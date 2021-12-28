@@ -20,6 +20,7 @@ AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}/releases
+UsePreviousAppDir=no
 DefaultDirName={autopf}\{#MyUsername}\wcit
 DefaultGroupName={#MyUsername}\wcit
 AllowNoIcons=yes
