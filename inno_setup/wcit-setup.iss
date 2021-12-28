@@ -3,7 +3,7 @@
 #define MyAppURL "https://github.com/mrkenhoo/wcit"
 #define MyAppExeName "wcit.exe"
 #define MyUsername "mrkenhoo"
-#define VersionInfoDescription "Windows CLI Instaler Tool \
+#define VersionInfoDescription "Windows CLI Installer Tool \
                                 is a program which deploys \
                                 Windows onto any storage device \
                                 within an existing Windows installation \
