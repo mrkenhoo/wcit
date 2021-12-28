@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Windows CLI Installer Tool")]
-[assembly: AssemblyDescription("Deploy Windows onto any storage device using CLI")]
+[assembly: AssemblyDescription("Windows CLI Installer Tool is a program which deploys Windows onto any storage device within an existing Windows installation eliminating the need to reboot to install the OS.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("wcit")]
