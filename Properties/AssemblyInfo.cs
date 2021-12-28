@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Windows CLI Installer Tool")]
-[assembly: AssemblyDescription("A tiny program which deploys Windows on any storage device, through command-line")]
+[assembly: AssemblyDescription("Deploy Windows onto any storage device using CLI")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("wcit")]
