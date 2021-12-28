@@ -13,36 +13,34 @@ namespace wcit
             {
                 Console.Clear();
 
-                //DiskManager.GetPhysicalDisks();
+                DiskManager.GetPhysicalDisks();
 
-                //Console.WriteLine("Please type the disk number of the device you want to format (e.g. 0):");
-                //string diskNumber = Console.ReadLine();
-
-                //Console.WriteLine("");
-
-                //DiskManager.FormatDrive(diskNumber);
+                Console.WriteLine("Please type the disk number of the device you want to format (e.g. 0):");
+                string diskNumber = Console.ReadLine();
 
                 Console.WriteLine("");
 
-                //Console.WriteLine("Type the letter where the ISO is mounted at (e.g. D:):");
-                //string source_drive = Console.ReadLine();
+                DiskManager.FormatDrive(diskNumber);
 
                 Console.WriteLine("");
 
-                //DeployManager.GetImageInfo(source_drive);
+                Console.WriteLine("Type the letter where the ISO is mounted at (e.g. D:):");
+                string source_drive = Console.ReadLine();
 
-                //Console.WriteLine("Type the index number of the Windows edition to install (e.g. 1): ");
-                //string windows_edition = Console.ReadLine();
+                Console.WriteLine("");
 
-                //Console.WriteLine("");
-                //Console.WriteLine($"Deploying Windows from the drive {source_drive} to Disk {diskNumber}, please wait...");
-                //DeployManager.DeployWindows(source_drive, windows_edition);
+                DeployManager.GetImageInfo(source_drive);
+
+                Console.WriteLine("Type the index number of the Windows edition to install (e.g. 1): ");
+                string windows_edition = Console.ReadLine();
+
+                Console.WriteLine("");
+                Console.WriteLine($"Deploying Windows from the drive {source_drive} to Disk {diskNumber}, please wait...");
+                DeployManager.DeployWindows(source_drive, windows_edition);
 
                 Console.WriteLine("");
                 Console.WriteLine("Installing bootloader...");
                 DeployManager.InstallBootloader();
-
-                Console.WriteLine("");
 
                 Console.WriteLine("Windows has been deployed and it's ready to use");
                 Console.WriteLine("Press ENTER to close the window");
