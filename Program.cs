@@ -8,43 +8,35 @@ namespace wcit
         [STAThread]
         static void Main()
         {
-            string version = "v20211228";
+            string version = "v0.0.1.1";
             Console.Title = $"Windows CLI Installer Tool - version {version}";
             if (GetCurrentRole.IsUserAdmin() == true)
             {
                 Console.Clear();
+                Console.WriteLine("Welcome to the Windows CLI Installer Tool!\nCreated by Ken Hoo (mrkenhoo)\n\n==> Available disks on your system:");
 
                 DiskManager.GetPhysicalDisks();
 
-                Console.WriteLine("Please type the disk number of the device you want to format (e.g. 0):");
+                Console.WriteLine("\n==> Please type the disk number to format (e.g. 0):");
                 string diskNumber = Console.ReadLine();
-
-                Console.WriteLine("");
 
                 DiskManager.FormatDrive(diskNumber);
 
-                Console.WriteLine("");
-
-                Console.WriteLine("Type the letter where the ISO is mounted at (e.g. D:):");
+                Console.WriteLine("\n==> Type the letter where the ISO is mounted at below (e.g. D:).");
                 string source_drive = Console.ReadLine();
-
-                Console.WriteLine("");
-
+                
                 DeployManager.GetImageInfo(source_drive);
 
-                Console.WriteLine("Type the index number of the Windows edition to install (e.g. 1): ");
+                Console.WriteLine("==> Type the index number of the Windows edition you wish to install below (e.g. 1).");
                 string windows_edition = Console.ReadLine();
 
-                Console.WriteLine("");
-                Console.WriteLine($"Deploying Windows to disk {diskNumber}, please wait...");
+                Console.WriteLine($"\n==> Deploying Windows to disk {diskNumber}, please wait...");
                 DeployManager.DeployWindows(source_drive, windows_edition);
 
-                Console.WriteLine("");
-                Console.WriteLine("Installing bootloader...");
+                Console.WriteLine("\n==> Installing bootloader...");
                 DeployManager.InstallBootloader();
 
-                Console.WriteLine("Windows has been deployed and it's ready to use");
-                Console.WriteLine("Press ENTER to close the window");
+                Console.WriteLine("Windows has been deployed and it's ready to use\n\nPress ENTER to close the window");
                 Console.ReadLine();
             }
             else
