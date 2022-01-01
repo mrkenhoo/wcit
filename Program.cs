@@ -36,7 +36,7 @@ namespace wcit
                 string windows_edition = Console.ReadLine();
 
                 Console.WriteLine("");
-                Console.WriteLine($"Deploying Windows from the drive {source_drive} to Disk {diskNumber}, please wait...");
+                Console.WriteLine($"Deploying Windows to disk {diskNumber}, please wait...");
                 DeployManager.DeployWindows(source_drive, windows_edition);
 
                 Console.WriteLine("");
