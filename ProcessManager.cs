@@ -15,7 +15,7 @@ namespace wcit
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
                 process.Start();
                 process.WaitForExit();
-                process.Dispose();
+                process.Close();
             }
             catch (Exception)
             {
@@ -37,7 +37,27 @@ namespace wcit
                 process.WaitForExit();
                 string output = process.StandardOutput.ReadToEnd();
                 Console.WriteLine(output);
-                process.Dispose();
+                process.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static void StartDismProcess(string args)
+        {
+            try
+            {
+                Process process = new Process();
+                process.StartInfo.FileName = "dism.exe";
+                process.StartInfo.Arguments = args;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.RedirectStandardOutput = false;
+                process.Start();
+                process.WaitForExit();
+                process.Close();
             }
             catch (Exception)
             {
