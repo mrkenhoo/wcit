@@ -15,12 +15,11 @@ namespace wcit
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
                 process.Start();
                 process.WaitForExit();
-                process.Close();
                 process.Dispose();
             }
-            catch (ApplicationException ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -37,12 +36,11 @@ namespace wcit
                 process.StartInfo.RedirectStandardInput = true;
                 process.Start();
                 process.WaitForExit();
-                process.Close();
                 process.Dispose();
             }
-            catch (ApplicationException ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
     }

@@ -41,13 +41,12 @@ namespace wcit
                 process.StandardInput.WriteLine("assign letter j");
                 process.StandardInput.WriteLine("exit");
                 process.WaitForExit();
-                process.Close();
                 process.Dispose();
                 Console.WriteLine($"Disk {diskNumber} has been formatted successfully");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
     }

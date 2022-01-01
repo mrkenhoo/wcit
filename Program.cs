@@ -5,7 +5,8 @@ namespace wcit
 {
     internal class Program
     {
-        static void Main(string[] args)
+        [STAThread]
+        static void Main()
         {
             string version = "v20211228";
             Console.Title = $"Windows CLI Installer Tool - version {version}";
