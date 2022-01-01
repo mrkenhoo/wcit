@@ -20,6 +20,7 @@ namespace wcit
                 else
                 {
                     Console.Error.WriteLine("No valid image found.");
+                    Environment.Exit(1);
                 }
             }
             catch (Exception)
@@ -43,6 +44,7 @@ namespace wcit
                 else
                 {
                     Console.Error.WriteLine("No valid image found.");
+                    Environment.Exit(1);
                 }
             }
             catch (Exception)
@@ -55,7 +57,7 @@ namespace wcit
         {
             try
             {
-                Worker.StartCmdProcess("powershell.exe", "bcdboot j:\\windows /s i: /f UEFI");
+                Worker.StartCmdProcess("bcdboot", "j:\\windows /s i: /f UEFI");
             }
             catch (Exception)
             {
