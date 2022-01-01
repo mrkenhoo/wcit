@@ -12,7 +12,7 @@ namespace wcit
             ManagementObjectSearcher DeviceInfo = new ManagementObjectSearcher(DeviceTable);
             foreach (ManagementObject o in DeviceInfo.Get())
             {
-                Console.WriteLine("Device number = " + o["Index"]);
+                Console.WriteLine("Disk number = " + o["Index"]);
                 Console.WriteLine("Model = " + o["Model"]);
                 Console.WriteLine("DeviceID = " + o["DeviceID"]);
                 Console.WriteLine("");
