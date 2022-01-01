@@ -33,9 +33,10 @@ namespace wcit
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardInput = true;
                 process.Start();
                 process.WaitForExit();
+                string output = process.StandardOutput.ReadToEnd();
+                Console.WriteLine(output);
                 process.Dispose();
             }
             catch (Exception)
