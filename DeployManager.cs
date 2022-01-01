@@ -35,11 +35,11 @@ namespace wcit
             {
                 if (System.IO.File.Exists($"{source_drive}\\sources\\install.esd"))
                 {
-                    Worker.StartCmdProcess("dism", $"/apply-image /imagefile:{source_drive}\\sources\\install.esd /applydir:j:\\ /index:{windows_edition} /verify");
+                    Worker.StartDismProcess($"/apply-image /imagefile:{source_drive}\\sources\\install.esd /applydir:j:\\ /index:{windows_edition} /verify");
                 }
                 else if (System.IO.File.Exists($"{source_drive}\\sources\\install.wim"))
                 {
-                    Worker.StartCmdProcess("dism", $"/apply-image /imagefile:{source_drive}\\sources\\install.wim /applydir:j:\\ /index:{windows_edition} /verify");
+                    Worker.StartDismProcess($"/apply-image /imagefile:{source_drive}\\sources\\install.wim /applydir:j:\\ /index:{windows_edition} /verify");
                 }
                 else
                 {
