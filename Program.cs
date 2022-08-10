@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using System.Windows.Forms;
 
 namespace wcit
 {
@@ -9,8 +8,9 @@ namespace wcit
         [STAThread]
         static void Main()
         {
+#if WINDOWS7_0_OR_GREATER && NET6_0
             Console.Title = $"Windows CLI Installer Tool - version {Assembly.GetExecutingAssembly().GetName().Version}";
-            if (GetCurrentRole.IsUserAdmin() == true)
+            if (GetCurrentRole.IsUserAdmin())
             {
                 Console.Clear();
                 Console.WriteLine("Welcome to the Windows CLI Installer Tool!\nCreated by Ken Hoo (mrkenhoo)\n\n==> Available disks on your system:");
@@ -64,12 +64,13 @@ namespace wcit
             }
             else
             {
-                var Message = "This program needs administator privileges to work.";
-                var Caption = "Insufficient privileges";
-                var ButtonLayout = MessageBoxButtons.OK;
-                var Icon = MessageBoxIcon.Error;
-                MessageBox.Show(Message, Caption, ButtonLayout, Icon);
+                Console.Error.WriteLine("This program needs administator privileges to work.");
+                Console.ReadLine();
+                Environment.Exit(1);
             }
+#else
+            Console.Error.WriteLine("This program is only compatible with Windows 7 or greater.");
+#endif
         }
     }
 }
