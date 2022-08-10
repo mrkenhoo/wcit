@@ -1,14 +1,9 @@
 #define MyAppName "Windows CLI Installer Tool"
-#define MyAppVersion "0.0.1.2"
+#define MyAppVersion "0.0.1.3"
 #define MyAppURL "https://github.com/mrkenhoo/wcit"
 #define MyAppExeName "wcit.exe"
 #define MyUsername "mrkenhoo"
-#define VersionInfoDescription "Windows CLI Installer Tool \
-                                is a program which deploys \
-                                Windows onto any storage device \
-                                within an existing Windows installation \
-                                eliminating the need to reboot to install \
-                                the OS."
+#define VersionInfoDescription "Windows CLI Installer Tool"
 
 [Setup]
 AppId={{28B11907-066D-4911-BA15-E70234360C28}
@@ -38,7 +33,9 @@ VersionInfoProductVersion={#MyAppVersion}
 VersionInfoProductTextVersion={#MyAppVersion}
 VersionInfoTextVersion={#MyAppVersion}
 WizardResizable=no
-WindowResizable=no                           
+WindowResizable=no                   
+MinVersion=6.1sp1
+ArchitecturesAllowed=x64
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -55,7 +52,8 @@ Name: "corefiles"; Description: "Required program files"; Types: full; Flags: fi
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\{#MyUsername}\Documents\GitHub\wcit\bin\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: corefiles;
+Source: "C:\Users\{#MyUsername}\Documents\GitHub\wcit\bin\Release\net6.0-windows10.0.22621.0\win-x64\publish\*"; \
+      DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Components: corefiles; MinVersion: 6.1sp1;
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
