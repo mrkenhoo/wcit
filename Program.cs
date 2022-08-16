@@ -10,7 +10,7 @@ namespace wcit
         {
 #if WINDOWS7_0_OR_GREATER && NET6_0
             Console.Title = $"Windows CLI Installer Tool - version {Assembly.GetExecutingAssembly().GetName().Version}";
-            if (GetCurrentRole.IsUserAdmin())
+            if (PrivilegesManager.IsUserAdmin())
             {
                 Console.Clear();
                 Console.WriteLine("Welcome to the Windows CLI Installer Tool!\nCreated by Ken Hoo (mrkenhoo)\n\n==> Available disks on your system:");

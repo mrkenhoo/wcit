@@ -2,7 +2,7 @@
 
 namespace wcit
 {
-    internal class GetCurrentRole
+    internal class PrivilegesManager
     {
         public static bool IsUserAdmin()
         {
