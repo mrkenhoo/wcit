@@ -64,7 +64,7 @@ namespace wcit
             }
             else
             {
-                Console.Error.WriteLine("This program needs administator privileges to work.");
+                Console.Error.WriteLine("This program needs administrator privileges to work.");
                 Console.ReadLine();
                 Environment.Exit(1);
             }
