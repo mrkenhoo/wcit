@@ -29,17 +29,17 @@ namespace wcit
             }
         }
 
-        public static void DeployWindows(string source_drive, string windows_edition)
+        public static void DeployWindows(string source_drive, string destination_drive, string windows_edition)
         {
             try
             {
                 if (System.IO.File.Exists($"{source_drive}\\sources\\install.esd"))
                 {
-                    Worker.StartDismProcess($"/apply-image /imagefile:{source_drive}\\sources\\install.esd /applydir:j:\\ /index:{windows_edition} /verify");
+                    Worker.StartDismProcess($"/apply-image /imagefile:{source_drive}\\sources\\install.esd /applydir:{destination_drive}\\ /index:{windows_edition} /verify");
                 }
                 else if (System.IO.File.Exists($"{source_drive}\\sources\\install.wim"))
                 {
-                    Worker.StartDismProcess($"/apply-image /imagefile:{source_drive}\\sources\\install.wim /applydir:j:\\ /index:{windows_edition} /verify");
+                    Worker.StartDismProcess($"/apply-image /imagefile:{source_drive}\\sources\\install.wim /applydir:{destination_drive}\\ /index:{windows_edition} /verify");
                 }
                 else
                 {
@@ -53,11 +53,11 @@ namespace wcit
             }
         }
 
-        public static void InstallBootloader()
+        public static void InstallBootloader(string destination_drive, string efi_drive)
         {
             try
             {
-                Worker.StartCmdProcess("bcdboot", "j:\\windows /s i: /f UEFI");
+                Worker.StartCmdProcess("bcdboot", $"{destination_drive}\\windows /s {efi_drive} /f UEFI");
             }
             catch (Exception)
             {
