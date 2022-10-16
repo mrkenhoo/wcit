@@ -1,5 +1,5 @@
-bin/
-obj/
-inno_setup/*
-!inno_setup/wcit-setup.iss
 .vs/
+bin/
+inno_setup/
+obj/
+Properties/
