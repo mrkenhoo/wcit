@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Management;
 
 namespace wcit
@@ -10,7 +11,7 @@ namespace wcit
         {
             WqlObjectQuery DeviceTable = new("SELECT * FROM Win32_DiskDrive");
             ManagementObjectSearcher DeviceInfo = new(DeviceTable);
-            foreach (ManagementObject o in DeviceInfo.Get())
+            foreach (ManagementObject o in DeviceInfo.Get().Cast<ManagementObject>())
             {
                 Console.WriteLine("Disk number = " + o["Index"]);
                 Console.WriteLine("Model = " + o["Model"]);
