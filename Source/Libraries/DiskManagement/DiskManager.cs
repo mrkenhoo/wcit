@@ -1,25 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Management;
 
-namespace wcit
+namespace wcit.Libraries.DiskManagement
 {
-    internal class DiskManager
+    public static partial class SystemDrives
     {
-        public static void GetPhysicalDisks()
-        {
-            WqlObjectQuery DeviceTable = new("SELECT * FROM Win32_DiskDrive");
-            ManagementObjectSearcher DeviceInfo = new(DeviceTable);
-            foreach (ManagementObject o in DeviceInfo.Get().Cast<ManagementObject>())
-            {
-                Console.WriteLine("Disk number = " + o["Index"]);
-                Console.WriteLine("Model = " + o["Model"]);
-                Console.WriteLine("DeviceID = " + o["DeviceID"]);
-                Console.WriteLine("");
-            }
-        }
-        public static void FormatDrive(string diskNumber, string destination_drive, string efi_drive)
+        public static void FormatDrive(string DiskNumber, string DestinationDrive, string EfiDrive)
         {
             try
             {
@@ -29,23 +15,31 @@ namespace wcit
                 process.StartInfo.RedirectStandardInput = true;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.Start();
-                Console.WriteLine($"Formatting disk {diskNumber}...");
-                process.StandardInput.WriteLine($"select disk {diskNumber}");
+                process.StandardInput.WriteLine($"select disk {DiskNumber}");
+                Console.WriteLine($"Wiping disk {DiskNumber}...");
                 process.StandardInput.WriteLine("clean");
+                Console.WriteLine($"Converting disk {DiskNumber} to GPT...");
                 process.StandardInput.WriteLine("convert gpt");
+                Console.WriteLine($"Creating EFI partition from disk {DiskNumber}...");
                 process.StandardInput.WriteLine("create partition efi size=100");
+                Console.WriteLine($"Formatting EFI partition from disk {DiskNumber}...");
                 process.StandardInput.WriteLine("format fs=fat32 quick");
-                process.StandardInput.WriteLine($"assign letter {efi_drive}");
+                Console.WriteLine($"Mounting EFI partition to {EfiDrive} from disk {DiskNumber}...");
+                process.StandardInput.WriteLine($"assign letter {EfiDrive}");
+                Console.WriteLine($"Creating MSR partition in disk {DiskNumber}...");
                 process.StandardInput.WriteLine("create partition msr size=16");
+                Console.WriteLine($"Creating primary partition in disk {DiskNumber}...");
                 process.StandardInput.WriteLine("create partition primary");
+                Console.WriteLine($"Formatting primary partition in disk {DiskNumber}...");
                 process.StandardInput.WriteLine("format fs=ntfs quick");
-                process.StandardInput.WriteLine($"assign letter {destination_drive}");
+                Console.WriteLine($"Mounting primary partition to {DestinationDrive} from disk {DiskNumber}...");
+                process.StandardInput.WriteLine($"assign letter {DestinationDrive}");
                 process.StandardInput.WriteLine("exit");
                 process.WaitForExit();
                 process.Dispose();
                 if (Environment.ExitCode == 0)
                 {
-                    Console.WriteLine($"Disk {diskNumber} has been formatted successfully");
+                    Console.WriteLine($"\nDisk {DiskNumber} has been formatted successfully");
                 }
                 else
                 {
