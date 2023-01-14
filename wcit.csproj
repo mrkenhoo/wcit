@@ -3,9 +3,9 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net7.0-windows10.0.22621.0</TargetFramework>
-        <Version>0.0.1.5</Version>
-        <AssemblyVersion>0.0.1.5</AssemblyVersion>
-        <FileVersion>0.0.1.5</FileVersion>
+        <Version>0.0.1.6</Version>
+        <AssemblyVersion>0.0.1.6</AssemblyVersion>
+        <FileVersion>0.0.1.6</FileVersion>
         <Company>Ken Hoo</Company>
         <Authors>Ken Hoo</Authors>
         <Product>Windows CLI Installer Tool</Product>
@@ -30,7 +30,6 @@
         <PlatformTarget>x64</PlatformTarget>
         <Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
-		<AllowUnsafeBlocks>False</AllowUnsafeBlocks>
 		<SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
 		<AnalysisLevel>latest-recommended</AnalysisLevel>
     </PropertyGroup>
