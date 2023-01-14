@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Reflection;
-using wcit.Libraries.Deployment;
-using wcit.Libraries.DiskManagement;
-using wcit.Libraries.ParametersManager;
-using wcit.Libraries.PrivilegesManager;
-using wcit.Source.Libraries.EFIManager;
+using wcit.Management.PrivilegesManager;
+using wcit.Management.EFIManager;
+using wcit.Management.ParametersManager;
+using wcit.Management.DiskManagement;
+using wcit.Utilities.Deployment;
 
 namespace wcit
 {
-    internal class Program
+    internal sealed class Program
     {
         [MTAThread]
         static int Main(string[] args)
@@ -16,7 +16,7 @@ namespace wcit
             ConsoleColor foregroundDefault = Console.ForegroundColor;
             Console.Title = $"Windows CLI Installer Tool - version {Assembly.GetExecutingAssembly().GetName().Version}";
 #if WINDOWS7_0_OR_GREATER && NET7_0
-            if (Permissions.IsUserAdmin())
+            if (GetPrivileges.IsUserAdmin())
             {
                 try
                 {
@@ -41,15 +41,29 @@ Windows edition (Index) is set to '{Parameters.WindowsEdition}'", Console.Foregr
                     Console.WriteLine($"\nIf this is correct, press any key to continue...", Console.ForegroundColor = foregroundDefault);
                     Console.ReadLine();
 
-                    SystemDrives.FormatDrive(Parameters.DiskNumber,
-                                             Parameters.DestinationDrive,
-                                             Parameters.EfiDrive);
+                    if (Parameters.DiskNumber != null &&
+                        Parameters.DestinationDrive != null &&
+                        Parameters.EfiDrive != null)
+                    {
+                        SystemDrives.FormatDrive(Parameters.DiskNumber,
+                                                 Parameters.DestinationDrive,
+                                                 Parameters.EfiDrive);
+                    }
 
                     Console.WriteLine($"\n==> Deploying Windows to drive {Parameters.DestinationDrive} in disk {Parameters.DiskNumber}, please wait...");
-                    NewDeploy.ApplyImage(Parameters.SourceDrive, Parameters.DestinationDrive, Parameters.WindowsEdition);
+                    if (Parameters.SourceDrive != null &&
+                        Parameters.DestinationDrive != null &&
+                        Parameters.WindowsEdition != null)
+                    {
+                        NewDeploy.ApplyImage(Parameters.SourceDrive, Parameters.DestinationDrive, Parameters.WindowsEdition);
+                    }
 
                     Console.WriteLine($"\n==> Installing bootloader to drive {Parameters.EfiDrive} in disk {Parameters.DiskNumber}");
-                    NewDeploy.InstallBootloader(Parameters.DestinationDrive, Parameters.EfiDrive, "UEFI");
+                    if (Parameters.DestinationDrive != null &&
+                        Parameters.EfiDrive != null)
+                    {
+                        NewDeploy.InstallBootloader(Parameters.DestinationDrive, Parameters.EfiDrive, "UEFI");
+                    }
 
                     Console.WriteLine("Windows has been deployed and it's ready to use\n\nPress ENTER to close the window");
                 }
@@ -60,17 +74,14 @@ Windows edition (Index) is set to '{Parameters.WindowsEdition}'", Console.Foregr
             }
             else
             {
-                Console.Error.WriteLine("ERROR: This program needs administrator privileges to work.", Console.ForegroundColor = ConsoleColor.Red);
-                Console.ReadLine();
-                Environment.Exit(1);
+                throw new UnauthorizedAccessException("This program needs administrator privileges to work");
             }
 #else
-            Console.Error.WriteLine("This program is only compatible with Windows 7 or greater and .NET 7.0");
+            Console.Error.WriteLine("This program requires Windows 7 or greater and .NET 7.0");
             Console.WriteLine("Press any key to close the program.");
             Console.ReadLine();
             Environment.Exit(1);
 #endif
-
             return 0;
         }
     }

@@ -1,13 +1,13 @@
 ﻿using System.Security.Principal;
 
-namespace wcit.Libraries.PrivilegesManager
+namespace wcit.Management.PrivilegesManager
 {
-    internal class Permissions
+    public sealed class GetPrivileges
     {
         public static bool IsUserAdmin()
         {
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
-            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            WindowsPrincipal principal = new(identity);
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
     }

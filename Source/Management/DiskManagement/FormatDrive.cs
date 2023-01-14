@@ -1,9 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 
-namespace wcit.Libraries.DiskManagement
+namespace wcit.Management.DiskManagement
 {
-    public static partial class SystemDrives
+    public sealed partial class SystemDrives
     {
         public static void FormatDrive(string DiskNumber, string DestinationDrive, string EfiDrive)
         {
@@ -16,7 +17,7 @@ namespace wcit.Libraries.DiskManagement
                 process.StartInfo.RedirectStandardOutput = true;
                 process.Start();
                 process.StandardInput.WriteLine($"select disk {DiskNumber}");
-                Console.WriteLine($"Wiping disk {DiskNumber}...");
+                Console.WriteLine($"\nWiping disk {DiskNumber}...");
                 process.StandardInput.WriteLine("clean");
                 Console.WriteLine($"Converting disk {DiskNumber} to GPT...");
                 process.StandardInput.WriteLine("convert gpt");
@@ -48,7 +49,19 @@ namespace wcit.Libraries.DiskManagement
                     Environment.Exit(1);
                 }
             }
-            catch (Exception)
+            catch (ObjectDisposedException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (Win32Exception)
+            {
+                throw;
+            }
+            catch (SystemException)
             {
                 throw;
             }

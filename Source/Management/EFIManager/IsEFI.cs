@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace wcit.Source.Libraries.EFIManager
+namespace wcit.Management.EFIManager
 {
-    public static class GetEFIInfo
+    public static partial class GetEFIInfo
     {
         [DllImport("kernel32.dll",
             EntryPoint = "GetFirmwareEnvironmentVariableA",
@@ -11,7 +11,7 @@ namespace wcit.Source.Libraries.EFIManager
             CharSet = CharSet.Unicode,
             ExactSpelling = true,
             CallingConvention = CallingConvention.StdCall)]
-        public static extern int GetFirmwareType(string lpName, string lpGUID, IntPtr pBuffer, uint size);
+        private static extern int GetFirmwareType(string lpName, string lpGUID, IntPtr pBuffer, uint size);
 
         public static bool IsEFI()
         {

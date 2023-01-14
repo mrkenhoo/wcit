@@ -1,7 +1,7 @@
 ﻿using System;
-using wcit.Libraries.ProcessManager;
+using wcit.Management.ProcessManager;
 
-namespace wcit.Libraries.Deployment
+namespace wcit.Utilities.Deployment
 {
     public static partial class NewDeploy
     {

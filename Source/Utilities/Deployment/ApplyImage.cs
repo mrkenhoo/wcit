@@ -1,7 +1,8 @@
 ﻿using System;
-using wcit.Libraries.ProcessManager;
+using System.IO;
+using wcit.Management.ProcessManager;
 
-namespace wcit.Libraries.Deployment
+namespace wcit.Utilities.Deployment
 {
     public static partial class NewDeploy
     {
@@ -19,8 +20,7 @@ namespace wcit.Libraries.Deployment
                 }
                 else
                 {
-                    Console.Error.WriteLine("No valid image found.");
-                    Environment.Exit(1);
+                    throw new FileNotFoundException("Could not find a valid image");
                 }
             }
             catch (Exception)

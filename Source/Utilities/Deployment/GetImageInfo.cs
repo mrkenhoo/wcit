@@ -1,7 +1,8 @@
 ﻿using System;
-using wcit.Libraries.ProcessManager;
+using System.IO;
+using wcit.Management.ProcessManager;
 
-namespace wcit.Libraries.Deployment
+namespace wcit.Utilities.Deployment
 {
     public static partial class NewDeploy
     {
@@ -9,18 +10,17 @@ namespace wcit.Libraries.Deployment
         {
             try
             {
-                if (System.IO.File.Exists($"{SourceDrive}\\sources\\install.esd"))
+                if (File.Exists($"{SourceDrive}\\sources\\install.esd"))
                 {
                     Worker.StartCmdProcess("dism", $"/get-imageinfo /imagefile:{SourceDrive}\\sources\\install.esd");
                 }
-                else if (System.IO.File.Exists($"{SourceDrive}\\sources\\install.wim"))
+                else if (File.Exists($"{SourceDrive}\\sources\\install.wim"))
                 {
                     Worker.StartCmdProcess("dism", $"/get-imageinfo /imagefile:{SourceDrive}\\sources\\install.wim");
                 }
                 else
                 {
-                    Console.Error.WriteLine("No valid image found.");
-                    Environment.Exit(1);
+                    throw new FileNotFoundException("Could not find a valid image");
                 }
             }
             catch (Exception)

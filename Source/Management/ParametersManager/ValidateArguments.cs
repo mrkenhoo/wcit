@@ -1,10 +1,10 @@
 ﻿using System;
-using wcit.Libraries.Deployment;
-using wcit.Libraries.DiskManagement;
+using wcit.Management.DiskManagement;
+using wcit.Utilities.Deployment;
 
-namespace wcit.Libraries.ParametersManager
+namespace wcit.Management.ParametersManager
 {
-    internal class Parameters
+    public sealed class Parameters
     {
         public static string? DestinationDrive { get; set; }
         public static string? EfiDrive { get; set; }

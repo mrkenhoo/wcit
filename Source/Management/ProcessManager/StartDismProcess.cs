@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace wcit.Libraries.ProcessManager
+namespace wcit.Management.ProcessManager
 {
-    public static partial class Worker
+    public sealed partial class Worker
     {
-        public static void StartProcess(string fileName, string args)
+        public static void StartDismProcess(string args)
         {
             try
             {
                 Process process = new();
-                process.StartInfo.FileName = fileName;
+                process.StartInfo.FileName = "dism.exe";
                 process.StartInfo.Arguments = args;
-                process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.RedirectStandardOutput = false;
                 process.Start();
                 process.WaitForExit();
                 process.Close();
