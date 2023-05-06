@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "wcit", "Client\wcit.csproj", "{2DA14DF3-E220-43C9-B111-AF0FEFC04151}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Runtime", "Runtime\Runtime.shproj", "{DF6217CA-04AC-4960-B6E7-91D35AD68ED2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2DA14DF3-E220-43C9-B111-AF0FEFC04151}.Debug|x64.ActiveCfg = Debug|x64
+		{2DA14DF3-E220-43C9-B111-AF0FEFC04151}.Debug|x64.Build.0 = Debug|x64
+		{2DA14DF3-E220-43C9-B111-AF0FEFC04151}.Release|x64.ActiveCfg = Release|x64
+		{2DA14DF3-E220-43C9-B111-AF0FEFC04151}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8267F5CB-90F1-4C9C-9990-5AC4B331B87B}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Runtime\Runtime.projitems*{2da14df3-e220-43c9-b111-af0fefc04151}*SharedItemsImports = 5
+		Runtime\Runtime.projitems*{df6217ca-04ac-4960-b6e7-91d35ad68ed2}*SharedItemsImports = 13
+	EndGlobalSection
+EndGlobal

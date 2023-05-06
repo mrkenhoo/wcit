@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace wcit.Management.DiskManagement
+namespace Runtime.Management.DiskManagement
 {
     public sealed partial class SystemDrives
     {

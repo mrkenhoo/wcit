@@ -1,6 +1,6 @@
 ﻿using System.Security.Principal;
 
-namespace wcit.Management.PrivilegesManager
+namespace Runtime.Management.PrivilegesManager
 {
     public sealed class GetPrivileges
     {

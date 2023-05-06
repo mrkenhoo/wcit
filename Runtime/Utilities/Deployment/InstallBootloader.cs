@@ -1,7 +1,6 @@
-﻿using System;
-using wcit.Management.ProcessManager;
+﻿using Runtime.Management.ProcessManager;
 
-namespace wcit.Utilities.Deployment
+namespace Runtime.Utilities.Deployment
 {
     public static partial class NewDeploy
     {

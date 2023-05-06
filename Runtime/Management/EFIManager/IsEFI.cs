@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace wcit.Management.EFIManager
+namespace Runtime.Management.EFIManager
 {
     public static partial class GetEFIInfo
     {

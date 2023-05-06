@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Management;
+﻿using System.Management;
 
-namespace wcit.Management.DiskManagement
+namespace Runtime.Management.DiskManagement
 {
     public sealed partial class SystemDrives
     {

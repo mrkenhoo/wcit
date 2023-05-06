@@ -1,8 +1,7 @@
-﻿using System;
-using wcit.Management.DiskManagement;
-using wcit.Utilities.Deployment;
+﻿using Runtime.Management.DiskManagement;
+using Runtime.Utilities.Deployment;
 
-namespace wcit.Management.ParametersManager
+namespace Runtime.Management.ParametersManager
 {
     public sealed class Parameters
     {

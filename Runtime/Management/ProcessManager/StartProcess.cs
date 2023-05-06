@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace wcit.Management.ProcessManager
+namespace Runtime.Management.ProcessManager
 {
     public sealed partial class Worker
     {
