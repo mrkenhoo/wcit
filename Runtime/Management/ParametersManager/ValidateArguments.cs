@@ -3,17 +3,16 @@ using Runtime.Utilities.Deployment;
 
 namespace Runtime.Management.ParametersManager
 {
-    public sealed class Parameters
+    sealed class Parameters
     {
         public static string? DestinationDrive { get; set; }
         public static string? EfiDrive { get; set; }
         public static string? DiskNumber { get; set; }
         public static string? SourceDrive { get; set; }
-        public static string? WindowsEdition { get; set; }
+        public static int? WindowsEdition { get; set; }
 
-        public static void Setup()
+        internal static void Setup()
         {
-
             if (DestinationDrive == null)
             {
                 Console.WriteLine("\n==> Type the mountpoint to use for deploying Windows (e.g. Z:).");
@@ -79,27 +78,25 @@ namespace Runtime.Management.ParametersManager
 
                 if (string.IsNullOrEmpty(SourceDrive))
                 {
-                    Console.WriteLine("No source drive was specified.\n\nPress ENTER to quit the program.",
-                                      Console.ForegroundColor = ConsoleColor.Red);
+                    Console.WriteLine("No source drive was specified.\n\nPress ENTER to quit the program.", Console.ForegroundColor = ConsoleColor.Red);
                     Console.ReadLine();
                     Environment.Exit(1);
                 }
             }
 
-            if (WindowsEdition == null)
+            if (WindowsEdition == null || WindowsEdition == 0)
             {
                 NewDeploy.GetImageInfo(SourceDrive);
 
                 Console.WriteLine("==> Type the index number of the Windows edition you wish to install below (e.g. 1).");
-                WindowsEdition = Console.ReadLine();
-
-                if (string.IsNullOrEmpty(WindowsEdition))
-                {
-                    Console.WriteLine("No Windows edition was specified.\n\nPress ENTER to quit the program.",
-                                      Console.ForegroundColor = ConsoleColor.Red);
-                    Console.ReadLine();
-                    Environment.Exit(1);
-                }
+                WindowsEdition = Console.Read();
+            }
+            else
+            {
+                Console.WriteLine("No Windows edition was specified.\n\nPress ENTER to quit the program.",
+                Console.ForegroundColor = ConsoleColor.Red);
+                Console.ReadLine();
+                Environment.Exit(1);
             }
         }
     }

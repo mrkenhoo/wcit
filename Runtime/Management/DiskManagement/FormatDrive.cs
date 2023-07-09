@@ -1,12 +1,11 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics;
 
 namespace Runtime.Management.DiskManagement
 {
-    public sealed partial class SystemDrives
+    partial class SystemDrives
     {
-        public static void FormatDrive(string DiskNumber, string DestinationDrive, string EfiDrive)
+        internal static void FormatDrive(string DiskNumber, string DestinationDrive, string EfiDrive)
         {
             try
             {
@@ -38,15 +37,13 @@ namespace Runtime.Management.DiskManagement
                 process.StandardInput.WriteLine("exit");
                 process.WaitForExit();
                 process.Dispose();
-                if (Environment.ExitCode == 0)
+                switch (Environment.ExitCode)
                 {
-                    Console.WriteLine($"\nDisk {DiskNumber} has been formatted successfully");
-                }
-                else
-                {
-                    Console.Error.WriteLine("\nAn error has occurred.\n\nPress ENTER to close the program");
-                    Console.ReadLine();
-                    Environment.Exit(1);
+                    case 0:
+                        Console.WriteLine($"\nDisk {DiskNumber} has been formatted successfully");
+                        break;
+                    case 1:
+                        throw new SystemException();
                 }
             }
             catch (ObjectDisposedException)

@@ -5,7 +5,7 @@ namespace Runtime.Utilities.Deployment
 {
     public static partial class NewDeploy
     {
-        public static void ApplyImage(string SourceDrive, string DestinationDrive, string Index)
+        public static void ApplyImage(string SourceDrive, string DestinationDrive, int Index)
         {
             try
             {

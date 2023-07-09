@@ -2,9 +2,9 @@
 
 namespace Runtime.Management.DiskManagement
 {
-    public sealed partial class SystemDrives
+    partial class SystemDrives
     {
-        public static void ListAll()
+        internal static void ListAll()
         {
             try
             {
