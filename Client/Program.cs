@@ -12,7 +12,6 @@ namespace wcit
         [MTAThread]
         private static int Main(string[] args)
         {
-            ConsoleColor foregroundDefault = Console.ForegroundColor;
             Console.Title = $"Windows CLI Installer Tool - version {Assembly.GetExecutingAssembly().GetName().Version}";
 
 #if WINDOWS10_0_19041_0_OR_GREATER && NET7_0_OR_GREATER
@@ -37,9 +36,9 @@ namespace wcit
     EFI drive is set to '{Parameters.EfiDrive}'
     Disk number is set to '{Parameters.DiskNumber}'
     Source drive is set to '{Parameters.SourceDrive}'
-    Windows edition (Index) is set to '{Parameters.WindowsEdition}'", Console.ForegroundColor = ConsoleColor.Green);
+    Windows edition (Index) is set to '{Parameters.WindowsEdition}'");
 
-                        Console.WriteLine($"\nIf this is correct, press any key to continue...", Console.ForegroundColor = foregroundDefault);
+                        Console.WriteLine($"\nIf this is correct, press any key to continue...");
                         Console.ReadLine();
 
                         if (Parameters.DiskNumber != null &&
