@@ -20,15 +20,13 @@ namespace Runtime.Management.ParametersManager
 
                 if (string.IsNullOrEmpty(DestinationDrive))
                 {
-                    Console.WriteLine("No destination drive was specified.\n\nPress ENTER to quit the program.",
-                                      Console.ForegroundColor = ConsoleColor.Red);
+                    Console.WriteLine("No destination drive was specified.\n\nPress ENTER to quit the program.");
                     Console.ReadLine();
                     Environment.Exit(1);
                 }
                 else if (!DestinationDrive.Contains(':'))
                 {
-                    Console.Error.WriteLine($"\nERROR: '{DestinationDrive}': Invalid destination drive, it must have a colon. For example: 'H:'.\n\nPress ENTER to quit the program.",
-                                            Console.ForegroundColor = ConsoleColor.Red);
+                    Console.Error.WriteLine($"\nERROR: '{DestinationDrive}': Invalid destination drive, it must have a colon. For example: 'H:'.\n\nPress ENTER to quit the program.");
                     Console.ReadLine();
                     Environment.Exit(1);
                 }
@@ -41,14 +39,13 @@ namespace Runtime.Management.ParametersManager
 
                 if (string.IsNullOrEmpty(EfiDrive))
                 {
-                    Console.WriteLine("No EFI drive was specified.\n\nPress ENTER to quit the program.", Console.ForegroundColor = ConsoleColor.Red);
+                    Console.WriteLine("No EFI drive was specified.\n\nPress ENTER to quit the program.");
                     Console.ReadLine();
                     Environment.Exit(1);
                 }
                 else if (!EfiDrive.Contains(':'))
                 {
-                    Console.Error.WriteLine($"\nERROR: '{EfiDrive}': Invalid EFI drive, it must have a colon. For example: 'H:'.\n\nPress ENTER to quit the program.",
-                                            Console.ForegroundColor = ConsoleColor.Red);
+                    Console.Error.WriteLine($"\nERROR: '{EfiDrive}': Invalid EFI drive, it must have a colon. For example: 'H:'.\n\nPress ENTER to quit the program.");
                     Console.ReadLine();
                     Environment.Exit(1);
                 }
@@ -64,8 +61,7 @@ namespace Runtime.Management.ParametersManager
 
                 if (string.IsNullOrEmpty(DiskNumber))
                 {
-                    Console.WriteLine("No disk specified for formatting.\n\nPress ENTER to quit the program.",
-                                      Console.ForegroundColor = ConsoleColor.Red);
+                    Console.WriteLine("No disk specified for formatting.\n\nPress ENTER to quit the program.");
                     Console.ReadLine();
                     Environment.Exit(1);
                 }
@@ -78,7 +74,7 @@ namespace Runtime.Management.ParametersManager
 
                 if (string.IsNullOrEmpty(SourceDrive))
                 {
-                    Console.WriteLine("No source drive was specified.\n\nPress ENTER to quit the program.", Console.ForegroundColor = ConsoleColor.Red);
+                    Console.WriteLine("No source drive was specified.\n\nPress ENTER to quit the program.");
                     Console.ReadLine();
                     Environment.Exit(1);
                 }
@@ -93,8 +89,7 @@ namespace Runtime.Management.ParametersManager
             }
             else
             {
-                Console.WriteLine("No Windows edition was specified.\n\nPress ENTER to quit the program.",
-                Console.ForegroundColor = ConsoleColor.Red);
+                Console.WriteLine("No Windows edition was specified.\n\nPress ENTER to quit the program.");
                 Console.ReadLine();
                 Environment.Exit(1);
             }

@@ -1,5 +1,4 @@
-﻿using Microsoft.Dism;
-using Runtime.Management.ProcessManager;
+﻿using Runtime.Management.ProcessManager;
 
 namespace Runtime.Utilities.Deployment
 {
