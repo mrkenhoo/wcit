@@ -56,7 +56,7 @@ namespace wcit
                             Parameters.DestinationDrive != null &&
                             Parameters.WindowsEdition != null)
                         {
-                            NewDeploy.ApplyImage(Parameters.SourceDrive, Parameters.DestinationDrive, Parameters.WindowsEdition);
+                            NewDeploy.ApplyImage(Parameters.SourceDrive, Parameters.DestinationDrive, (int)Parameters.WindowsEdition);
                         }
 
                         Console.WriteLine($"\n==> Installing bootloader to drive {Parameters.EfiDrive} in disk {Parameters.DiskNumber}");
