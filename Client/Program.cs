@@ -14,6 +14,7 @@ namespace wcit
         {
             ConsoleColor foregroundDefault = Console.ForegroundColor;
             Console.Title = $"Windows CLI Installer Tool - version {Assembly.GetExecutingAssembly().GetName().Version}";
+#if WINDOWS10_0_19041_0_OR_GREATER && NET7_0_OR_GREATER
             if (GetPrivileges.IsUserAdmin())
             {
                 try
@@ -74,8 +75,10 @@ Windows edition (Index) is set to '{Parameters.WindowsEdition}'", Console.Foregr
             {
                 throw new UnauthorizedAccessException("This program needs administrator privileges to work");
             }
-
-            return 0;
+#else
+            throw new NotSupportedException("This system is not compatible with this program.");
+#endif
+            return Environment.ExitCode;
         }
     }
 }
