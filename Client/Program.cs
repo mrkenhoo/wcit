@@ -19,7 +19,7 @@ namespace wcit
             {
                 try
                 {
-                    if (!GetEFIInfo.IsEFI())
+                    if (GetEFIInfo.IsEFI() == 0)
                     {
                         Console.Error.WriteLine("Only EFI systems are supported");
                         Environment.Exit(1);
