@@ -20,10 +20,9 @@ namespace wcit
                 case true:
                     try
                     {
-                        if (GetEFIInfo.IsEFI() == 0)
+                        if (!GetEFIInfo.IsEFI())
                         {
-                            Console.Error.WriteLine("Only EFI systems are supported");
-                            Environment.Exit(1);
+                            throw new PlatformNotSupportedException("An error has occurred: Your system does not support EFI");
                         }
 
                         Console.Clear();
