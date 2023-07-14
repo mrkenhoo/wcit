@@ -1,20 +1,17 @@
-﻿using System.Runtime.InteropServices;
+﻿using Microsoft.Win32;
 
 namespace Runtime.Management.EFIManager
 {
     static partial class GetEFIInfo
     {
-        [DllImport("kernel32.dll",
-            EntryPoint = "GetFirmwareEnvironmentVariableA",
-            SetLastError = true,
-            CharSet = CharSet.Unicode,
-            ExactSpelling = true,
-            CallingConvention = CallingConvention.StdCall)]
-        private static extern int GetFirmwareType(string lpName, string lpGUID, IntPtr pBuffer, uint size);
-
-        internal static int IsEFI()
+        internal static bool IsEFI()
         {
-            return GetFirmwareType("", "{00000000-0000-0000-0000-000000000000}", IntPtr.Zero, 0);
+            const string UefiRegistryKeyPath = @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control";
+            const string UefiRegistryValueName = "FirmwareEnvironmentVariable";
+
+            object firmwareEnvironmentVariable = Registry.GetValue(UefiRegistryKeyPath, UefiRegistryValueName, null);
+
+            return firmwareEnvironmentVariable != null;
         }
     }
 }
