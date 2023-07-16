@@ -17,12 +17,14 @@ namespace Runtime.Management.EFIManager
             // Call the function with a dummy variable name and a dummy variable namespace (function will fail because these don't exist.)
             GetFirmwareType("", "{00000000-0000-0000-0000-000000000000}", IntPtr.Zero, 0);
 
-            if (Marshal.GetLastWin32Error() == 0)
+            if (Marshal.GetLastWin32Error() == 1)
+            {
+                return false;
+            }
+            else
             {
                 return true;
             }
-
-            return true;
         }
     }
 }
