@@ -1,6 +1,6 @@
-.vs/
 bin/
 inno_setup/
 obj/
 Properties/
 *.user
+.*
