@@ -31,6 +31,8 @@ variables:
   # NOTE: Please edit this path so it matches the structure of your project!
   SOURCE_CODE_PATH: '*/*/'
 
+  EXPORT_NAME: wcit
+
 # ### Define global cache rule
 #
 # Before building the project, all dependencies (e.g. third-party NuGet packages)
@@ -119,3 +121,9 @@ deploy:
   script:
     - 'dotnet publish'
   environment: production
+  artifacts:
+    name: $EXPORT_NAME-$VERSION
+    paths:
+      - ./Client/bin/x64/Release/net7.0-windows10.0.22621.0/publish/win-x64
+  only:
+    - main
