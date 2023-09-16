@@ -122,8 +122,6 @@ deploy:
     - 'dotnet publish --self-contained --output build'
 
 release:
-  needs:
-    - deploy
   stage: .post
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   rules:
