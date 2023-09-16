@@ -120,6 +120,7 @@ deploy:
   stage: deploy
   script:
     - 'dotnet publish --self-contained --output build'
+    - 'sudo apt install -y zip'
     - 'zip -r wcit.zip build'
 
 release:
