@@ -115,21 +115,3 @@ tests:
   # (e.g. integration tests, unit tests etc).
   script:
     - 'dotnet test --no-restore'
-
-publish:
-  stage: deploy
-  script:
-    - 'dotnet publish --self-contained --output build'
-
-release:
-  needs:
-    - publish
-  stage: deploy
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
-  rules:
-    - if: $CI_COMMIT_TAG
-      when: never
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  script:
-    - 'apt update && apt install -y zip'
-    - 'zip -r wcit.zip build'
