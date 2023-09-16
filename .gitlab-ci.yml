@@ -119,11 +119,11 @@ tests:
 deploy:
   stage: deploy
   script:
-    - 'dotnet publish'
+    - 'dotnet publish --self-contained --output ./build'
   environment: production
   artifacts:
     name: $EXPORT_NAME-$VERSION
     paths:
-      - ./Client/bin/x64/Release/net7.0-windows10.0.22621.0/publish/win-x64
+      - ./build
   only:
     - main
