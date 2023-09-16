@@ -116,8 +116,8 @@ tests:
   script:
     - 'dotnet test --no-restore'
 
-deploy:
-  stage: release
+release:
+  stage: deploy
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   rules:
     - if: $CI_COMMIT_TAG
