@@ -116,5 +116,6 @@ tests:
 
 deploy:
   stage: deploy
-  script: echo "Define your deployment script!"
+  script:
+    - 'dotnet publish'
   environment: production
