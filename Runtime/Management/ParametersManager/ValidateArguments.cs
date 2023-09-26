@@ -7,91 +7,97 @@ namespace Runtime.Management.ParametersManager
     {
         public static string? DestinationDrive { get; set; }
         public static string? EfiDrive { get; set; }
-        public static string? DiskNumber { get; set; }
+        public static int DiskNumber = -1;
         public static string? SourceDrive { get; set; }
-        public static int? WindowsEdition { get; set; }
+        public static int WindowsEdition = 0;
+        public static bool AddDriversToWindows = false;
 
         internal static void Setup()
         {
             if (DestinationDrive == null)
             {
-                Console.WriteLine("\n==> Type the mountpoint to use for deploying Windows (e.g. Z:).");
+                Console.Write("\n==> Type the mountpoint to use for deploying Windows (e.g. Z:): ");
                 DestinationDrive = Console.ReadLine();
 
                 if (string.IsNullOrEmpty(DestinationDrive))
                 {
-                    Console.WriteLine("No destination drive was specified.\n\nPress ENTER to quit the program.");
+                    Console.Write("No destination drive was specified.\n\nPress ENTER to quit the program: ");
                     Console.ReadLine();
                     Environment.Exit(1);
                 }
                 else if (!DestinationDrive.Contains(':'))
                 {
-                    Console.Error.WriteLine($"\nERROR: '{DestinationDrive}': Invalid destination drive, it must have a colon. For example: 'H:'.\n\nPress ENTER to quit the program.");
-                    Console.ReadLine();
-                    Environment.Exit(1);
+                    throw new ArgumentException($"Invalid source drive {SourceDrive}, it must have a colon. For example: 'H:'.");
                 }
             }
 
             if (EfiDrive == null)
             {
-                Console.WriteLine("\n==> Type a mountpoint for installing the bootloader at (e.g. K:).");
+                Console.Write("\n==> Type a mountpoint for installing the bootloader at (e.g. K:): ");
                 EfiDrive = Console.ReadLine();
 
                 if (string.IsNullOrEmpty(EfiDrive))
                 {
-                    Console.WriteLine("No EFI drive was specified.\n\nPress ENTER to quit the program.");
-                    Console.ReadLine();
-                    Environment.Exit(1);
+                    throw new ArgumentException("No EFI drive was specified");
                 }
                 else if (!EfiDrive.Contains(':'))
                 {
-                    Console.Error.WriteLine($"\nERROR: '{EfiDrive}': Invalid EFI drive, it must have a colon. For example: 'H:'.\n\nPress ENTER to quit the program.");
-                    Console.ReadLine();
-                    Environment.Exit(1);
+                    throw new ArgumentException($"Invalid EFI drive {EfiDrive}, it must have a colon. For example: 'H:'.");
                 }
             }
 
-            if (DiskNumber == null)
+            if (DiskNumber == -1)
             {
                 Console.WriteLine("\n==> These are the disks available on your system:");
                 SystemDrives.ListAll();
 
-                Console.WriteLine("\n==> Please type the disk number to format (e.g. 0):");
-                DiskNumber = Console.ReadLine();
+                Console.Write("\n==> Please type the disk number to format (e.g. 0): ");
+                string? SelectedDisk = Console.ReadLine();
 
-                if (string.IsNullOrEmpty(DiskNumber))
+                if (!string.IsNullOrEmpty(SelectedDisk))
                 {
-                    Console.WriteLine("No disk specified for formatting.\n\nPress ENTER to quit the program.");
-                    Console.ReadLine();
-                    Environment.Exit(1);
+                    DiskNumber = Convert.ToInt32(SelectedDisk);
                 }
+                else
+                {
+                    throw new ArgumentException("No disk was chosen to formatting.", nameof(DiskNumber));
+                }
+
+
+                // This prevents SourceDrive = Console.ReadLine() shown below from being skipped
+                Console.ReadLine();
             }
 
             if (SourceDrive == null)
             {
-                Console.WriteLine("\n==> Type the letter where the ISO is mounted at below (e.g. D:).");
+                Console.Write("\n==> Type the letter where the ISO is mounted at (e.g. D:): ");
                 SourceDrive = Console.ReadLine();
 
                 if (string.IsNullOrEmpty(SourceDrive))
                 {
-                    Console.WriteLine("No source drive was specified.\n\nPress ENTER to quit the program.");
-                    Console.ReadLine();
-                    Environment.Exit(1);
+                    throw new ArgumentException("No source drive was specified.\n\nPress ENTER to quit the program.", nameof(SourceDrive));
+                }
+                else if (!SourceDrive.Contains(':'))
+                {
+                   throw new ArgumentException($"Invalid source drive {SourceDrive}, it must have a colon. For example: 'H:'.");
                 }
             }
 
-            if (WindowsEdition == null || WindowsEdition == 0)
+            if (WindowsEdition == 0)
             {
                 NewDeploy.GetImageInfo(SourceDrive);
 
-                Console.WriteLine("==> Type the index number of the Windows edition you wish to install below (e.g. 1).");
-                WindowsEdition = Console.Read();
-            }
-            else
-            {
-                Console.WriteLine("No Windows edition was specified.\n\nPress ENTER to quit the program.");
-                Console.ReadLine();
-                Environment.Exit(1);
+                Console.Write("==> Type the index number of the Windows edition you wish to install (e.g. 1): ");
+                string? SelectedIndex = Console.ReadLine();
+
+                if (!string.IsNullOrEmpty(SelectedIndex))
+                {
+                    WindowsEdition = Convert.ToInt32(SelectedIndex);
+                }
+                else
+                {
+                    throw new ArgumentException("No Windows edition was specified.", nameof(SelectedIndex));
+                }
             }
         }
     }
