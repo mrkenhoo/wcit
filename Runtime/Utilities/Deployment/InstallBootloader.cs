@@ -8,7 +8,7 @@ namespace Runtime.Utilities.Deployment
         {
             try
             {
-                if (Directory.Exists(EfiDrive))
+                if (Directory.Exists(EfiDrive + "\\EFI\\Boot") || Directory.Exists(EfiDrive + "\\EFI\\Microsoft"))
                 {
                     throw new Exception("The drive letter " + EfiDrive + "is already in use.");
                 }
