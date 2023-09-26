@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Management\ProcessManager\StartCmdProcess.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Management\ProcessManager\StartDismProcess.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Management\ProcessManager\StartProcess.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Deployment\AddDriver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Deployment\ApplyImage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Deployment\GetImageInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Deployment\InstallBootloader.cs" />
