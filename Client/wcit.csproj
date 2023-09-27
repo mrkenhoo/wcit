@@ -19,11 +19,10 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Dism" Version="2.5.2" />
-    <PackageReference Include="System.Management" Version="7.0.1" />
-  </ItemGroup>
-
   <Import Project="..\Runtime\Runtime.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <PackageReference Include="System.Management" Version="7.0.2" />
+  </ItemGroup>
 
 </Project>
