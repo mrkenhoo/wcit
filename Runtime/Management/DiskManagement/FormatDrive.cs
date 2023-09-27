@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.Versioning;
 
 namespace Runtime.Management.DiskManagement
 {
+    [SupportedOSPlatform("windows")]
     partial class SystemDrives
     {
         internal static void FormatDrive(int DiskNumber, string DestinationDrive, string EfiDrive)

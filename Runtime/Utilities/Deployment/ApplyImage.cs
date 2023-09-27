@@ -1,9 +1,11 @@
 ﻿using Runtime.Management.ProcessManager;
 using System;
 using System.IO;
+using System.Runtime.Versioning;
 
 namespace Runtime.Utilities.Deployment
 {
+    [SupportedOSPlatform("windows")]
     public static partial class NewDeploy
     {
         public static void ApplyImage(string SourceDrive, string DestinationDrive, int Index)

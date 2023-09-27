@@ -1,7 +1,9 @@
-﻿using System.Security.Principal;
+﻿using System.Runtime.Versioning;
+using System.Security.Principal;
 
 namespace Runtime.Management.PrivilegesManager
 {
+    [SupportedOSPlatform("windows")]
     public sealed class GetPrivileges
     {
         public static bool IsUserAdmin()

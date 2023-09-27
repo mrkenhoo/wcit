@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace Runtime.Management.EFIManager
 {
+    [SupportedOSPlatform("windows")]
     static partial class GetEFIInfo
     {
         [DllImport("kernel32.dll",

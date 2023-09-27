@@ -1,9 +1,11 @@
 ﻿using Runtime.Management.DiskManagement;
 using Runtime.Utilities.Deployment;
 using System;
+using System.Runtime.Versioning;
 
 namespace Runtime.Management.ParametersManager
 {
+    [SupportedOSPlatform("windows")]
     sealed class Parameters
     {
         public static string? DestinationDrive { get; set; }
