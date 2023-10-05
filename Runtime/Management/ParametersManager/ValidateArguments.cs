@@ -1,6 +1,7 @@
 ﻿using Runtime.Management.DiskManagement;
 using Runtime.Utilities.Deployment;
 using System;
+using System.IO;
 using System.Runtime.Versioning;
 
 namespace Runtime.Management.ParametersManager
@@ -28,6 +29,11 @@ namespace Runtime.Management.ParametersManager
                     Console.ReadLine();
                     Environment.Exit(1);
                 }
+                else if (DestinationDrive.StartsWith(':'))
+                {
+                    throw new InvalidDataException(@$"Invalid source drive {SourceDrive}, it must have a colon at the
+end not at the beginning. For example: 'H:'.");
+                }
                 else if (!DestinationDrive.Contains(':'))
                 {
                     throw new ArgumentException($"Invalid source drive {SourceDrive}, it must have a colon. For example: 'H:'.");
@@ -42,6 +48,11 @@ namespace Runtime.Management.ParametersManager
                 if (string.IsNullOrEmpty(EfiDrive))
                 {
                     throw new ArgumentException("No EFI drive was specified");
+                }
+                else if (EfiDrive.StartsWith(':'))
+                {
+                    throw new InvalidDataException(@$"Invalid source drive {EfiDrive}, it must have a colon at the
+end not at the beginning. For example: 'H:'.");
                 }
                 else if (!EfiDrive.Contains(':'))
                 {
@@ -75,6 +86,11 @@ namespace Runtime.Management.ParametersManager
                 if (string.IsNullOrEmpty(SourceDrive))
                 {
                     throw new ArgumentException("No source drive was specified.\n\nPress ENTER to quit the program.", nameof(SourceDrive));
+                }
+                else if (SourceDrive.StartsWith(':'))
+                {
+                    throw new InvalidDataException(@$"Invalid source drive {SourceDrive}, it must have a colon at the
+end not at the beginning. For example: 'H:'.");
                 }
                 else if (!SourceDrive.Contains(':'))
                 {
