@@ -6,7 +6,7 @@ using System.Runtime.Versioning;
 namespace Runtime.Management.DiskManagement
 {
     [SupportedOSPlatform("windows")]
-    partial class SystemDrives
+    public partial class SystemDrives
     {
         internal static void FormatDrive(int DiskNumber, string DestinationDrive, string EfiDrive)
         {
