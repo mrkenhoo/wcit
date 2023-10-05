@@ -65,10 +65,6 @@ namespace Runtime.Management.ParametersManager
                 {
                     throw new ArgumentException("No disk was chosen to formatting.", nameof(DiskNumber));
                 }
-
-
-                // This prevents SourceDrive = Console.ReadLine() shown below from being skipped
-                Console.ReadLine();
             }
 
             if (SourceDrive == null)
