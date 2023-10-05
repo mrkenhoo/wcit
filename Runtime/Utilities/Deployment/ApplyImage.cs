@@ -6,9 +6,9 @@ using System.Runtime.Versioning;
 namespace Runtime.Utilities.Deployment
 {
     [SupportedOSPlatform("windows")]
-    public static partial class NewDeploy
+    public partial class NewDeploy
     {
-        public static void ApplyImage(string SourceDrive, string DestinationDrive, int Index)
+        internal static void ApplyImage(string SourceDrive, string DestinationDrive, int Index)
         {
             if (SourceDrive == null)
             {
@@ -25,7 +25,7 @@ namespace Runtime.Utilities.Deployment
 
             try
             {
-                if (!Directory.Exists(DestinationDrive + "\\windows"))
+                if (Directory.Exists(DestinationDrive + "\\windows"))
                 {
                     if (File.Exists($"{SourceDrive}\\sources\\install.esd"))
                     {
