@@ -4,10 +4,10 @@ using System;
 using System.IO;
 using System.Runtime.Versioning;
 
-namespace Runtime.Management.ParametersManager
+namespace Runtime.Management.Installer
 {
     [SupportedOSPlatform("windows")]
-    sealed class Parameters
+    sealed class Configuration
     {
         public static string? DestinationDrive { get; set; }
         public static string? EfiDrive { get; set; }
@@ -16,7 +16,7 @@ namespace Runtime.Management.ParametersManager
         public static int WindowsEdition = 0;
         public static bool AddDriversToWindows = false;
 
-        internal static void Setup()
+        internal static void SetupInstaller()
         {
             if (DestinationDrive == null)
             {
