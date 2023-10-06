@@ -11,15 +11,15 @@ namespace Runtime.Utilities.Deployment
         {
             try
             {
-                switch(DestinationDrive == null)
+                switch(DestinationDrive)
                 {
-                    case true:
+                    case null:
                         throw new ArgumentNullException(nameof(DestinationDrive));
                 }
 
-                switch(DriversSource == null)
+                switch(DriversSource)
                 {
-                    case true:
+                    case null:
                         throw new ArgumentNullException(nameof(DriversSource));
                 }
                 Worker.StartDismProcess($"/Image:{DestinationDrive} /Add-Driver /Drive:{DriversSource} /recurse");
