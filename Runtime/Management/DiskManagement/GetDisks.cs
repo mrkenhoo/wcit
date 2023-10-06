@@ -24,7 +24,6 @@ namespace Runtime.Management.DiskManagement
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
