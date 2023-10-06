@@ -9,6 +9,7 @@
     <Import_RootNamespace>Runtime</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)management\configuration\Parameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Management\DiskManagement\FormatDrive.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Management\DiskManagement\GetDisks.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Management\EFIManager\IsEFI.cs" />

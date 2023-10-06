@@ -7,15 +7,8 @@ using System.Runtime.Versioning;
 namespace Runtime.Management.Installer
 {
     [SupportedOSPlatform("windows")]
-    sealed class Configuration
+    sealed partial class Configuration
     {
-        public static string? DestinationDrive { get; set; }
-        public static string? EfiDrive { get; set; }
-        public static int DiskNumber = -1;
-        public static string? SourceDrive { get; set; }
-        public static int WindowsEdition = 0;
-        public static bool AddDriversToWindows = false;
-
         internal static void SetupInstaller()
         {
             if (DestinationDrive == null)
@@ -112,6 +105,26 @@ end not at the beginning. For example: 'H:'.");
                 else
                 {
                     throw new ArgumentException("No Windows edition was specified.", nameof(SelectedIndex));
+                }
+            }
+
+            if (!AddDriversToWindows)
+            {
+                Console.Write("==> Do you want to add any extra drivers to Windows before using it?: ");
+                string? UserWantsDrivers = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(UserWantsDrivers))
+                {
+                    throw new ArgumentNullException(nameof(UserWantsDrivers));
+                }
+                else if (UserWantsDrivers.Contains("yes"))
+                {
+                    Console.Write("==> Type a drive letter or directory where to look drivers for: ");
+                    string? DriversSource = Console.ReadLine();
+                    if (!string.IsNullOrEmpty(DriversSource))
+                    {
+                        NewDeploy.AddDriver(DestinationDrive, DriversSource);
+                    }
                 }
             }
         }
