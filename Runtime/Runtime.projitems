@@ -12,7 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Management\DiskManagement\FormatDrive.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Management\DiskManagement\GetDisks.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Management\EFIManager\IsEFI.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Management\ParametersManager\ValidateArguments.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Management\Configuration\SetupInstaller.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Management\PrivilegesManager\IsUserAdmin.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Management\ProcessManager\StartCmdProcess.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Management\ProcessManager\StartDismProcess.cs" />
