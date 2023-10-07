@@ -1,15 +1,15 @@
-﻿using Runtime.Management.DiskManagement;
-using Runtime.Utilities.Deployment;
+﻿using libwcit.Management.DiskManagement;
+using libwcit.Utilities.Deployment;
 using System;
 using System.IO;
 using System.Runtime.Versioning;
 
-namespace Runtime.Management.Installer
+namespace libwcit.Management.Installer
 {
     [SupportedOSPlatform("windows")]
-    sealed partial class Configuration
+    public sealed partial class Configuration
     {
-        internal static void SetupInstaller()
+        public static void SetupInstaller()
         {
             if (DestinationDrive == null)
             {

@@ -3,12 +3,12 @@ using System.Linq;
 using System.Management;
 using System.Runtime.Versioning;
 
-namespace Runtime.Management.DiskManagement
+namespace libwcit.Management.DiskManagement
 {
     [SupportedOSPlatform("windows")]
-    partial class SystemDrives
+    public partial class SystemDrives
     {
-        internal static void ListAll()
+        public static void ListAll()
         {
             try
             {

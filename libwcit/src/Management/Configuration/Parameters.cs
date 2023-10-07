@@ -1,9 +1,9 @@
 using System.Runtime.Versioning;
 
-namespace Runtime.Management.Installer
+namespace libwcit.Management.Installer
 {
     [SupportedOSPlatform("windows")]
-    sealed partial class Configuration
+    public sealed partial class Configuration
     {
         public static string? DestinationDrive { get; set; }
         public static string? EfiDrive { get; set; }

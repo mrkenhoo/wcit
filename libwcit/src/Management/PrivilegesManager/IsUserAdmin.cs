@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Versioning;
 using System.Security.Principal;
 
-namespace Runtime.Management.PrivilegesManager
+namespace libwcit.Management.PrivilegesManager
 {
     [SupportedOSPlatform("windows")]
     public sealed class GetPrivileges

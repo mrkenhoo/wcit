@@ -3,12 +3,12 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.Versioning;
 
-namespace Runtime.Management.DiskManagement
+namespace libwcit.Management.DiskManagement
 {
     [SupportedOSPlatform("windows")]
     public partial class SystemDrives
     {
-        internal static void FormatDrive(int DiskNumber, string DestinationDrive, string EfiDrive)
+        public static void FormatDrive(int DiskNumber, string DestinationDrive, string EfiDrive)
         {
             try
             {

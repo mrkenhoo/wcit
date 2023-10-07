@@ -1,8 +1,8 @@
-﻿using Runtime.Management.DiskManagement;
-using Runtime.Management.EFIManager;
-using Runtime.Management.Installer;
-using Runtime.Management.PrivilegesManager;
-using Runtime.Utilities.Deployment;
+﻿using libwcit.Management.DiskManagement;
+using libwcit.Management.EFIManager;
+using libwcit.Management.Installer;
+using libwcit.Management.PrivilegesManager;
+using libwcit.Utilities.Deployment;
 using System;
 using System.Reflection;
 

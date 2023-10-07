@@ -1,14 +1,14 @@
-﻿using Runtime.Management.ProcessManager;
+﻿using libwcit.Management.ProcessManager;
 using System;
 using System.IO;
 using System.Runtime.Versioning;
 
-namespace Runtime.Utilities.Deployment
+namespace libwcit.Utilities.Deployment
 {
     [SupportedOSPlatform("windows")]
     public partial class NewDeploy
     {
-        internal static void ApplyImage(string SourceDrive, string DestinationDrive, int Index)
+        public static void ApplyImage(string SourceDrive, string DestinationDrive, int Index)
         {
             if (SourceDrive == null)
             {
