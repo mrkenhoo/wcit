@@ -7,7 +7,7 @@ using System.Runtime.Versioning;
 namespace libwcit.Management.Installer
 {
     [SupportedOSPlatform("windows")]
-    public sealed partial class Configuration
+    public partial class Configuration
     {
         /// <summary>
         /// Configures the installer to get the deployment ready.
