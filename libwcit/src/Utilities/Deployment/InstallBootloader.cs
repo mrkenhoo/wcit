@@ -8,6 +8,14 @@ namespace libwcit.Utilities.Deployment
     [SupportedOSPlatform("windows")]
     public static partial class NewDeploy
     {
+        /// <summary>
+        /// Installs the bootloader into the <paramref name="EfiDrive"/> at the
+        /// <paramref name="DestinationDrive"/> where the newly deployed Windows installation is found.
+        /// The <paramref name="FirmwareType"/> needs to be set to BIOS or UEFI.
+        /// </summary>
+        /// <param name="DestinationDrive"></param>
+        /// <param name="EfiDrive"></param>
+        /// <param name="FirmwareType"></param>
         public static void InstallBootloader(string DestinationDrive, string EfiDrive, string FirmwareType)
         {
             try

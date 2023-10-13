@@ -9,6 +9,12 @@ namespace libwcit.Management.Installer
     [SupportedOSPlatform("windows")]
     public sealed partial class Configuration
     {
+        /// <summary>
+        /// Configures the installer to get the deployment ready.
+        /// </summary>
+        /// <exception cref="InvalidDataException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         public static void SetupInstaller()
         {
             if (DestinationDrive == null)

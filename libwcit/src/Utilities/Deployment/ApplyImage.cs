@@ -8,6 +8,15 @@ namespace libwcit.Utilities.Deployment
     [SupportedOSPlatform("windows")]
     public partial class NewDeploy
     {
+        /// <summary>
+        /// Deploys an image of Windows to the specified <paramref name="DestinationDrive"/>.
+        /// What gets installed is specified by <paramref name="SourceDrive"/> and the <paramref name="Index"/>.
+        /// </summary>
+        /// <param name="SourceDrive"></param>
+        /// <param name="DestinationDrive"></param>
+        /// <param name="Index"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public static void ApplyImage(string SourceDrive, string DestinationDrive, int Index)
         {
             if (SourceDrive == null)

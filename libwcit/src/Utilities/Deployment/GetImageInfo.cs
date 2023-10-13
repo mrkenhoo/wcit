@@ -8,6 +8,10 @@ namespace libwcit.Utilities.Deployment
     [SupportedOSPlatform("windows")]
     public static partial class NewDeploy
     {
+        /// <summary>
+        /// Gets all Windows editions available from the <paramref name="SourceDrive"/> using DISM, if any.
+        /// </summary>
+        /// <param name="SourceDrive"></param>
         public static void GetImageInfo(string SourceDrive)
         {
             try
