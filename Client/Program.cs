@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace wcit
 {
-    internal sealed class Program
+    internal class Program
     {
         [MTAThread]
         private static int Main(string[] args)
