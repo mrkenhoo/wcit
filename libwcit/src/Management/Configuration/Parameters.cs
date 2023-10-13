@@ -3,7 +3,7 @@ using System.Runtime.Versioning;
 namespace libwcit.Management.Installer
 {
     [SupportedOSPlatform("windows")]
-    public sealed partial class Configuration
+    public partial class Configuration
     {
         public static string? DestinationDrive { get; set; }
         public static string? EfiDrive { get; set; }

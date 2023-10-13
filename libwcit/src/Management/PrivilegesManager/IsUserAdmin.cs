@@ -4,7 +4,7 @@ using System.Security.Principal;
 namespace libwcit.Management.PrivilegesManager
 {
     [SupportedOSPlatform("windows")]
-    public sealed class GetPrivileges
+    public class GetPrivileges
     {
         /// <summary>
         /// Checks if the current user has Administrator privileges.
