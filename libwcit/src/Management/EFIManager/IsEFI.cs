@@ -15,6 +15,11 @@ namespace libwcit.Management.EFIManager
             CallingConvention = CallingConvention.StdCall)]
         private static extern int GetFirmwareType(string lpName, string lpGUID, IntPtr pBuffer, uint size);
 
+
+        /// <summary>
+        /// Checks if the system supports EFI.
+        /// </summary>
+        /// <returns>true or false</returns>
         public static bool IsEFI()
         {
             // Call the function with a dummy variable name and a dummy variable namespace (function will fail because these don't exist.)
