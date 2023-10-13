@@ -8,8 +8,7 @@ namespace libwcit.Management.PrivilegesManager
     {
         public static bool IsUserAdmin()
         {
-            WindowsIdentity identity = WindowsIdentity.GetCurrent();
-            WindowsPrincipal principal = new(identity);
+            WindowsPrincipal principal = new(WindowsIdentity.GetCurrent());
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
     }
