@@ -13,7 +13,7 @@ namespace wcit
         [MTAThread]
         private static int Main(string[] args)
         {
-            Console.Title = $"Windows CLI Installer Tool - version {Assembly.GetExecutingAssembly().GetName().Version}";
+            Console.Title = $"{Assembly.GetExecutingAssembly().GetName().Name} v{Assembly.GetExecutingAssembly().GetName().Version}";
 
 #if WINDOWS10_0_22621_0_OR_GREATER && NET7_0_OR_GREATER
             switch (GetPrivileges.IsUserAdmin())
@@ -23,12 +23,12 @@ namespace wcit
                     {
                         if (!GetEFIInfo.IsEFI())
                         {
-                            throw new PlatformNotSupportedException("An error has occurred: Your system does not support EFI");
+                            throw new PlatformNotSupportedException("An error has occurred: Your system does not support EFI.");
                         }
 
                         Console.Clear();
 
-                        Console.WriteLine("Welcome to the Windows CLI Installer Tool!\nCreated by Ken Hoo (mrkenhoo)");
+                        Console.WriteLine("Welcome to the Windows CLI Installer Tool!\nCreated by Felipe González Martín");
 
                         Configuration.SetupInstaller();
 
