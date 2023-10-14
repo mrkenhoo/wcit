@@ -18,6 +18,19 @@ namespace libwcit.Utilities.Deployment
         /// <param name="FirmwareType"></param>
         public static void InstallBootloader(string DestinationDrive, string EfiDrive, string FirmwareType)
         {
+            if (DestinationDrive == null)
+            {
+                throw new ArgumentNullException(nameof(DestinationDrive));
+            }
+            else if (EfiDrive == null)
+            {
+                throw (new ArgumentNullException(nameof(EfiDrive)));
+            }
+            else if (FirmwareType == null)
+            {
+                throw (new ArgumentNullException(nameof(FirmwareType)));
+            }
+
             try
             {
                 if (Directory.Exists(EfiDrive + "\\EFI\\Boot") || Directory.Exists(EfiDrive + "\\EFI\\Microsoft"))
