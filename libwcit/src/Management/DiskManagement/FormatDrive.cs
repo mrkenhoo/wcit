@@ -47,7 +47,8 @@ namespace libwcit.Management.DiskManagement
                             Console.WriteLine($"\nDisk {DiskNumber} has been formatted successfully");
                             break;
                         case 1:
-                            throw new SystemException();
+                            Environment.Exit(1);
+                            break;
                     }
                 }
             }

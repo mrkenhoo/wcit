@@ -1,6 +1,7 @@
 ﻿using libwcit.Management.DiskManagement;
 using libwcit.Utilities.Deployment;
 using System;
+using System.Globalization;
 using System.IO;
 using System.Runtime.Versioning;
 
@@ -69,7 +70,7 @@ end not at the beginning. For example: 'H:'.");
 
                 if (!string.IsNullOrEmpty(SelectedDisk))
                 {
-                    DiskNumber = Convert.ToInt32(SelectedDisk);
+                    DiskNumber = Convert.ToInt32(SelectedDisk, CultureInfo.CurrentCulture);
                 }
                 else
                 {
@@ -106,7 +107,7 @@ end not at the beginning. For example: 'H:'.");
 
                 if (!string.IsNullOrEmpty(SelectedIndex))
                 {
-                    WindowsEdition = Convert.ToInt32(SelectedIndex);
+                    WindowsEdition = Convert.ToInt32(SelectedIndex, CultureInfo.CurrentCulture);
                 }
                 else
                 {

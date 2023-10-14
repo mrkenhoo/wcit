@@ -22,7 +22,7 @@ namespace libwcit.Utilities.Deployment
             {
                 if (Directory.Exists(EfiDrive + "\\EFI\\Boot") || Directory.Exists(EfiDrive + "\\EFI\\Microsoft"))
                 {
-                    throw new Exception("The drive letter " + EfiDrive + "is already in use.");
+                    Console.Error.WriteLine("The drive letter " + EfiDrive + "is already in use.");
                 }
                 else if (!Directory.Exists($"{DestinationDrive}\\windows"))
                 {
