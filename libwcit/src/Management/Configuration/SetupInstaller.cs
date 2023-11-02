@@ -18,6 +18,10 @@ namespace libwcit.Management.Installer
         /// <exception cref="ArgumentNullException"></exception>
         public static void SetupInstaller()
         {
+            DiskNumber = -1;
+            WindowsEdition = 0;
+            AddDriversToWindows = false;
+
             if (DestinationDrive == null)
             {
                 Console.Write("\n==> Type the mountpoint to use for deploying Windows (e.g. Z:): ");

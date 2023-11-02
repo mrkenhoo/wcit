@@ -7,9 +7,10 @@ namespace libwcit.Management.Installer
     {
         public static string? DestinationDrive { get; set; }
         public static string? EfiDrive { get; set; }
-        public static int DiskNumber = -1;
+        public static int DiskNumber { get; set; }
         public static string? SourceDrive { get; set; }
-        public static int WindowsEdition = 0;
-        public static bool AddDriversToWindows = false;
+        public static int WindowsEdition = { get; set; }
+        public static bool AddDriversToWindows = { get; set; }
     }
 }
+
