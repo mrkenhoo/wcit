@@ -31,26 +31,26 @@ namespace client_gui
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.ConfigureInstaller = new System.Windows.Forms.GroupBox();
-            this.DestinationDriveLabel = new System.Windows.Forms.Label();
+            this.ConfigureInstaller_Panel = new System.Windows.Forms.TableLayoutPanel();
+            this.SourceDrive = new System.Windows.Forms.TextBox();
+            this.EfiDrive = new System.Windows.Forms.TextBox();
             this.DestinationDrive = new System.Windows.Forms.TextBox();
+            this.DestinationDriveLabel = new System.Windows.Forms.Label();
+            this.EfiDriveLabel = new System.Windows.Forms.Label();
+            this.DiskNumberLabel = new System.Windows.Forms.Label();
+            this.DiskNumber = new System.Windows.Forms.NumericUpDown();
+            this.SourceDriveLabel = new System.Windows.Forms.Label();
             this.DiskList = new System.Windows.Forms.DataGridView();
             this.MenuBar = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ConfigureInstaller_Panel = new System.Windows.Forms.TableLayoutPanel();
-            this.EfiDriveLabel = new System.Windows.Forms.Label();
-            this.EfiDrive = new System.Windows.Forms.TextBox();
-            this.DiskNumberLabel = new System.Windows.Forms.Label();
-            this.DiskNumber = new System.Windows.Forms.NumericUpDown();
             this.InstallButton = new System.Windows.Forms.Button();
-            this.SourceDriveLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.ConfigureInstaller.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DiskList)).BeginInit();
-            this.MenuBar.SuspendLayout();
             this.ConfigureInstaller_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DiskNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DiskList)).BeginInit();
+            this.MenuBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConfigureInstaller
@@ -63,16 +63,63 @@ namespace client_gui
             this.ConfigureInstaller.TabStop = false;
             this.ConfigureInstaller.UseCompatibleTextRendering = true;
             // 
+            // ConfigureInstaller_Panel
+            // 
+            resources.ApplyResources(this.ConfigureInstaller_Panel, "ConfigureInstaller_Panel");
+            this.ConfigureInstaller_Panel.Controls.Add(this.SourceDrive, 1, 3);
+            this.ConfigureInstaller_Panel.Controls.Add(this.EfiDrive, 1, 1);
+            this.ConfigureInstaller_Panel.Controls.Add(this.DestinationDrive, 1, 0);
+            this.ConfigureInstaller_Panel.Controls.Add(this.DestinationDriveLabel, 0, 0);
+            this.ConfigureInstaller_Panel.Controls.Add(this.EfiDriveLabel, 0, 1);
+            this.ConfigureInstaller_Panel.Controls.Add(this.DiskNumberLabel, 0, 2);
+            this.ConfigureInstaller_Panel.Controls.Add(this.DiskNumber, 1, 2);
+            this.ConfigureInstaller_Panel.Controls.Add(this.SourceDriveLabel, 0, 3);
+            this.ConfigureInstaller_Panel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ConfigureInstaller_Panel.Name = "ConfigureInstaller_Panel";
+            // 
+            // SourceDrive
+            // 
+            this.SourceDrive.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.SourceDrive, "SourceDrive");
+            this.SourceDrive.Name = "SourceDrive";
+            // 
+            // EfiDrive
+            // 
+            this.EfiDrive.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.EfiDrive, "EfiDrive");
+            this.EfiDrive.Name = "EfiDrive";
+            // 
+            // DestinationDrive
+            // 
+            this.DestinationDrive.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.DestinationDrive, "DestinationDrive");
+            this.DestinationDrive.Name = "DestinationDrive";
+            // 
             // DestinationDriveLabel
             // 
             resources.ApplyResources(this.DestinationDriveLabel, "DestinationDriveLabel");
             this.DestinationDriveLabel.Name = "DestinationDriveLabel";
             // 
-            // DestinationDrive
+            // EfiDriveLabel
             // 
-            this.DestinationDrive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.DestinationDrive, "DestinationDrive");
-            this.DestinationDrive.Name = "DestinationDrive";
+            resources.ApplyResources(this.EfiDriveLabel, "EfiDriveLabel");
+            this.EfiDriveLabel.Name = "EfiDriveLabel";
+            // 
+            // DiskNumberLabel
+            // 
+            resources.ApplyResources(this.DiskNumberLabel, "DiskNumberLabel");
+            this.DiskNumberLabel.Name = "DiskNumberLabel";
+            // 
+            // DiskNumber
+            // 
+            resources.ApplyResources(this.DiskNumber, "DiskNumber");
+            this.DiskNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DiskNumber.Name = "DiskNumber";
+            // 
+            // SourceDriveLabel
+            // 
+            resources.ApplyResources(this.SourceDriveLabel, "SourceDriveLabel");
+            this.SourceDriveLabel.Name = "SourceDriveLabel";
             // 
             // DiskList
             // 
@@ -115,60 +162,12 @@ namespace client_gui
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             // 
-            // ConfigureInstaller_Panel
-            // 
-            resources.ApplyResources(this.ConfigureInstaller_Panel, "ConfigureInstaller_Panel");
-            this.ConfigureInstaller_Panel.Controls.Add(this.textBox1, 1, 3);
-            this.ConfigureInstaller_Panel.Controls.Add(this.EfiDrive, 1, 1);
-            this.ConfigureInstaller_Panel.Controls.Add(this.DestinationDrive, 1, 0);
-            this.ConfigureInstaller_Panel.Controls.Add(this.DestinationDriveLabel, 0, 0);
-            this.ConfigureInstaller_Panel.Controls.Add(this.EfiDriveLabel, 0, 1);
-            this.ConfigureInstaller_Panel.Controls.Add(this.DiskNumberLabel, 0, 2);
-            this.ConfigureInstaller_Panel.Controls.Add(this.DiskNumber, 1, 2);
-            this.ConfigureInstaller_Panel.Controls.Add(this.SourceDriveLabel, 0, 3);
-            this.ConfigureInstaller_Panel.Cursor = System.Windows.Forms.Cursors.Default;
-            this.ConfigureInstaller_Panel.Name = "ConfigureInstaller_Panel";
-            // 
-            // EfiDriveLabel
-            // 
-            resources.ApplyResources(this.EfiDriveLabel, "EfiDriveLabel");
-            this.EfiDriveLabel.Name = "EfiDriveLabel";
-            // 
-            // EfiDrive
-            // 
-            this.EfiDrive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.EfiDrive, "EfiDrive");
-            this.EfiDrive.Name = "EfiDrive";
-            // 
-            // DiskNumberLabel
-            // 
-            resources.ApplyResources(this.DiskNumberLabel, "DiskNumberLabel");
-            this.DiskNumberLabel.Name = "DiskNumberLabel";
-            // 
-            // DiskNumber
-            // 
-            resources.ApplyResources(this.DiskNumber, "DiskNumber");
-            this.DiskNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.DiskNumber.Name = "DiskNumber";
-            // 
             // InstallButton
             // 
-            this.InstallButton.AutoEllipsis = true;
             resources.ApplyResources(this.InstallButton, "InstallButton");
             this.InstallButton.Name = "InstallButton";
             this.InstallButton.UseVisualStyleBackColor = true;
             this.InstallButton.Click += new System.EventHandler(this.InstallButton_Click);
-            // 
-            // SourceDriveLabel
-            // 
-            resources.ApplyResources(this.SourceDriveLabel, "SourceDriveLabel");
-            this.SourceDriveLabel.Name = "SourceDriveLabel";
-            // 
-            // textBox1
-            // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.textBox1, "textBox1");
-            this.textBox1.Name = "textBox1";
             // 
             // MainWindow
             // 
@@ -182,12 +181,12 @@ namespace client_gui
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ConfigureInstaller.ResumeLayout(false);
             this.ConfigureInstaller.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DiskList)).EndInit();
-            this.MenuBar.ResumeLayout(false);
-            this.MenuBar.PerformLayout();
             this.ConfigureInstaller_Panel.ResumeLayout(false);
             this.ConfigureInstaller_Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DiskNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DiskList)).EndInit();
+            this.MenuBar.ResumeLayout(false);
+            this.MenuBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,7 +208,7 @@ namespace client_gui
         private System.Windows.Forms.NumericUpDown DiskNumber;
         private System.Windows.Forms.Button InstallButton;
         private System.Windows.Forms.Label SourceDriveLabel;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox SourceDrive;
     }
 }
 

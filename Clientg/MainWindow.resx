@@ -125,32 +125,32 @@
     <value>2</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="SourceDrive.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 75</value>
   </data>
-  <data name="textBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="SourceDrive.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 13</value>
   </data>
-  <data name="textBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="SourceDrive.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;textBox1.Name" xml:space="preserve">
-    <value>textBox1</value>
+  <data name="&gt;&gt;SourceDrive.Name" xml:space="preserve">
+    <value>SourceDrive</value>
   </data>
-  <data name="&gt;&gt;textBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;SourceDrive.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SourceDrive.Parent" xml:space="preserve">
     <value>ConfigureInstaller_Panel</value>
   </data>
-  <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;SourceDrive.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="EfiDrive.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 29</value>
   </data>
   <data name="EfiDrive.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>100, 13</value>
   </data>
   <data name="EfiDrive.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -171,7 +171,7 @@
     <value>97, 3</value>
   </data>
   <data name="DestinationDrive.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>100, 13</value>
   </data>
   <data name="DestinationDrive.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -352,7 +352,7 @@
     <value>0</value>
   </data>
   <data name="ConfigureInstaller_Panel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="textBox1" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="EfiDrive" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="DestinationDrive" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="DestinationDriveLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="EfiDriveLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DiskNumberLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DiskNumber" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="SourceDriveLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20,Absolute,20,Absolute,20,Absolute,20,Absolute,20,Absolute,20,Absolute,20,Absolute,20,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="SourceDrive" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="EfiDrive" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="DestinationDrive" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="DestinationDriveLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="EfiDriveLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DiskNumberLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DiskNumber" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="SourceDriveLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,20,Absolute,20,Absolute,20,Absolute,20,Absolute,20,Absolute,20,Absolute,20,Absolute,20,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="DiskList.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
