@@ -1,11 +1,12 @@
-﻿using System;
+﻿using libwcit.Utilities.Deployment;
 using System.ComponentModel;
-using System.Linq;
+using System.Data;
 using System.Management;
-using System.Windows.Forms;
+using System.Runtime.Versioning;
 
 namespace client_gui
 {
+    [SupportedOSPlatform("windows")]
     public partial class MainWindow : Form
     {
         public MainWindow()
@@ -26,9 +27,9 @@ namespace client_gui
 
             foreach (ManagementObject o in DeviceInfo.Get().Cast<ManagementObject>())
             {
-                string diskNumber = o["Index"].ToString();
-                string model = o["Model"].ToString();
-                string deviceID = o["DeviceID"].ToString();
+                string? diskNumber = o["Index"].ToString();
+                string? model = o["Model"].ToString();
+                string? deviceID = o["DeviceID"].ToString();
 
                 // Display information in the DiskList
                 DiskList.Rows.Add(diskNumber, model, deviceID);
@@ -45,7 +46,25 @@ namespace client_gui
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(DestinationDrive.Text))
+            {
+                throw new ArgumentNullException(nameof(DestinationDrive));
+            }
+            else if (string.IsNullOrEmpty(EfiDrive.Text))
+            {
+                throw new ArgumentNullException(nameof(EfiDrive));
+            }
+            else if (string.IsNullOrEmpty(DiskNumber.Text))
+            {
+                throw new ArgumentNullException(nameof(SourceDrive));
+            }
 
+            MessageBox.Show($"""
+                Destination drive: {DestinationDrive.Text}
+                EFI drive: {EfiDrive.Text}
+                Disk number: {DiskNumber.Text}
+                Source drive: {SourceDrive.Text}
+                """);
         }
     }
 }
