@@ -16,20 +16,12 @@ namespace libwcit.Utilities.Deployment
         /// <param name="DestinationDrive"></param>
         /// <param name="EfiDrive"></param>
         /// <param name="FirmwareType"></param>
+        /// <exception cref="ArgumentException"/>
         public static void InstallBootloader(string DestinationDrive, string EfiDrive, string FirmwareType)
         {
-            if (DestinationDrive == null)
-            {
-                throw new ArgumentNullException(nameof(DestinationDrive));
-            }
-            else if (EfiDrive == null)
-            {
-                throw (new ArgumentNullException(nameof(EfiDrive)));
-            }
-            else if (FirmwareType == null)
-            {
-                throw (new ArgumentNullException(nameof(FirmwareType)));
-            }
+            ArgumentException.ThrowIfNullOrWhiteSpace(DestinationDrive, nameof(DestinationDrive));
+            ArgumentException.ThrowIfNullOrWhiteSpace(EfiDrive, nameof(EfiDrive));
+            ArgumentException.ThrowIfNullOrWhiteSpace(FirmwareType, nameof(FirmwareType));
 
             try
             {

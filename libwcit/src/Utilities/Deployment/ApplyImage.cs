@@ -15,18 +15,12 @@ namespace libwcit.Utilities.Deployment
         /// <param name="SourceDrive"></param>
         /// <param name="DestinationDrive"></param>
         /// <param name="Index"></param>
-        /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
         public static void ApplyImage(string SourceDrive, string DestinationDrive, int Index)
         {
-            if (SourceDrive == null)
-            {
-                throw new ArgumentNullException(nameof(SourceDrive));
-            }
-            else if (DestinationDrive == null)
-            {
-                throw new ArgumentNullException(nameof(DestinationDrive));
-            }
+            ArgumentException.ThrowIfNullOrWhiteSpace(SourceDrive);
+            ArgumentException.ThrowIfNullOrWhiteSpace(DestinationDrive);
+
             if (Index <= 0)
             {
                 throw new ArgumentException("No Windows edition was chosen", nameof(Index));
@@ -34,7 +28,7 @@ namespace libwcit.Utilities.Deployment
 
             try
             {
-                if (Directory.Exists(DestinationDrive + "\\windows"))
+                if (!Directory.Exists(DestinationDrive + "\\windows"))
                 {
                     if (File.Exists($"{SourceDrive}\\sources\\install.esd"))
                     {
@@ -52,6 +46,7 @@ namespace libwcit.Utilities.Deployment
                 else
                 {
                     Console.Error.WriteLine("Windows seems to be already deployed, not overwriting it.");
+                    Environment.Exit(1);
                 }
             }
             catch (Exception)
