@@ -7,14 +7,9 @@ namespace libwcit.Management.EFIManager
     [SupportedOSPlatform("windows")]
     public static partial class GetEFIInfo
     {
-        [DllImport("kernel32.dll",
-            EntryPoint = "GetFirmwareEnvironmentVariableA",
-            SetLastError = true,
-            CharSet = CharSet.Unicode,
-            ExactSpelling = true,
-            CallingConvention = CallingConvention.StdCall)]
-        private static extern int GetFirmwareType(string lpName, string lpGUID, IntPtr pBuffer, uint size);
-
+        [LibraryImport("kernel32.dll", EntryPoint = "GetFirmwareEnvironmentVariableA", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [UnmanagedCallConv(CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvStdcall) })]
+        private static partial void GetFirmwareType(string lpName, string lpGUID, IntPtr pBuffer, uint size);
 
         /// <summary>
         /// Checks if the system supports EFI.
