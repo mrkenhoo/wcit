@@ -20,7 +20,6 @@ namespace libwcit.Management.Installer
         {
             DiskNumber = -1;
             WindowsEdition = 0;
-            AddDriversToWindows = false;
 
             if (DestinationDrive == null)
             {
@@ -35,8 +34,7 @@ namespace libwcit.Management.Installer
                 }
                 else if (DestinationDrive.StartsWith(':'))
                 {
-                    throw new InvalidDataException(@$"Invalid source drive {SourceDrive}, it must have a colon at the
-end not at the beginning. For example: 'H:'.");
+                    throw new InvalidDataException(@$"Invalid source drive {SourceDrive}, it must have a colon at the end not at the beginning. For example: 'H:'.");
                 }
                 else if (!DestinationDrive.Contains(':'))
                 {
@@ -119,16 +117,14 @@ end not at the beginning. For example: 'H:'.");
                 }
             }
 
-            if (!AddDriversToWindows)
+            if (!InstallExtraDrivers)
             {
                 Console.Write("==> Do you want to add any extra drivers to Windows before using it?: ");
                 string? UserWantsDrivers = Console.ReadLine();
 
-                if (string.IsNullOrEmpty(UserWantsDrivers))
-                {
-                    throw new ArgumentNullException(nameof(UserWantsDrivers));
-                }
-                else if (UserWantsDrivers.Contains("yes"))
+                ArgumentException.ThrowIfNullOrWhiteSpace(UserWantsDrivers);
+
+                if (UserWantsDrivers.Contains("yes"))
                 {
                     Console.Write("==> Type a drive letter or directory where to look drivers for: ");
                     string? DriversSource = Console.ReadLine();
