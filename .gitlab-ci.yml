@@ -115,3 +115,10 @@ tests:
   # (e.g. integration tests, unit tests etc).
   script:
     - 'dotnet test --no-restore'
+
+installer:
+  stage: deploy
+  image: amake/innosetup
+  script:
+    - 'compil32 /cc "wcit-setup.iss"'
+    #- 'iscc "Path/To/MyAppSetup.iss"'
