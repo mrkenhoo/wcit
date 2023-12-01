@@ -16,11 +16,8 @@ namespace libwcit.Management.Installer
         /// <exception cref="InvalidDataException"></exception>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        public static void SetupInstaller()
+        public static void SetupInstaller(bool InstallExtraDrivers = false)
         {
-            DiskNumber = -1;
-            WindowsEdition = 0;
-
             if (DestinationDrive == null)
             {
                 Console.Write("\n==> Type the mountpoint to use for deploying Windows (e.g. Z:): ");
@@ -62,7 +59,7 @@ end not at the beginning. For example: 'H:'.");
                 }
             }
 
-            if (DiskNumber == -1)
+            if (DiskNumber == -1 || DiskNumber !>= 0)
             {
                 Console.WriteLine("\n==> These are the disks available on your system:");
                 SystemDrives.ListAll();
@@ -91,8 +88,7 @@ end not at the beginning. For example: 'H:'.");
                 }
                 else if (SourceDrive.StartsWith(':'))
                 {
-                    throw new InvalidDataException(@$"Invalid source drive {SourceDrive}, it must have a colon at the
-end not at the beginning. For example: 'H:'.");
+                    throw new InvalidDataException(@$"Invalid source drive {SourceDrive}, it must have a colon at the end not at the beginning. For example: 'H:'.");
                 }
                 else if (!SourceDrive.Contains(':'))
                 {
@@ -134,6 +130,38 @@ end not at the beginning. For example: 'H:'.");
                     }
                 }
             }
+
+            Console.Write(@$"Destination drive is set to '{DestinationDrive}'
+EFI drive is set to '{EfiDrive}'
+Disk number is set to '{DiskNumber}'
+Source drive is set to '{SourceDrive}'
+Windows edition (Index) is set to '{WindowsEdition}'");
+
+            Console.WriteLine($"\nIf this is correct, press any key to continue...");
+            Console.ReadKey();
+        }
+
+        public static void InstallWindows()
+        {
+            if (DiskNumber != -1 && DestinationDrive != null && EfiDrive != null)
+            {
+                SystemDrives.FormatDrive(DiskNumber, DestinationDrive, EfiDrive);
+            }
+
+            Console.WriteLine($"\n==> Deploying Windows to drive {DestinationDrive} in disk {DiskNumber}, please wait...");
+
+            if (SourceDrive != null && DestinationDrive != null && WindowsEdition != 0)
+            {
+                NewDeploy.ApplyImage(SourceDrive, DestinationDrive, WindowsEdition);
+            }
+            Console.WriteLine($"\n==> Installing bootloader to drive {EfiDrive} in disk {DiskNumber}");
+
+            if (DestinationDrive != null && EfiDrive != null)
+            {
+                NewDeploy.InstallBootloader(DestinationDrive, EfiDrive, "UEFI");
+            }
+
+            Console.WriteLine("Windows has been deployed and it's ready to use\n\nPress ENTER to close the window");
         }
     }
 }
