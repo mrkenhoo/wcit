@@ -11,9 +11,9 @@ namespace wcit
         [MTAThread]
         private static int Main(string[] args)
         {
-            Console.Title = $"{Assembly.GetExecutingAssembly().GetName().Name} v{Assembly.GetExecutingAssembly().GetName().Version}";
+            Console.Title = $"{Assembly.GetExecutingAssembly().GetName().FullName} v{Assembly.GetExecutingAssembly().GetName().Version}";
 
-#if WINDOWS10_0_22621_0_OR_GREATER && NET7_0_OR_GREATER
+#if WINDOWS10_0_22621_0_OR_GREATER && NET8_0_OR_GREATER
             switch (GetPrivileges.IsUserAdmin())
             {
                 case true:
@@ -31,12 +31,10 @@ namespace wcit
                         Configuration.SetupInstaller();
 
                         Configuration.InstallWindows();
-
-                        Console.WriteLine("Windows has been deployed and it's ready to use\n\nPress ENTER to close the window");
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Console.Error.WriteLine(ex.Message);
+                        throw;
                     }
                     break;
                 case false:

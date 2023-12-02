@@ -74,7 +74,7 @@ end not at the beginning. For example: 'H:'.");
                 }
                 else
                 {
-                    throw new ArgumentException("No disk was chosen to formatting.", nameof(DiskNumber));
+                    throw new ArgumentException("No disk was chosen to formatting.");
                 }
             }
 
@@ -85,7 +85,7 @@ end not at the beginning. For example: 'H:'.");
 
                 if (string.IsNullOrEmpty(SourceDrive))
                 {
-                    throw new ArgumentException("No source drive was specified.\n\nPress ENTER to quit the program.", nameof(SourceDrive));
+                    throw new ArgumentException("No source drive was specified.\n\nPress ENTER to quit the program.");
                 }
                 else if (SourceDrive.StartsWith(':'))
                 {
@@ -93,7 +93,7 @@ end not at the beginning. For example: 'H:'.");
                 }
                 else if (!SourceDrive.Contains(':'))
                 {
-                   throw new ArgumentException($"Invalid source drive {SourceDrive}, it must have a colon. For example: 'H:'.");
+                   throw new ArgumentException($"Invalid source drive {SourceDrive}, it must end with a colon. For example: 'H:'.");
                 }
             }
 
@@ -110,7 +110,7 @@ end not at the beginning. For example: 'H:'.");
                 }
                 else
                 {
-                    throw new ArgumentException("No Windows edition was specified.", nameof(SelectedIndex));
+                    throw new ArgumentException("No Windows edition was specified.");
                 }
             }
 
@@ -121,13 +121,13 @@ end not at the beginning. For example: 'H:'.");
 
                 ArgumentException.ThrowIfNullOrWhiteSpace(UserWantsDrivers);
 
-                if (UserWantsDrivers.Contains("yes"))
+                if (UserWantsDrivers.Contains("yes") || UserWantsDrivers.Contains('y'))
                 {
                     Console.Write("==> Type a drive letter or directory where to look drivers for: ");
                     string? DriversSource = Console.ReadLine();
                     if (!string.IsNullOrEmpty(DriversSource))
                     {
-                        NewDeploy.AddDriver(DestinationDrive, DriversSource);
+                        NewDeploy.AddDrivers(DestinationDrive, DriversSource);
                     }
                 }
             }
