@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.Versioning;
 
-namespace Runtime.Management.ProcessManager
+namespace libwcit.Management.ProcessManager
 {
+    [SupportedOSPlatform("windows")]
     public sealed partial class Worker
     {
         public static void StartProcess(string fileName, string args)

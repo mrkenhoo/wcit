@@ -1,10 +1,14 @@
-﻿using System.Management;
+﻿using System;
+using System.Linq;
+using System.Management;
+using System.Runtime.Versioning;
 
-namespace Runtime.Management.DiskManagement
+namespace libwcit.Management.DiskManagement
 {
-    partial class SystemDrives
+    [SupportedOSPlatform("windows")]
+    public partial class SystemDrives
     {
-        internal static void ListAll()
+        public static void ListAll()
         {
             try
             {
@@ -20,7 +24,6 @@ namespace Runtime.Management.DiskManagement
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
