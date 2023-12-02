@@ -13,7 +13,7 @@ namespace libwcit.Utilities.Deployment
         /// </summary>
         /// <param name="DestinationDrive"></param>
         /// <param name="DriversSource"></param>
-        public static void AddDriver(string DestinationDrive, string DriversSource)
+        public static void AddDrivers(string DestinationDrive, string DriversSource)
         {
             try
             {
