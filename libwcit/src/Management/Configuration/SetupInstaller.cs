@@ -13,6 +13,7 @@ namespace libwcit.Management.Installer
         /// <summary>
         /// Configures the installer to get the deployment ready.
         /// </summary>
+        /// <param name="InstallExtraDrivers"/>
         /// <exception cref="InvalidDataException"></exception>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
