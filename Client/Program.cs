@@ -11,7 +11,7 @@ namespace wcit
         [MTAThread]
         private static int Main(string[] args)
         {
-            Console.Title = $"{Assembly.GetExecutingAssembly().GetName().FullName} v{Assembly.GetExecutingAssembly().GetName().Version}";
+            Console.Title = $"{Assembly.GetExecutingAssembly().GetName().Name} v{Assembly.GetExecutingAssembly().GetName().Version}";
 
 #if WINDOWS10_0_22621_0_OR_GREATER && NET8_0_OR_GREATER
             switch (GetPrivileges.IsUserAdmin())
