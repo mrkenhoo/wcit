@@ -40,10 +40,11 @@ namespace wcit
                 case false:
                     throw new UnauthorizedAccessException("This program needs administrator privileges to work.");
             }
+
+            return 0;
 #else
             throw new NotSupportedException("This system is not compatible with this program.");
 #endif
-            return Environment.ExitCode;
         }
     }
 }
