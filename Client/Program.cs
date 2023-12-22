@@ -21,7 +21,7 @@ namespace wcit
                     {
                         if (!GetEFIInfo.IsEFI())
                         {
-                            throw new PlatformNotSupportedException("An error has occurred: Your system does not support EFI.");
+                            throw new PlatformNotSupportedException("Your system does not support EFI.");
                         }
 
                         Console.Clear();
