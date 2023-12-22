@@ -155,6 +155,7 @@ Windows edition (Index) is set to '{WindowsEdition}'");
             {
                 NewDeploy.ApplyImage(SourceDrive, DestinationDrive, WindowsEdition);
             }
+
             Console.WriteLine($"\n==> Installing bootloader to drive {EfiDrive} in disk {DiskNumber}");
 
             if (DestinationDrive != null && EfiDrive != null)
