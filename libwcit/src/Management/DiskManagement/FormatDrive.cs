@@ -41,12 +41,13 @@ namespace libwcit.Management.DiskManagement
                     process.StandardInput.WriteLine("exit");
                     process.WaitForExit();
                     process.Dispose();
-                    switch (Environment.ExitCode)
+                    switch (process.ExitCode)
                     {
                         case 0:
                             Console.WriteLine($"\nDisk {DiskNumber} has been formatted successfully");
                             break;
                         case 1:
+                            Console.Error.WriteLine($"\nFailed to format the disk {DiskNumber}");
                             Environment.Exit(1);
                             break;
                     }
