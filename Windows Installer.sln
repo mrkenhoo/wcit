@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "wcit", "Client\wcit.csproj"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "libwcit", "libwcit\libwcit.csproj", "{C4F97036-0A8C-41FD-9CE9-8A4CC804E461}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "client_gui", "client_gui\client_gui.csproj", "{273BD1F6-8382-4A4D-AB32-49BBB59A291E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,14 @@ Global
 		{C4F97036-0A8C-41FD-9CE9-8A4CC804E461}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C4F97036-0A8C-41FD-9CE9-8A4CC804E461}.Release|x64.ActiveCfg = Release|Any CPU
 		{C4F97036-0A8C-41FD-9CE9-8A4CC804E461}.Release|x64.Build.0 = Release|Any CPU
+		{273BD1F6-8382-4A4D-AB32-49BBB59A291E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{273BD1F6-8382-4A4D-AB32-49BBB59A291E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{273BD1F6-8382-4A4D-AB32-49BBB59A291E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{273BD1F6-8382-4A4D-AB32-49BBB59A291E}.Debug|x64.Build.0 = Debug|Any CPU
+		{273BD1F6-8382-4A4D-AB32-49BBB59A291E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{273BD1F6-8382-4A4D-AB32-49BBB59A291E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{273BD1F6-8382-4A4D-AB32-49BBB59A291E}.Release|x64.ActiveCfg = Release|Any CPU
+		{273BD1F6-8382-4A4D-AB32-49BBB59A291E}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
