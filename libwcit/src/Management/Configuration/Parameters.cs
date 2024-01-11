@@ -5,11 +5,11 @@ namespace libwcit.Management.Installer
     [SupportedOSPlatform("windows")]
     public partial class Configuration
     {
-        public static string? DestinationDrive { get; set; }
-        public static string? EfiDrive { get; set; }
-        public static int DiskNumber { get; set; }
-        public static string? SourceDrive { get; set; }
-        public static int WindowsEdition { get; set; }
-        public static bool InstallExtraDrivers { get; set; }
+        public static string? DestinationDrive { get; private set; }
+        public static string? EfiDrive { get; private set; }
+        public static int DiskNumber { get; private set; }
+        public static string? SourceDrive { get; private set; }
+        public static int WindowsEdition { get; private set; }
+        public static bool InstallExtraDrivers { get; private set; }
     }
 }

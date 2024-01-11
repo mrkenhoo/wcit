@@ -51,8 +51,7 @@ namespace libwcit.Management.Installer
                 }
                 else if (EfiDrive.StartsWith(':'))
                 {
-                    throw new InvalidDataException(@$"Invalid source drive {EfiDrive}, it must have a colon at the
-end not at the beginning. For example: 'H:'.");
+                    throw new InvalidDataException(@$"Invalid source drive {EfiDrive}, it must have a colon at the end not at the beginning. For example: 'H:'.");
                 }
                 else if (!EfiDrive.Contains(':'))
                 {
@@ -95,11 +94,17 @@ end not at the beginning. For example: 'H:'.");
                 {
                    throw new ArgumentException($"Invalid source drive {SourceDrive}, it must end with a colon. For example: 'H:'.");
                 }
+
+                NewDeploy.ImageFile = NewDeploy.GetImageFile(SourceDrive);
+            }
+            else
+            {
+                NewDeploy.ImageFile = NewDeploy.GetImageFile(SourceDrive);
             }
 
-            if (WindowsEdition == 0)
+            if (WindowsEdition !>= 0)
             {
-                NewDeploy.GetImageInfo(SourceDrive);
+                NewDeploy.GetImageInfo(NewDeploy.ImageFile);
 
                 Console.Write("==> Type the index number of the Windows edition you wish to install (e.g. 1): ");
                 string? SelectedIndex = Console.ReadLine();
@@ -119,51 +124,34 @@ end not at the beginning. For example: 'H:'.");
                 Console.Write("==> Do you want to add any extra drivers to Windows before using it?: ");
                 string? UserWantsDrivers = Console.ReadLine();
 
-                ArgumentException.ThrowIfNullOrWhiteSpace(UserWantsDrivers);
-
-                if (UserWantsDrivers.Contains("yes") || UserWantsDrivers.Contains('y'))
+                if (UserWantsDrivers != null)
                 {
-                    Console.Write("==> Type a drive letter or directory where to look drivers for: ");
-                    string? DriversSource = Console.ReadLine();
-                    if (!string.IsNullOrEmpty(DriversSource))
+                    if (!string.IsNullOrWhiteSpace(UserWantsDrivers) && UserWantsDrivers.Contains("yes") || UserWantsDrivers.Contains('y'))
                     {
-                        NewDeploy.AddDrivers(DestinationDrive, DriversSource);
+                        Console.Write("==> Type a drive letter or directory where to look drivers for: ");
+                        string? DriversSource = Console.ReadLine();
+                        if (!string.IsNullOrEmpty(DriversSource))
+                        {
+                            NewDeploy.AddDrivers(DestinationDrive, DriversSource);
+                        }
                     }
+                }
+                else
+                {
+                    throw new ArgumentException(UserWantsDrivers);
                 }
             }
 
-            Console.Write(@$"Destination drive is set to '{DestinationDrive}'
-EFI drive is set to '{EfiDrive}'
-Disk number is set to '{DiskNumber}'
-Source drive is set to '{SourceDrive}'
-Windows edition (Index) is set to '{WindowsEdition}'");
+            Console.Write($"""
+                Destination drive is set to '{DestinationDrive}'
+                EFI drive is set to '{EfiDrive}'
+                Disk number is set to '{DiskNumber}'
+                Source drive is set to '{SourceDrive}'
+                Windows edition (Index) is set to '{WindowsEdition}'
+                """);
 
             Console.WriteLine($"\nIf this is correct, press any key to continue...");
             Console.ReadKey();
-        }
-
-        public static void InstallWindows()
-        {
-            if (DiskNumber != -1 && DestinationDrive != null && EfiDrive != null)
-            {
-                SystemDrives.FormatDrive(DiskNumber, DestinationDrive, EfiDrive);
-            }
-
-            Console.WriteLine($"\n==> Deploying Windows to drive {DestinationDrive} in disk {DiskNumber}, please wait...");
-
-            if (SourceDrive != null && DestinationDrive != null && WindowsEdition != 0)
-            {
-                NewDeploy.ApplyImage(SourceDrive, DestinationDrive, WindowsEdition);
-            }
-
-            Console.WriteLine($"\n==> Installing bootloader to drive {EfiDrive} in disk {DiskNumber}");
-
-            if (DestinationDrive != null && EfiDrive != null)
-            {
-                NewDeploy.InstallBootloader(DestinationDrive, EfiDrive, "UEFI");
-            }
-
-            Console.WriteLine("Windows has been deployed and it's ready to use\n\nPress ENTER to close the window");
         }
     }
 }
