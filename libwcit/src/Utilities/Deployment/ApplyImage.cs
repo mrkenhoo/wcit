@@ -16,37 +16,33 @@ namespace libwcit.Utilities.Deployment
         /// <param name="DestinationDrive"></param>
         /// <param name="Index"></param>
         /// <exception cref="ArgumentException"></exception>
-        public static void ApplyImage(string SourceDrive, string DestinationDrive, int Index)
+        public static int ApplyImage(string ImageFile, string DestinationDrive, int ImageIndex)
         {
-            ArgumentException.ThrowIfNullOrWhiteSpace(SourceDrive);
-            ArgumentException.ThrowIfNullOrWhiteSpace(DestinationDrive);
-
-            if (Index <= 0)
+            if (string.IsNullOrEmpty(ImageFile))
             {
-                throw new ArgumentException("No Windows edition was chosen", nameof(Index));
+                throw new ArgumentException($"'{nameof(ImageFile)}' cannot be null or empty.", nameof(ImageFile));
             }
+
+            if (string.IsNullOrEmpty(DestinationDrive))
+            {
+                throw new ArgumentException($"'{nameof(DestinationDrive)}' cannot be null or empty.", nameof(DestinationDrive));
+            }
+
+            if (ImageFile.Length <= 0) throw new InvalidDataException(@$"Invalid {ImageFile}");
+
+            if (ImageIndex < 0) throw new ArgumentException("No Windows edition was chosen", nameof(ImageIndex));
 
             try
             {
-                if (!Directory.Exists(DestinationDrive + "\\windows"))
+                if (!Directory.Exists($@"{DestinationDrive}\windows"))
                 {
-                    if (File.Exists($"{SourceDrive}\\sources\\install.esd"))
-                    {
-                        Worker.StartDismProcess($"/apply-image /imagefile:{SourceDrive}\\sources\\install.esd /applydir:{DestinationDrive}\\ /index:{Index} /verify");
-                    }
-                    else if (File.Exists($"{SourceDrive}\\sources\\install.wim"))
-                    {
-                        Worker.StartDismProcess($"/apply-image /imagefile:{SourceDrive}\\sources\\install.wim /applydir:{DestinationDrive}\\ /index:{Index} /verify");
-                    }
-                    else
-                    {
-                        throw new FileNotFoundException("Could not find a valid image");
-                    }
+                    Worker.StartDismProcess(@$"/apply-image /imagefile:{ImageFile} /applydir:{DestinationDrive}\ /index:{ImageIndex} /verify");
+                    return Worker.ExitCode;
                 }
                 else
                 {
                     Console.Error.WriteLine("Windows seems to be already deployed, not overwriting it.");
-                    Environment.Exit(1);
+                    return 2;
                 }
             }
             catch (Exception)

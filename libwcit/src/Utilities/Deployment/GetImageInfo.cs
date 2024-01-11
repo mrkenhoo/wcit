@@ -1,33 +1,70 @@
 ﻿using libwcit.Management.ProcessManager;
+using Microsoft.Dism;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Versioning;
 
 namespace libwcit.Utilities.Deployment
 {
     [SupportedOSPlatform("windows")]
-    public static partial class NewDeploy
+    public partial class NewDeploy
     {
         /// <summary>
-        /// Gets all Windows editions available from the <paramref name="SourceDrive"/> using DISM, if any.
+        /// Gets all Windows editions available from the <paramref name="ImageFile"/> using DISM, if any.
         /// </summary>
-        /// <param name="SourceDrive"></param>
-        public static void GetImageInfo(string SourceDrive)
+        /// <param name="ImageFile"></param>
+        public static void GetImageInfo(string ImageFile)
         {
             try
             {
-                if (File.Exists($"{SourceDrive}\\sources\\install.esd"))
+                if (ImageFile != null)
                 {
-                    Worker.StartCmdProcess("dism", $"/get-imageinfo /imagefile:{SourceDrive}\\sources\\install.esd");
-                }
-                else if (File.Exists($"{SourceDrive}\\sources\\install.wim"))
-                {
-                    Worker.StartCmdProcess("dism", $"/get-imageinfo /imagefile:{SourceDrive}\\sources\\install.wim");
+                    Worker.StartCmdProcess("dism.exe", @$"/get-imageinfo /imagefile:{ImageFile}");
                 }
                 else
                 {
-                    throw new FileNotFoundException("Could not find a valid image");
+                    throw new FileNotFoundException("No image file was specified");
                 }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static List<Tuple<int, string>> GetImageInfoT(string SourceDrive, string ImageFile)
+        {
+            if (string.IsNullOrWhiteSpace(SourceDrive))
+            {
+                throw new ArgumentException($"'{nameof(SourceDrive)}' cannot be null or whitespace.", nameof(SourceDrive));
+            }
+            if (string.IsNullOrWhiteSpace(ImageFile))
+            {
+                throw new ArgumentException($"'{nameof(ImageFile)}' cannot be null or whitespace.", nameof(ImageFile));
+            }
+
+            List<Tuple<int, string>> ImageList = [];
+
+            DismApi.Initialize(DismLogLevel.LogErrors);
+
+            DismApi.GetImageInfo(ImageFile);
+
+            try
+            {
+                DismImageInfoCollection imageInfos = DismApi.GetImageInfo(GetImageFile(SourceDrive));
+
+                foreach (DismImageInfo imageInfo in imageInfos)
+                {
+                    ImageList.ForEach(imageInfos =>
+                    {
+                        ImageList.Add(Tuple.Create(imageInfo.ImageIndex, imageInfo.ImageName));
+                    });
+                }
+
+                DismApi.Shutdown();
+
+                return ImageList;
             }
             catch (Exception)
             {

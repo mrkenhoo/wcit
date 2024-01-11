@@ -5,7 +5,7 @@ using System.Runtime.Versioning;
 namespace libwcit.Utilities.Deployment
 {
     [SupportedOSPlatform("windows")]
-    public static partial class NewDeploy
+    public partial class NewDeploy
     {
         /// <summary>
         /// Installs drivers to an offline Windows image at
@@ -13,14 +13,14 @@ namespace libwcit.Utilities.Deployment
         /// </summary>
         /// <param name="DestinationDrive"></param>
         /// <param name="DriversSource"></param>
-        public static void AddDrivers(string DestinationDrive, string DriversSource)
+        public static void AddDrivers(string ImageFile, string DriversSource)
         {
             try
             {
-                switch(DestinationDrive)
+                switch(ImageFile)
                 {
                     case null:
-                        throw new ArgumentNullException(nameof(DestinationDrive));
+                        throw new ArgumentNullException(nameof(ImageFile));
                 }
 
                 switch(DriversSource)
@@ -28,7 +28,7 @@ namespace libwcit.Utilities.Deployment
                     case null:
                         throw new ArgumentNullException(nameof(DriversSource));
                 }
-                Worker.StartDismProcess($"/Image:{DestinationDrive} /Add-Driver /Drive:{DriversSource} /recurse");
+                Worker.StartDismProcess($"/Image:{ImageFile} /Add-Driver /Drive:{DriversSource} /recurse");
             }
             catch (Exception)
             {
