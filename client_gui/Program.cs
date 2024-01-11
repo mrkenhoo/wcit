@@ -1,3 +1,6 @@
+using System;
+using System.Windows.Forms;
+
 namespace client_gui
 {
     internal static class Program
