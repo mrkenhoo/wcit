@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace client_gui
 {
     partial class MainWindow
@@ -31,103 +33,89 @@ namespace client_gui
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             ConfigureInstaller = new GroupBox();
-            ImageIndex = new DataGridView();
-            ConfigureInstaller_Panel = new TableLayoutPanel();
             SourceDrive = new TextBox();
+            ImageList = new DataGridView();
+            SourceDriveLabel = new Label();
+            DiskNumberLabel = new Label();
+            EfiDriveLabel = new Label();
             EfiDrive = new TextBox();
+            DiskList = new DataGridView();
+            DiskNumber = new NumericUpDown();
             DestinationDrive = new TextBox();
             DestinationDriveLabel = new Label();
-            EfiDriveLabel = new Label();
-            DiskNumberLabel = new Label();
-            DiskNumber = new NumericUpDown();
-            SourceDriveLabel = new Label();
-            DiskList = new DataGridView();
             MenuBar = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             InstallButton = new Button();
+            WindowsEditionIndex = new NumericUpDown();
+            WindowsEditionIndexLabel = new Label();
             ConfigureInstaller.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)ImageIndex).BeginInit();
-            ConfigureInstaller_Panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)DiskNumber).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ImageList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DiskList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)DiskNumber).BeginInit();
             MenuBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)WindowsEditionIndex).BeginInit();
             SuspendLayout();
             // 
             // ConfigureInstaller
             // 
-            ConfigureInstaller.Controls.Add(ImageIndex);
-            ConfigureInstaller.Controls.Add(ConfigureInstaller_Panel);
+            ConfigureInstaller.Controls.Add(WindowsEditionIndexLabel);
+            ConfigureInstaller.Controls.Add(WindowsEditionIndex);
+            ConfigureInstaller.Controls.Add(SourceDrive);
+            ConfigureInstaller.Controls.Add(ImageList);
+            ConfigureInstaller.Controls.Add(SourceDriveLabel);
+            ConfigureInstaller.Controls.Add(DiskNumberLabel);
+            ConfigureInstaller.Controls.Add(EfiDriveLabel);
+            ConfigureInstaller.Controls.Add(EfiDrive);
             ConfigureInstaller.Controls.Add(DiskList);
+            ConfigureInstaller.Controls.Add(DiskNumber);
+            ConfigureInstaller.Controls.Add(DestinationDrive);
+            ConfigureInstaller.Controls.Add(DestinationDriveLabel);
             ConfigureInstaller.FlatStyle = FlatStyle.System;
             resources.ApplyResources(ConfigureInstaller, "ConfigureInstaller");
             ConfigureInstaller.Name = "ConfigureInstaller";
             ConfigureInstaller.TabStop = false;
             ConfigureInstaller.UseCompatibleTextRendering = true;
             // 
-            // ImageIndex
-            // 
-            ImageIndex.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            resources.ApplyResources(ImageIndex, "ImageIndex");
-            ImageIndex.Name = "ImageIndex";
-            // 
-            // ConfigureInstaller_Panel
-            // 
-            resources.ApplyResources(ConfigureInstaller_Panel, "ConfigureInstaller_Panel");
-            ConfigureInstaller_Panel.Controls.Add(SourceDrive, 1, 3);
-            ConfigureInstaller_Panel.Controls.Add(EfiDrive, 1, 1);
-            ConfigureInstaller_Panel.Controls.Add(DestinationDrive, 1, 0);
-            ConfigureInstaller_Panel.Controls.Add(DestinationDriveLabel, 0, 0);
-            ConfigureInstaller_Panel.Controls.Add(EfiDriveLabel, 0, 1);
-            ConfigureInstaller_Panel.Controls.Add(DiskNumberLabel, 0, 2);
-            ConfigureInstaller_Panel.Controls.Add(DiskNumber, 1, 2);
-            ConfigureInstaller_Panel.Controls.Add(SourceDriveLabel, 0, 3);
-            ConfigureInstaller_Panel.Name = "ConfigureInstaller_Panel";
-            // 
             // SourceDrive
             // 
-            SourceDrive.BorderStyle = BorderStyle.None;
             resources.ApplyResources(SourceDrive, "SourceDrive");
             SourceDrive.Name = "SourceDrive";
             // 
-            // EfiDrive
+            // ImageList
             // 
-            EfiDrive.BorderStyle = BorderStyle.None;
-            resources.ApplyResources(EfiDrive, "EfiDrive");
-            EfiDrive.Name = "EfiDrive";
-            // 
-            // DestinationDrive
-            // 
-            DestinationDrive.BorderStyle = BorderStyle.None;
-            resources.ApplyResources(DestinationDrive, "DestinationDrive");
-            DestinationDrive.Name = "DestinationDrive";
-            // 
-            // DestinationDriveLabel
-            // 
-            resources.ApplyResources(DestinationDriveLabel, "DestinationDriveLabel");
-            DestinationDriveLabel.Name = "DestinationDriveLabel";
-            // 
-            // EfiDriveLabel
-            // 
-            resources.ApplyResources(EfiDriveLabel, "EfiDriveLabel");
-            EfiDriveLabel.Name = "EfiDriveLabel";
-            // 
-            // DiskNumberLabel
-            // 
-            resources.ApplyResources(DiskNumberLabel, "DiskNumberLabel");
-            DiskNumberLabel.Name = "DiskNumberLabel";
-            // 
-            // DiskNumber
-            // 
-            resources.ApplyResources(DiskNumber, "DiskNumber");
-            DiskNumber.BorderStyle = BorderStyle.None;
-            DiskNumber.Name = "DiskNumber";
+            ImageList.AllowUserToAddRows = false;
+            ImageList.AllowUserToDeleteRows = false;
+            ImageList.AllowUserToResizeColumns = false;
+            ImageList.AllowUserToResizeRows = false;
+            ImageList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(ImageList, "ImageList");
+            ImageList.Name = "ImageList";
+            ImageList.ReadOnly = true;
             // 
             // SourceDriveLabel
             // 
             resources.ApplyResources(SourceDriveLabel, "SourceDriveLabel");
+            SourceDriveLabel.FlatStyle = FlatStyle.System;
             SourceDriveLabel.Name = "SourceDriveLabel";
+            // 
+            // DiskNumberLabel
+            // 
+            resources.ApplyResources(DiskNumberLabel, "DiskNumberLabel");
+            DiskNumberLabel.FlatStyle = FlatStyle.System;
+            DiskNumberLabel.Name = "DiskNumberLabel";
+            // 
+            // EfiDriveLabel
+            // 
+            resources.ApplyResources(EfiDriveLabel, "EfiDriveLabel");
+            EfiDriveLabel.FlatStyle = FlatStyle.System;
+            EfiDriveLabel.Name = "EfiDriveLabel";
+            // 
+            // EfiDrive
+            // 
+            resources.ApplyResources(EfiDrive, "EfiDrive");
+            EfiDrive.Name = "EfiDrive";
             // 
             // DiskList
             // 
@@ -142,6 +130,22 @@ namespace client_gui
             DiskList.Name = "DiskList";
             DiskList.ReadOnly = true;
             DiskList.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            // 
+            // DiskNumber
+            // 
+            resources.ApplyResources(DiskNumber, "DiskNumber");
+            DiskNumber.Name = "DiskNumber";
+            // 
+            // DestinationDrive
+            // 
+            resources.ApplyResources(DestinationDrive, "DestinationDrive");
+            DestinationDrive.Name = "DestinationDrive";
+            // 
+            // DestinationDriveLabel
+            // 
+            resources.ApplyResources(DestinationDriveLabel, "DestinationDriveLabel");
+            DestinationDriveLabel.FlatStyle = FlatStyle.System;
+            DestinationDriveLabel.Name = "DestinationDriveLabel";
             // 
             // MenuBar
             // 
@@ -174,6 +178,17 @@ namespace client_gui
             InstallButton.UseVisualStyleBackColor = true;
             InstallButton.Click += InstallButton_Click;
             // 
+            // WindowsEditionIndex
+            // 
+            resources.ApplyResources(WindowsEditionIndex, "WindowsEditionIndex");
+            WindowsEditionIndex.Name = "WindowsEditionIndex";
+            // 
+            // WindowsEditionIndexLabel
+            // 
+            resources.ApplyResources(WindowsEditionIndexLabel, "WindowsEditionIndexLabel");
+            WindowsEditionIndexLabel.FlatStyle = FlatStyle.System;
+            WindowsEditionIndexLabel.Name = "WindowsEditionIndexLabel";
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -186,13 +201,12 @@ namespace client_gui
             Load += MainWindow_Load;
             ConfigureInstaller.ResumeLayout(false);
             ConfigureInstaller.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)ImageIndex).EndInit();
-            ConfigureInstaller_Panel.ResumeLayout(false);
-            ConfigureInstaller_Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)DiskNumber).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ImageList).EndInit();
             ((System.ComponentModel.ISupportInitialize)DiskList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)DiskNumber).EndInit();
             MenuBar.ResumeLayout(false);
             MenuBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)WindowsEditionIndex).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -206,15 +220,16 @@ namespace client_gui
         private ToolStripMenuItem aboutToolStripMenuItem;
         private Label DestinationDriveLabel;
         private TextBox DestinationDrive;
-        private TableLayoutPanel ConfigureInstaller_Panel;
         private Label EfiDriveLabel;
         private TextBox EfiDrive;
+        private Button InstallButton;
+        private DataGridView ImageList;
+        private TextBox SourceDrive;
         private Label DiskNumberLabel;
         private NumericUpDown DiskNumber;
-        private Button InstallButton;
         private Label SourceDriveLabel;
-        private TextBox SourceDrive;
-        private DataGridView ImageIndex;
+        private Label WindowsEditionIndexLabel;
+        private NumericUpDown WindowsEditionIndex;
     }
 }
 

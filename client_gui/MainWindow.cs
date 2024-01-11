@@ -1,8 +1,12 @@
-﻿using libwcit.Utilities.Deployment;
+﻿using libwcit.Management.DiskManagement;
+using libwcit.Utilities.Deployment;
+using System;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Management;
 using System.Runtime.Versioning;
+using System.Windows.Forms;
 
 namespace client_gui
 {
@@ -46,25 +50,35 @@ namespace client_gui
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(DestinationDrive.Text))
+            if (string.IsNullOrWhiteSpace(DestinationDrive.Text))
             {
-                throw new ArgumentNullException(nameof(DestinationDrive));
+                MessageBox.Show($"Error: DestinationDrive is not set", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (string.IsNullOrEmpty(EfiDrive.Text))
+            else if (DestinationDrive.Text.Length > 2 || DestinationDrive.Text.StartsWith(':') || !DestinationDrive.Text.EndsWith(':'))
             {
-                throw new ArgumentNullException(nameof(EfiDrive));
+                MessageBox.Show($"Invalid value at DestinationDrive: {DestinationDrive.Text}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (string.IsNullOrEmpty(DiskNumber.Text))
+            else if (string.IsNullOrWhiteSpace(EfiDrive.Text))
             {
-                throw new ArgumentNullException(nameof(SourceDrive));
+                MessageBox.Show($"Error: EfiDrive is not set", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            MessageBox.Show($"""
-                Destination drive: {DestinationDrive.Text}
-                EFI drive: {EfiDrive.Text}
-                Disk number: {DiskNumber.Text}
-                Source drive: {SourceDrive.Text}
-                """);
+            else if (EfiDrive.Text.Length > 2 || EfiDrive.Text.StartsWith(':') || !EfiDrive.Text.EndsWith(':'))
+            {
+                MessageBox.Show($"Invalid value at EFiDrive: {EfiDrive.Text}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (decimal.Equals(DiskNumber.Value, -1))
+            {
+                MessageBox.Show($"Error: DiskNumber is not set", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (string.Equals(DestinationDrive.Text, EfiDrive.Text) || string.Equals(DestinationDrive.Text, SourceDrive.Text) || string.Equals(EfiDrive.Text, SourceDrive.Text))
+            {
+                MessageBox.Show($"Error: DestinationDrive ({DestinationDrive.Text}) is the same as EfiDrive ({EfiDrive.Text}).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                SystemDrives.FormatDrive((int)DiskNumber.Value, DestinationDrive.Text, EfiDrive.Text);
+                NewDeploy.ApplyImage(SourceDrive.Text, DestinationDrive.Text, (int)WindowsEditionIndex.Value);
+            }
         }
     }
 }
