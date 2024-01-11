@@ -8,7 +8,7 @@ namespace libwcit.Management.DiskManagement
     [SupportedOSPlatform("windows")]
     public partial class SystemDrives
     {
-        public static void ListAll()
+        public static int ListAll()
         {
             try
             {
@@ -21,6 +21,8 @@ namespace libwcit.Management.DiskManagement
                     Console.WriteLine("DeviceID = " + o["DeviceID"]);
                     Console.WriteLine("");
                 }
+
+                return 0;
             }
             catch (Exception)
             {
