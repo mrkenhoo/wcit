@@ -8,7 +8,10 @@ namespace libwcit.Management.DiskManagement
     [SupportedOSPlatform("windows")]
     public partial class SystemDrives
     {
-        public static int ListAll()
+        /// <summary>
+        /// Retrieves all disks available in the system and prints it out.
+        /// </summary>
+        public static void GetDisks()
         {
             try
             {
@@ -21,8 +24,6 @@ namespace libwcit.Management.DiskManagement
                     Console.WriteLine("DeviceID = " + o["DeviceID"]);
                     Console.WriteLine("");
                 }
-
-                return 0;
             }
             catch (Exception)
             {

@@ -62,7 +62,7 @@ namespace libwcit.Management.Installer
             if (DiskNumber == -1 || DiskNumber !>= 0)
             {
                 Console.WriteLine("\n==> These are the disks available on your system:");
-                SystemDrives.ListAll();
+                SystemDrives.GetDisks();
 
                 Console.Write("\n==> Please type the disk number to format (e.g. 0): ");
                 string? SelectedDisk = Console.ReadLine();

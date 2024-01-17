@@ -11,7 +11,7 @@ namespace libwcit.Management.Installer
         {
             if (DiskNumber != -1 && DestinationDrive != null && EfiDrive != null)
             {
-                SystemDrives.FormatDrive(DiskNumber, DestinationDrive, EfiDrive);
+                SystemDrives.FormatDisk(DiskNumber, DestinationDrive, EfiDrive);
             }
 
             if (NewDeploy.ImageFile != null && DestinationDrive != null && WindowsEdition >= 0)
