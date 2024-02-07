@@ -4,7 +4,7 @@ using libwcit.Management.PrivilegesManager;
 using System;
 using System.Reflection;
 
-namespace wcit
+namespace cli_app
 {
     internal class Program
     {
