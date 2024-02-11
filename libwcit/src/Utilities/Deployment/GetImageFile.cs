@@ -18,17 +18,17 @@ namespace libwcit.Utilities.Deployment
             if (File.Exists(@$"{SourceDrive}\sources\install.esd"))
             {
                 ImageFile = @$"{SourceDrive}\sources\install.esd";
+                return ImageFile;
             }
             else if (File.Exists(@$"{SourceDrive}\sources\install.wim"))
             {
-                ImageFile = @$"{SourceDrive}\sources\install.esd";
+                ImageFile = @$"{SourceDrive}\sources\install.wim";
+                return ImageFile;
             }
             else
             {
                 throw new FileNotFoundException(@$"Could not find an image file.");
             }
-
-            return ImageFile;
         }
     }
 }
