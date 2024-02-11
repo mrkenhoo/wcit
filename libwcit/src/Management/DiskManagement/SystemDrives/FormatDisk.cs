@@ -40,8 +40,9 @@ namespace libwcit.Management.DiskManagement
                 process.StandardInput.WriteLine($"assign letter {DestinationDrive}");
                 process.StandardInput.WriteLine("exit");
                 process.WaitForExit();
+                Worker.ExitCode = process.ExitCode;
                 process.Dispose();
-                switch (process.ExitCode)
+                switch (Worker.ExitCode)
                 {
                     case 0:
                         Console.WriteLine($"\nDisk {DiskNumber} has been formatted successfully");
@@ -51,7 +52,7 @@ namespace libwcit.Management.DiskManagement
                         break;
                 }
 
-                return process.ExitCode;
+                return Worker.ExitCode;
             }
             catch (ObjectDisposedException)
             {
