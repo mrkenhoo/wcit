@@ -96,10 +96,12 @@ namespace libwcit.Management.Installer
                 }
 
                 NewDeploy.ImageFile = NewDeploy.GetImageFile(SourceDrive);
+                NewDeploy.GetImageInfo(NewDeploy.ImageFile);
             }
             else
             {
                 NewDeploy.ImageFile = NewDeploy.GetImageFile(SourceDrive);
+                NewDeploy.GetImageInfo(SourceDrive);
             }
 
             if (WindowsEdition !>= 0)
