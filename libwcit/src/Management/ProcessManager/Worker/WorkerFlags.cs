@@ -2,6 +2,6 @@
 {
     public static partial class Worker
     {
-        public static int ExitCode { get; private set; }
+        public static int ExitCode { get; set; }
     }
 }
