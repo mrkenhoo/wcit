@@ -6,9 +6,9 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <StartupObject>gui_app.Program</StartupObject>
-	  <LangVersion>latest</LangVersion>
-	  <PlatformTarget>x64</PlatformTarget>
-	  <ErrorReport>none</ErrorReport>
+    <LangVersion>latest</LangVersion>
+	<PlatformTarget>x64</PlatformTarget>
+	<ErrorReport>none</ErrorReport>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 

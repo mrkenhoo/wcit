@@ -17,7 +17,7 @@ namespace libwcit.Management.Installer
             if (NewDeploy.ImageFile != null && DestinationDrive != null && WindowsEdition >= 0)
             {
                 Console.WriteLine($"\nImage file: {NewDeploy.ImageFile}");
-                Console.WriteLine($"\n==> Deploying Windows to drive {DestinationDrive} in disk {DiskNumber}, please wait...");
+                Console.WriteLine($"==> Deploying Windows to drive {DestinationDrive} in disk {DiskNumber}, please wait...");
                 NewDeploy.ApplyImage(NewDeploy.ImageFile, DestinationDrive, WindowsEdition);
             }
 

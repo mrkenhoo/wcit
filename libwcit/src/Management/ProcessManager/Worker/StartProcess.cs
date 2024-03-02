@@ -11,16 +11,18 @@ namespace libwcit.Management.ProcessManager
         {
             try
             {
-                Process process = new();
-                process.StartInfo.FileName = fileName;
-                process.StartInfo.Arguments = args;
-                process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
-                process.Start();
-                process.WaitForExit();
-                ExitCode = process.ExitCode;
-                process.Close();
+                using (Process process = new())
+                {
+                    process.StartInfo.FileName = fileName;
+                    process.StartInfo.Arguments = args;
+                    process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+                    process.Start();
+                    process.WaitForExit();
+                    ExitCode = process.ExitCode;
+                    process.Close();
+                }
 
-                return process.ExitCode;
+                return ExitCode;
             }
             catch (Exception)
             {

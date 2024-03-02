@@ -9,7 +9,7 @@ namespace libwcit.Management.PrivilegesManager
         /// <summary>
         /// Checks if the current user has Administrator privileges.
         /// </summary>
-        /// <returns>true or false</returns>
+        /// <returns>Boolean</returns>
         public static bool IsUserAdmin()
         {
             WindowsPrincipal principal = new(WindowsIdentity.GetCurrent());
