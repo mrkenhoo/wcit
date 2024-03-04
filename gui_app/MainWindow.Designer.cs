@@ -33,11 +33,12 @@ namespace gui_app
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             ConfigureInstaller = new GroupBox();
+            ImageFilePath = new Label();
+            ChooseISOImage = new Button();
             WindowsEditionIndexLabel = new Label();
             WindowsEditionIndex = new NumericUpDown();
-            SourceDrive = new TextBox();
             ImageList = new DataGridView();
-            SourceDriveLabel = new Label();
+            ImageFileLabel = new Label();
             DiskNumberLabel = new Label();
             EfiDriveLabel = new Label();
             EfiDrive = new TextBox();
@@ -60,11 +61,12 @@ namespace gui_app
             // 
             // ConfigureInstaller
             // 
+            ConfigureInstaller.Controls.Add(ImageFilePath);
+            ConfigureInstaller.Controls.Add(ChooseISOImage);
             ConfigureInstaller.Controls.Add(WindowsEditionIndexLabel);
             ConfigureInstaller.Controls.Add(WindowsEditionIndex);
-            ConfigureInstaller.Controls.Add(SourceDrive);
             ConfigureInstaller.Controls.Add(ImageList);
-            ConfigureInstaller.Controls.Add(SourceDriveLabel);
+            ConfigureInstaller.Controls.Add(ImageFileLabel);
             ConfigureInstaller.Controls.Add(DiskNumberLabel);
             ConfigureInstaller.Controls.Add(EfiDriveLabel);
             ConfigureInstaller.Controls.Add(EfiDrive);
@@ -78,6 +80,19 @@ namespace gui_app
             ConfigureInstaller.TabStop = false;
             ConfigureInstaller.UseCompatibleTextRendering = true;
             // 
+            // ImageFilePath
+            // 
+            resources.ApplyResources(ImageFilePath, "ImageFilePath");
+            ImageFilePath.FlatStyle = FlatStyle.System;
+            ImageFilePath.Name = "ImageFilePath";
+            // 
+            // ChooseISOImage
+            // 
+            resources.ApplyResources(ChooseISOImage, "ChooseISOImage");
+            ChooseISOImage.Name = "ChooseISOImage";
+            ChooseISOImage.UseVisualStyleBackColor = true;
+            ChooseISOImage.Click += ChooseISOImage_Click;
+            // 
             // WindowsEditionIndexLabel
             // 
             resources.ApplyResources(WindowsEditionIndexLabel, "WindowsEditionIndexLabel");
@@ -89,27 +104,23 @@ namespace gui_app
             resources.ApplyResources(WindowsEditionIndex, "WindowsEditionIndex");
             WindowsEditionIndex.Name = "WindowsEditionIndex";
             // 
-            // SourceDrive
-            // 
-            resources.ApplyResources(SourceDrive, "SourceDrive");
-            SourceDrive.Name = "SourceDrive";
-            // 
             // ImageList
             // 
             ImageList.AllowUserToAddRows = false;
             ImageList.AllowUserToDeleteRows = false;
             ImageList.AllowUserToResizeColumns = false;
             ImageList.AllowUserToResizeRows = false;
+            ImageList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ImageList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(ImageList, "ImageList");
             ImageList.Name = "ImageList";
             ImageList.ReadOnly = true;
             // 
-            // SourceDriveLabel
+            // ImageFileLabel
             // 
-            resources.ApplyResources(SourceDriveLabel, "SourceDriveLabel");
-            SourceDriveLabel.FlatStyle = FlatStyle.System;
-            SourceDriveLabel.Name = "SourceDriveLabel";
+            resources.ApplyResources(ImageFileLabel, "ImageFileLabel");
+            ImageFileLabel.FlatStyle = FlatStyle.System;
+            ImageFileLabel.Name = "ImageFileLabel";
             // 
             // DiskNumberLabel
             // 
@@ -225,12 +236,13 @@ namespace gui_app
         private TextBox EfiDrive;
         private Button InstallButton;
         private DataGridView ImageList;
-        private TextBox SourceDrive;
         private Label DiskNumberLabel;
         private NumericUpDown DiskNumber;
-        private Label SourceDriveLabel;
+        private Label ImageFileLabel;
         private Label WindowsEditionIndexLabel;
         private NumericUpDown WindowsEditionIndex;
+        private Button ChooseISOImage;
+        private Label ImageFilePath;
     }
 }
 
