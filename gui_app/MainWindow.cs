@@ -51,7 +51,6 @@ namespace gui_app
                 OpenFileDialog OpenFileDialog = new()
                 {
                     Filter = "ESD file (*.esd)|*.esd|WIM file (*.wim)|*.wim",
-                    //Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*"
                     CheckFileExists = true,
                     CheckPathExists = true,
                     AddExtension = true,
