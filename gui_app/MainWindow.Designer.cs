@@ -33,65 +33,86 @@ namespace gui_app
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             ConfigureInstaller = new GroupBox();
-            ImageFilePath = new Label();
-            ChooseISOImage = new Button();
-            WindowsEditionIndexLabel = new Label();
-            WindowsEditionIndex = new NumericUpDown();
-            ImageList = new DataGridView();
-            ImageFileLabel = new Label();
-            DiskNumberLabel = new Label();
-            EfiDriveLabel = new Label();
-            EfiDrive = new TextBox();
-            DiskList = new DataGridView();
-            DiskNumber = new NumericUpDown();
-            DestinationDrive = new TextBox();
+            InstallButton = new Button();
+            tableLayoutPanel1 = new TableLayoutPanel();
             DestinationDriveLabel = new Label();
+            EfiDriveLabel = new Label();
+            WindowsEditionIndex = new NumericUpDown();
+            WindowsEditionIndexLabel = new Label();
+            ImageFilePath = new Label();
+            DestinationDrive = new TextBox();
+            EfiDrive = new TextBox();
+            DiskNumberLabel = new Label();
+            DiskNumber = new NumericUpDown();
+            ImageFileLabel = new Label();
+            ChooseISOImage = new Button();
+            ImageList = new DataGridView();
+            DiskList = new DataGridView();
             MenuBar = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
-            InstallButton = new Button();
+            aboutTheProgramToolStripMenuItem = new ToolStripMenuItem();
             ConfigureInstaller.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)WindowsEditionIndex).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)DiskNumber).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ImageList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DiskList).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)DiskNumber).BeginInit();
             MenuBar.SuspendLayout();
             SuspendLayout();
             // 
             // ConfigureInstaller
             // 
-            ConfigureInstaller.Controls.Add(ImageFilePath);
-            ConfigureInstaller.Controls.Add(ChooseISOImage);
-            ConfigureInstaller.Controls.Add(WindowsEditionIndexLabel);
-            ConfigureInstaller.Controls.Add(WindowsEditionIndex);
+            ConfigureInstaller.Controls.Add(InstallButton);
+            ConfigureInstaller.Controls.Add(tableLayoutPanel1);
             ConfigureInstaller.Controls.Add(ImageList);
-            ConfigureInstaller.Controls.Add(ImageFileLabel);
-            ConfigureInstaller.Controls.Add(DiskNumberLabel);
-            ConfigureInstaller.Controls.Add(EfiDriveLabel);
-            ConfigureInstaller.Controls.Add(EfiDrive);
             ConfigureInstaller.Controls.Add(DiskList);
-            ConfigureInstaller.Controls.Add(DiskNumber);
-            ConfigureInstaller.Controls.Add(DestinationDrive);
-            ConfigureInstaller.Controls.Add(DestinationDriveLabel);
-            ConfigureInstaller.FlatStyle = FlatStyle.System;
             resources.ApplyResources(ConfigureInstaller, "ConfigureInstaller");
+            ConfigureInstaller.FlatStyle = FlatStyle.System;
             ConfigureInstaller.Name = "ConfigureInstaller";
             ConfigureInstaller.TabStop = false;
             ConfigureInstaller.UseCompatibleTextRendering = true;
             // 
-            // ImageFilePath
+            // InstallButton
             // 
-            resources.ApplyResources(ImageFilePath, "ImageFilePath");
-            ImageFilePath.FlatStyle = FlatStyle.System;
-            ImageFilePath.Name = "ImageFilePath";
+            resources.ApplyResources(InstallButton, "InstallButton");
+            InstallButton.Name = "InstallButton";
+            InstallButton.UseVisualStyleBackColor = true;
+            InstallButton.Click += InstallButton_Click;
             // 
-            // ChooseISOImage
+            // tableLayoutPanel1
             // 
-            resources.ApplyResources(ChooseISOImage, "ChooseISOImage");
-            ChooseISOImage.Name = "ChooseISOImage";
-            ChooseISOImage.UseVisualStyleBackColor = true;
-            ChooseISOImage.Click += ChooseISOImage_Click;
+            resources.ApplyResources(tableLayoutPanel1, "tableLayoutPanel1");
+            tableLayoutPanel1.Controls.Add(DestinationDriveLabel, 0, 0);
+            tableLayoutPanel1.Controls.Add(EfiDriveLabel, 0, 1);
+            tableLayoutPanel1.Controls.Add(WindowsEditionIndex, 1, 4);
+            tableLayoutPanel1.Controls.Add(WindowsEditionIndexLabel, 0, 4);
+            tableLayoutPanel1.Controls.Add(ImageFilePath, 1, 3);
+            tableLayoutPanel1.Controls.Add(DestinationDrive, 1, 0);
+            tableLayoutPanel1.Controls.Add(EfiDrive, 1, 1);
+            tableLayoutPanel1.Controls.Add(DiskNumberLabel, 0, 2);
+            tableLayoutPanel1.Controls.Add(DiskNumber, 1, 2);
+            tableLayoutPanel1.Controls.Add(ImageFileLabel, 0, 3);
+            tableLayoutPanel1.Controls.Add(ChooseISOImage, 2, 3);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // DestinationDriveLabel
+            // 
+            resources.ApplyResources(DestinationDriveLabel, "DestinationDriveLabel");
+            DestinationDriveLabel.Name = "DestinationDriveLabel";
+            // 
+            // EfiDriveLabel
+            // 
+            resources.ApplyResources(EfiDriveLabel, "EfiDriveLabel");
+            EfiDriveLabel.FlatStyle = FlatStyle.System;
+            EfiDriveLabel.Name = "EfiDriveLabel";
+            // 
+            // WindowsEditionIndex
+            // 
+            resources.ApplyResources(WindowsEditionIndex, "WindowsEditionIndex");
+            WindowsEditionIndex.BorderStyle = BorderStyle.FixedSingle;
+            WindowsEditionIndex.Name = "WindowsEditionIndex";
             // 
             // WindowsEditionIndexLabel
             // 
@@ -99,10 +120,49 @@ namespace gui_app
             WindowsEditionIndexLabel.FlatStyle = FlatStyle.System;
             WindowsEditionIndexLabel.Name = "WindowsEditionIndexLabel";
             // 
-            // WindowsEditionIndex
+            // ImageFilePath
             // 
-            resources.ApplyResources(WindowsEditionIndex, "WindowsEditionIndex");
-            WindowsEditionIndex.Name = "WindowsEditionIndex";
+            ImageFilePath.AutoEllipsis = true;
+            resources.ApplyResources(ImageFilePath, "ImageFilePath");
+            ImageFilePath.FlatStyle = FlatStyle.System;
+            ImageFilePath.Name = "ImageFilePath";
+            // 
+            // DestinationDrive
+            // 
+            resources.ApplyResources(DestinationDrive, "DestinationDrive");
+            DestinationDrive.BorderStyle = BorderStyle.FixedSingle;
+            DestinationDrive.Name = "DestinationDrive";
+            // 
+            // EfiDrive
+            // 
+            resources.ApplyResources(EfiDrive, "EfiDrive");
+            EfiDrive.BorderStyle = BorderStyle.FixedSingle;
+            EfiDrive.Name = "EfiDrive";
+            // 
+            // DiskNumberLabel
+            // 
+            resources.ApplyResources(DiskNumberLabel, "DiskNumberLabel");
+            DiskNumberLabel.FlatStyle = FlatStyle.System;
+            DiskNumberLabel.Name = "DiskNumberLabel";
+            // 
+            // DiskNumber
+            // 
+            DiskNumber.BorderStyle = BorderStyle.FixedSingle;
+            resources.ApplyResources(DiskNumber, "DiskNumber");
+            DiskNumber.Name = "DiskNumber";
+            // 
+            // ImageFileLabel
+            // 
+            resources.ApplyResources(ImageFileLabel, "ImageFileLabel");
+            ImageFileLabel.FlatStyle = FlatStyle.System;
+            ImageFileLabel.Name = "ImageFileLabel";
+            // 
+            // ChooseISOImage
+            // 
+            resources.ApplyResources(ChooseISOImage, "ChooseISOImage");
+            ChooseISOImage.Name = "ChooseISOImage";
+            ChooseISOImage.UseVisualStyleBackColor = false;
+            ChooseISOImage.Click += ChooseISOImage_Click;
             // 
             // ImageList
             // 
@@ -111,33 +171,11 @@ namespace gui_app
             ImageList.AllowUserToResizeColumns = false;
             ImageList.AllowUserToResizeRows = false;
             ImageList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ImageList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             ImageList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(ImageList, "ImageList");
             ImageList.Name = "ImageList";
             ImageList.ReadOnly = true;
-            // 
-            // ImageFileLabel
-            // 
-            resources.ApplyResources(ImageFileLabel, "ImageFileLabel");
-            ImageFileLabel.FlatStyle = FlatStyle.System;
-            ImageFileLabel.Name = "ImageFileLabel";
-            // 
-            // DiskNumberLabel
-            // 
-            resources.ApplyResources(DiskNumberLabel, "DiskNumberLabel");
-            DiskNumberLabel.FlatStyle = FlatStyle.System;
-            DiskNumberLabel.Name = "DiskNumberLabel";
-            // 
-            // EfiDriveLabel
-            // 
-            resources.ApplyResources(EfiDriveLabel, "EfiDriveLabel");
-            EfiDriveLabel.FlatStyle = FlatStyle.System;
-            EfiDriveLabel.Name = "EfiDriveLabel";
-            // 
-            // EfiDrive
-            // 
-            resources.ApplyResources(EfiDrive, "EfiDrive");
-            EfiDrive.Name = "EfiDrive";
             // 
             // DiskList
             // 
@@ -151,23 +189,7 @@ namespace gui_app
             resources.ApplyResources(DiskList, "DiskList");
             DiskList.Name = "DiskList";
             DiskList.ReadOnly = true;
-            DiskList.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            // 
-            // DiskNumber
-            // 
-            resources.ApplyResources(DiskNumber, "DiskNumber");
-            DiskNumber.Name = "DiskNumber";
-            // 
-            // DestinationDrive
-            // 
-            resources.ApplyResources(DestinationDrive, "DestinationDrive");
-            DestinationDrive.Name = "DestinationDrive";
-            // 
-            // DestinationDriveLabel
-            // 
-            resources.ApplyResources(DestinationDriveLabel, "DestinationDriveLabel");
-            DestinationDriveLabel.FlatStyle = FlatStyle.System;
-            DestinationDriveLabel.Name = "DestinationDriveLabel";
+            DiskList.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             // 
             // MenuBar
             // 
@@ -190,33 +212,35 @@ namespace gui_app
             // 
             // aboutToolStripMenuItem
             // 
+            aboutToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { aboutTheProgramToolStripMenuItem });
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             resources.ApplyResources(aboutToolStripMenuItem, "aboutToolStripMenuItem");
             // 
-            // InstallButton
+            // aboutTheProgramToolStripMenuItem
             // 
-            resources.ApplyResources(InstallButton, "InstallButton");
-            InstallButton.Name = "InstallButton";
-            InstallButton.UseVisualStyleBackColor = true;
-            InstallButton.Click += InstallButton_Click;
+            aboutTheProgramToolStripMenuItem.Name = "aboutTheProgramToolStripMenuItem";
+            resources.ApplyResources(aboutTheProgramToolStripMenuItem, "aboutTheProgramToolStripMenuItem");
+            aboutTheProgramToolStripMenuItem.Click += AboutWindow_Click;
             // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Dpi;
-            Controls.Add(InstallButton);
             Controls.Add(ConfigureInstaller);
             Controls.Add(MenuBar);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "MainWindow";
             Load += MainWindow_Load;
             ConfigureInstaller.ResumeLayout(false);
             ConfigureInstaller.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)WindowsEditionIndex).EndInit();
+            ((System.ComponentModel.ISupportInitialize)DiskNumber).EndInit();
             ((System.ComponentModel.ISupportInitialize)ImageList).EndInit();
             ((System.ComponentModel.ISupportInitialize)DiskList).EndInit();
-            ((System.ComponentModel.ISupportInitialize)DiskNumber).EndInit();
             MenuBar.ResumeLayout(false);
             MenuBar.PerformLayout();
             ResumeLayout(false);
@@ -236,13 +260,14 @@ namespace gui_app
         private TextBox EfiDrive;
         private Button InstallButton;
         private DataGridView ImageList;
+        private TableLayoutPanel tableLayoutPanel1;
+        private NumericUpDown WindowsEditionIndex;
+        private Label WindowsEditionIndexLabel;
+        private Button ChooseISOImage;
+        private Label ImageFilePath;
         private Label DiskNumberLabel;
         private NumericUpDown DiskNumber;
         private Label ImageFileLabel;
-        private Label WindowsEditionIndexLabel;
-        private NumericUpDown WindowsEditionIndex;
-        private Button ChooseISOImage;
-        private Label ImageFilePath;
+        private ToolStripMenuItem aboutTheProgramToolStripMenuItem;
     }
 }
-

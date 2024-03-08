@@ -1,4 +1,5 @@
 ﻿using libwcit.Management.DiskManagement;
+using libwcit.Management.PrivilegesManager;
 using libwcit.Utilities.Deployment;
 using Microsoft.Dism;
 using System;
@@ -44,7 +45,14 @@ namespace gui_app
 
         private void GetImageInfo(object sender, EventArgs e)
         {
-            DismApi.Initialize(DismLogLevel.LogErrorsWarningsInfo);
+            if (!GetPrivileges.IsUserAdmin())
+            {
+                throw new UnauthorizedAccessException("Insufficient privileges to start DISM API.");
+            }
+            else
+            {
+                DismApi.Initialize(DismLogLevel.LogErrorsWarningsInfo);
+            }
 
             if (NewDeploy.ImageFile == null)
             {
@@ -64,7 +72,7 @@ namespace gui_app
                 {
                     MessageBox.Show("No image file was selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    throw new Exception("No image file was selected.");
+                    throw new ArgumentNullException(OpenFileDialog.FileName, "No image file was selected.");
                 }
                 else if (!OpenFileDialog.FileName.Contains("install"))
                 {
@@ -116,37 +124,13 @@ namespace gui_app
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(DestinationDrive.Text))
-            {
-                MessageBox.Show($"Error: DestinationDrive is not set", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (DestinationDrive.Text.Length > 2 || DestinationDrive.Text.StartsWith(':') || !DestinationDrive.Text.EndsWith(':'))
-            {
-                MessageBox.Show($"Invalid value at DestinationDrive: {DestinationDrive.Text}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (string.IsNullOrWhiteSpace(EfiDrive.Text))
-            {
-                MessageBox.Show($"Error: EfiDrive is not set", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (EfiDrive.Text.Length > 2 || EfiDrive.Text.StartsWith(':') || !EfiDrive.Text.EndsWith(':'))
-            {
-                MessageBox.Show($"Invalid value at EFiDrive: {EfiDrive.Text}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (decimal.Equals(DiskNumber.Value, -1))
-            {
-                MessageBox.Show($"Error: DiskNumber is not set", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (string.Equals(DestinationDrive.Text, EfiDrive.Text) ||
-                string.Equals(DestinationDrive.Text, ImageFilePath.Text) ||
-                string.Equals(EfiDrive.Text, ImageFilePath.Text))
-            {
-                MessageBox.Show($"Error: DestinationDrive ({DestinationDrive.Text}) is the same as EfiDrive ({EfiDrive.Text}).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                SystemDrives.FormatDisk((int)DiskNumber.Value, DestinationDrive.Text, EfiDrive.Text);
-                NewDeploy.ApplyImage(ImageFilePath.Text, DestinationDrive.Text, (int)WindowsEditionIndex.Value);
-            }
+            SystemDrives.FormatDisk((int)DiskNumber.Value, DestinationDrive.Text, EfiDrive.Text);
+            NewDeploy.ApplyImage(ImageFilePath.Text, DestinationDrive.Text, (int)WindowsEditionIndex.Value);
+        }
+
+        private void AboutWindow_Click(object sender, EventArgs e)
+        {
+            new AboutWindow().ShowDialog(this);
         }
     }
 }
