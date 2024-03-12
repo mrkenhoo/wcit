@@ -32,10 +32,8 @@ namespace gui_app
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            ConfigureInstaller = new GroupBox();
             InstallButton = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
-            DestinationDriveLabel = new Label();
             EfiDriveLabel = new Label();
             WindowsEditionIndex = new NumericUpDown();
             WindowsEditionIndexLabel = new Label();
@@ -46,6 +44,7 @@ namespace gui_app
             DiskNumber = new NumericUpDown();
             ImageFileLabel = new Label();
             ChooseISOImage = new Button();
+            DestinationDriveLabel = new Label();
             ImageList = new DataGridView();
             DiskList = new DataGridView();
             MenuBar = new MenuStrip();
@@ -53,7 +52,6 @@ namespace gui_app
             exitToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             aboutTheProgramToolStripMenuItem = new ToolStripMenuItem();
-            ConfigureInstaller.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)WindowsEditionIndex).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DiskNumber).BeginInit();
@@ -61,18 +59,6 @@ namespace gui_app
             ((System.ComponentModel.ISupportInitialize)DiskList).BeginInit();
             MenuBar.SuspendLayout();
             SuspendLayout();
-            // 
-            // ConfigureInstaller
-            // 
-            ConfigureInstaller.Controls.Add(InstallButton);
-            ConfigureInstaller.Controls.Add(tableLayoutPanel1);
-            ConfigureInstaller.Controls.Add(ImageList);
-            ConfigureInstaller.Controls.Add(DiskList);
-            resources.ApplyResources(ConfigureInstaller, "ConfigureInstaller");
-            ConfigureInstaller.FlatStyle = FlatStyle.System;
-            ConfigureInstaller.Name = "ConfigureInstaller";
-            ConfigureInstaller.TabStop = false;
-            ConfigureInstaller.UseCompatibleTextRendering = true;
             // 
             // InstallButton
             // 
@@ -84,7 +70,6 @@ namespace gui_app
             // tableLayoutPanel1
             // 
             resources.ApplyResources(tableLayoutPanel1, "tableLayoutPanel1");
-            tableLayoutPanel1.Controls.Add(DestinationDriveLabel, 0, 0);
             tableLayoutPanel1.Controls.Add(EfiDriveLabel, 0, 1);
             tableLayoutPanel1.Controls.Add(WindowsEditionIndex, 1, 4);
             tableLayoutPanel1.Controls.Add(WindowsEditionIndexLabel, 0, 4);
@@ -95,12 +80,8 @@ namespace gui_app
             tableLayoutPanel1.Controls.Add(DiskNumber, 1, 2);
             tableLayoutPanel1.Controls.Add(ImageFileLabel, 0, 3);
             tableLayoutPanel1.Controls.Add(ChooseISOImage, 2, 3);
+            tableLayoutPanel1.Controls.Add(DestinationDriveLabel, 0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // DestinationDriveLabel
-            // 
-            resources.ApplyResources(DestinationDriveLabel, "DestinationDriveLabel");
-            DestinationDriveLabel.Name = "DestinationDriveLabel";
             // 
             // EfiDriveLabel
             // 
@@ -164,6 +145,11 @@ namespace gui_app
             ChooseISOImage.UseVisualStyleBackColor = false;
             ChooseISOImage.Click += ChooseISOImage_Click;
             // 
+            // DestinationDriveLabel
+            // 
+            resources.ApplyResources(DestinationDriveLabel, "DestinationDriveLabel");
+            DestinationDriveLabel.Name = "DestinationDriveLabel";
+            // 
             // ImageList
             // 
             ImageList.AllowUserToAddRows = false;
@@ -226,15 +212,16 @@ namespace gui_app
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Dpi;
-            Controls.Add(ConfigureInstaller);
+            Controls.Add(InstallButton);
+            Controls.Add(ImageList);
+            Controls.Add(tableLayoutPanel1);
+            Controls.Add(DiskList);
             Controls.Add(MenuBar);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "MainWindow";
             Load += MainWindow_Load;
-            ConfigureInstaller.ResumeLayout(false);
-            ConfigureInstaller.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)WindowsEditionIndex).EndInit();
@@ -248,7 +235,6 @@ namespace gui_app
         }
 
         #endregion
-        private GroupBox ConfigureInstaller;
         private DataGridView DiskList;
         private MenuStrip MenuBar;
         private ToolStripMenuItem fileToolStripMenuItem;

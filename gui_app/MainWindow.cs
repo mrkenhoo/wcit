@@ -23,7 +23,7 @@ namespace gui_app
         private void GetDisksData(object sender, EventArgs e)
         {
             // Set up DiskList columns
-            DiskList.Columns.Add("DiskNumber", "Disk Number");
+            DiskList.Columns.Add("DiskNumber", "Disk");
             DiskList.Columns.Add("Model", "Model");
             DiskList.Columns.Add("DeviceID", "Device ID");
 
@@ -40,6 +40,7 @@ namespace gui_app
                 DiskList.Sort(DiskList.Columns[0], ListSortDirection.Ascending);
             }
 
+            DiskList.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             DiskNumber.Maximum = DiskList.Rows.Count;
         }
 
