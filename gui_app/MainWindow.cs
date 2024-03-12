@@ -72,7 +72,9 @@ namespace gui_app
                 {
                     MessageBox.Show("No image file was selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    throw new ArgumentNullException(OpenFileDialog.FileName, "No image file was selected.");
+                    NewDeploy.ImageFile = null;
+
+                    return;
                 }
                 else if (!OpenFileDialog.FileName.Contains("install"))
                 {
