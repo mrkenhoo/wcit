@@ -38,13 +38,13 @@ namespace gui_app
             WindowsEditionIndex = new NumericUpDown();
             WindowsEditionIndexLabel = new Label();
             ImageFilePath = new Label();
-            DestinationDrive = new TextBox();
-            EfiDrive = new TextBox();
             DiskNumberLabel = new Label();
             DiskNumber = new NumericUpDown();
             ImageFileLabel = new Label();
             ChooseISOImage = new Button();
             DestinationDriveLabel = new Label();
+            DestinationDrive = new ComboBox();
+            EfiDrive = new ComboBox();
             ImageList = new DataGridView();
             DiskList = new DataGridView();
             MenuBar = new MenuStrip();
@@ -74,13 +74,13 @@ namespace gui_app
             tableLayoutPanel1.Controls.Add(WindowsEditionIndex, 1, 4);
             tableLayoutPanel1.Controls.Add(WindowsEditionIndexLabel, 0, 4);
             tableLayoutPanel1.Controls.Add(ImageFilePath, 1, 3);
-            tableLayoutPanel1.Controls.Add(DestinationDrive, 1, 0);
-            tableLayoutPanel1.Controls.Add(EfiDrive, 1, 1);
             tableLayoutPanel1.Controls.Add(DiskNumberLabel, 0, 2);
             tableLayoutPanel1.Controls.Add(DiskNumber, 1, 2);
             tableLayoutPanel1.Controls.Add(ImageFileLabel, 0, 3);
             tableLayoutPanel1.Controls.Add(ChooseISOImage, 2, 3);
             tableLayoutPanel1.Controls.Add(DestinationDriveLabel, 0, 0);
+            tableLayoutPanel1.Controls.Add(DestinationDrive, 1, 0);
+            tableLayoutPanel1.Controls.Add(EfiDrive, 1, 1);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // EfiDriveLabel
@@ -107,18 +107,6 @@ namespace gui_app
             resources.ApplyResources(ImageFilePath, "ImageFilePath");
             ImageFilePath.FlatStyle = FlatStyle.System;
             ImageFilePath.Name = "ImageFilePath";
-            // 
-            // DestinationDrive
-            // 
-            resources.ApplyResources(DestinationDrive, "DestinationDrive");
-            DestinationDrive.BorderStyle = BorderStyle.FixedSingle;
-            DestinationDrive.Name = "DestinationDrive";
-            // 
-            // EfiDrive
-            // 
-            resources.ApplyResources(EfiDrive, "EfiDrive");
-            EfiDrive.BorderStyle = BorderStyle.FixedSingle;
-            EfiDrive.Name = "EfiDrive";
             // 
             // DiskNumberLabel
             // 
@@ -149,6 +137,20 @@ namespace gui_app
             // 
             resources.ApplyResources(DestinationDriveLabel, "DestinationDriveLabel");
             DestinationDriveLabel.Name = "DestinationDriveLabel";
+            // 
+            // DestinationDrive
+            // 
+            resources.ApplyResources(DestinationDrive, "DestinationDrive");
+            DestinationDrive.DropDownStyle = ComboBoxStyle.DropDownList;
+            DestinationDrive.FormattingEnabled = true;
+            DestinationDrive.Name = "DestinationDrive";
+            // 
+            // EfiDrive
+            // 
+            resources.ApplyResources(EfiDrive, "EfiDrive");
+            EfiDrive.DropDownStyle = ComboBoxStyle.DropDownList;
+            EfiDrive.FormattingEnabled = true;
+            EfiDrive.Name = "EfiDrive";
             // 
             // ImageList
             // 
@@ -241,9 +243,7 @@ namespace gui_app
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private Label DestinationDriveLabel;
-        private TextBox DestinationDrive;
         private Label EfiDriveLabel;
-        private TextBox EfiDrive;
         private Button InstallButton;
         private DataGridView ImageList;
         private TableLayoutPanel tableLayoutPanel1;
@@ -255,5 +255,7 @@ namespace gui_app
         private NumericUpDown DiskNumber;
         private Label ImageFileLabel;
         private ToolStripMenuItem aboutTheProgramToolStripMenuItem;
+        private ComboBox DestinationDrive;
+        private ComboBox EfiDrive;
     }
 }

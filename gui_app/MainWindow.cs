@@ -3,11 +3,13 @@ using libwcit.Management.PrivilegesManager;
 using libwcit.Utilities.Deployment;
 using Microsoft.Dism;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Management;
 using System.Runtime.Versioning;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace gui_app
@@ -18,6 +20,85 @@ namespace gui_app
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void GetDiskLetters(object sender, EventArgs e, bool UpdateData = false)
+        {
+            List<string> DiskLetters = [
+                "A:\\",
+                "B:\\",
+                "C:\\",
+                "D:\\",
+                "E:\\",
+                "F:\\",
+                "G:\\",
+                "H:\\",
+                "I:\\",
+                "J:\\",
+                "K:\\",
+                "L:\\",
+                "M:\\",
+                "N:\\",
+                "O:\\",
+                "P:\\",
+                "Q:\\",
+                "R:\\",
+                "S:\\",
+                "T:\\",
+                "U:\\",
+                "V:\\",
+                "W:\\",
+                "X:\\",
+                "Y:\\",
+                "Z:\\"
+            ];
+
+            try
+            {
+                DriveInfo[] drives = DriveInfo.GetDrives();
+
+                foreach (DriveInfo drive in drives)
+                {
+                    foreach (string letter in DiskLetters.ToList())
+                    {
+                        if (drive.Name == letter)
+                        {
+                            DiskLetters.Remove(letter);
+                        }
+                    }
+                }
+
+                DestinationDrive.Items.AddRange(DiskLetters.ToArray());
+                EfiDrive.Items.AddRange(DiskLetters.ToArray());
+
+                if (UpdateData)
+                {
+                    if (EfiDrive.Text.Length > 0)
+                    {
+                        while (DestinationDrive.Text.ToString() == EfiDrive.Text.ToString())
+                        {
+                            if (true)
+                            {
+                                MessageBox.Show($"The OS drive cannot be the same" +
+                                                " as the bootloader drive.",
+                                                "Duplicate drive letters",
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.Error);
+                                DestinationDrive.Text = null;
+                                EfiDrive.Text = null;
+                                break;
+                            }
+                        }
+                    }
+
+                    DestinationDrive.Items.AddRange(DiskLetters.ToArray());
+                    EfiDrive.Items.AddRange(DiskLetters.ToArray());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void GetDisksData(object sender, EventArgs e)
@@ -103,9 +184,37 @@ namespace gui_app
             DismApi.Shutdown();
         }
 
+        private void UpdateData(object? sender, EventArgs e)
+        {
+            try
+            {
+                if (sender != null)
+                {
+                    GetDiskLetters(sender, e, true);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            GetDisksData(sender, e);
+            try
+            {
+                GetDisksData(sender, e);
+                GetDiskLetters(sender, e);
+
+                DestinationDrive.SelectedIndexChanged += UpdateData;
+                EfiDrive.SelectedIndexChanged += UpdateData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private void CloseApplication(object sender, EventArgs e)
