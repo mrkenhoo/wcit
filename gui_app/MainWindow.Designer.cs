@@ -136,6 +136,7 @@ namespace gui_app
             // DestinationDriveLabel
             // 
             resources.ApplyResources(DestinationDriveLabel, "DestinationDriveLabel");
+            DestinationDriveLabel.FlatStyle = FlatStyle.System;
             DestinationDriveLabel.Name = "DestinationDriveLabel";
             // 
             // DestinationDrive
