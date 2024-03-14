@@ -1,4 +1,4 @@
-﻿namespace gui_app
+﻿namespace wit
 {
     partial class AboutWindow
     {

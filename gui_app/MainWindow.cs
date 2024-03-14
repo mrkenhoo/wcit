@@ -9,10 +9,9 @@ using System.IO;
 using System.Linq;
 using System.Management;
 using System.Runtime.Versioning;
-using System.Threading;
 using System.Windows.Forms;
 
-namespace gui_app
+namespace wit
 {
     [SupportedOSPlatform("windows")]
     public partial class MainWindow : Form
@@ -22,7 +21,7 @@ namespace gui_app
             InitializeComponent();
         }
 
-        private void GetDiskLetters(object sender, EventArgs e, bool UpdateData = false)
+        private void GetDiskLetters(bool UpdateData = false)
         {
             List<string> DiskLetters = [
                 "A:\\",
@@ -172,7 +171,7 @@ namespace gui_app
 
             foreach (DismImageInfo DismImage in dismImageInfos)
             {
-                WindowsEditionIndex.Minimum = DismImage.ImageIndex - DismImage.ImageIndex + 1;
+                WindowsEditionIndex.Minimum = DismImage.ImageIndex - DismImage.ImageIndex;
                 WindowsEditionIndex.Maximum = DismImage.ImageIndex;
                 ImageList.Rows.Add(DismImage.ImageIndex, DismImage.ImageName);
             }
@@ -187,7 +186,7 @@ namespace gui_app
             {
                 if (sender != null)
                 {
-                    GetDiskLetters(sender, e, true);
+                    GetDiskLetters(true);
                 }
             }
             catch (Exception)
@@ -202,7 +201,7 @@ namespace gui_app
             try
             {
                 GetDisksData(sender, e);
-                GetDiskLetters(sender, e);
+                GetDiskLetters();
 
                 DestinationDrive.SelectedIndexChanged += UpdateData;
                 EfiDrive.SelectedIndexChanged += UpdateData;

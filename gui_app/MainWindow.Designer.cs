@@ -1,7 +1,7 @@
 ﻿
 using System.Windows.Forms;
 
-namespace gui_app
+namespace wit
 {
     partial class MainWindow
     {

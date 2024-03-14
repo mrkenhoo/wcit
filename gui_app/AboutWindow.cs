@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Windows.Forms;
 
-namespace gui_app
+namespace wit
 {
     sealed partial class AboutWindow : Form
     {
