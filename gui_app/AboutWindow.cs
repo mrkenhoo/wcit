@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace gui_app
 {
-    partial class AboutWindow : Form
+    sealed partial class AboutWindow : Form
     {
         public AboutWindow()
         {
