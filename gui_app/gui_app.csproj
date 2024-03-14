@@ -13,6 +13,8 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
 	<WarningLevel>7</WarningLevel>
+	<AssemblyName>wit</AssemblyName>
+	<RootNamespace>wit</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
