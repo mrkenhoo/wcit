@@ -68,9 +68,6 @@ namespace gui_app
                     }
                 }
 
-                DestinationDrive.Items.AddRange(DiskLetters.ToArray());
-                EfiDrive.Items.AddRange(DiskLetters.ToArray());
-
                 if (UpdateData)
                 {
                     if (EfiDrive.Text.Length > 0)
@@ -79,21 +76,21 @@ namespace gui_app
                         {
                             if (true)
                             {
-                                MessageBox.Show($"The OS drive cannot be the same" +
-                                                " as the bootloader drive.",
+                                MessageBox.Show($"The OS drive cannot be the same as the bootloader drive.",
                                                 "Duplicate drive letters",
                                                 MessageBoxButtons.OK,
                                                 MessageBoxIcon.Error);
+
                                 DestinationDrive.Text = null;
                                 EfiDrive.Text = null;
                                 break;
                             }
                         }
                     }
-
-                    DestinationDrive.Items.AddRange(DiskLetters.ToArray());
-                    EfiDrive.Items.AddRange(DiskLetters.ToArray());
                 }
+
+                DestinationDrive.Items.AddRange(DiskLetters.ToArray());
+                EfiDrive.Items.AddRange(DiskLetters.ToArray());
             }
             catch (Exception)
             {
