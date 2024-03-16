@@ -21,7 +21,28 @@ namespace wit
             InitializeComponent();
         }
 
-        private void GetDiskLetters(bool UpdateData = false)
+        private void ValidateDiskLetter(object? sender, EventArgs e)
+        {
+            if (EfiDrive.Text.Length > 0)
+            {
+                while (DestinationDrive.Text.ToString() == EfiDrive.Text.ToString())
+                {
+                    if (true)
+                    {
+                        MessageBox.Show("The OS drive cannot be the same as the bootloader drive.",
+                                        "Duplicate drive letters",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
+
+                        DestinationDrive.Text = null;
+                        EfiDrive.Text = null;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void GetDiskLetters(object sender, EventArgs e)
         {
             List<string> DiskLetters = [
                 "A:\\",
@@ -63,27 +84,6 @@ namespace wit
                         if (drive.Name == letter)
                         {
                             DiskLetters.Remove(letter);
-                        }
-                    }
-                }
-
-                if (UpdateData)
-                {
-                    if (EfiDrive.Text.Length > 0)
-                    {
-                        while (DestinationDrive.Text.ToString() == EfiDrive.Text.ToString())
-                        {
-                            if (true)
-                            {
-                                MessageBox.Show($"The OS drive cannot be the same as the bootloader drive.",
-                                                "Duplicate drive letters",
-                                                MessageBoxButtons.OK,
-                                                MessageBoxIcon.Error);
-
-                                DestinationDrive.Text = null;
-                                EfiDrive.Text = null;
-                                break;
-                            }
                         }
                     }
                 }
@@ -180,31 +180,17 @@ namespace wit
             DismApi.Shutdown();
         }
 
-        private void UpdateData(object? sender, EventArgs e)
-        {
-            try
-            {
-                if (sender != null)
-                {
-                    GetDiskLetters(true);
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         private void MainWindow_Load(object sender, EventArgs e)
         {
             try
             {
                 GetDisksData(sender, e);
-                GetDiskLetters();
+                GetDiskLetters(sender, e);
 
-                DestinationDrive.SelectedIndexChanged += UpdateData;
-                EfiDrive.SelectedIndexChanged += UpdateData;
+                WindowsEditionIndex.Enabled = false;
+
+                DestinationDrive.SelectedIndexChanged += ValidateDiskLetter;
+                EfiDrive.SelectedIndexChanged += ValidateDiskLetter;
             }
             catch (Exception)
             {
