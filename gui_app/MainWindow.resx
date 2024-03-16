@@ -448,7 +448,7 @@
     <value>107, 4</value>
   </data>
   <data name="DestinationDrive.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 23</value>
+    <value>41, 23</value>
   </data>
   <data name="DestinationDrive.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -475,7 +475,7 @@
     <value>107, 34</value>
   </data>
   <data name="EfiDrive.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 23</value>
+    <value>41, 23</value>
   </data>
   <data name="EfiDrive.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
