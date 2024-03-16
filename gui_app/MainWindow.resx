@@ -130,10 +130,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="InstallButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>668, 209</value>
+    <value>668, 206</value>
   </data>
   <data name="InstallButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 24</value>
+    <value>104, 27</value>
   </data>
   <data name="InstallButton.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
