@@ -1,8 +1,8 @@
-﻿using libwcit.Management.ProcessManager;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.Versioning;
+using libwcit.Management.ProcessManager;
 
 namespace libwcit.Management.DiskManagement
 {
