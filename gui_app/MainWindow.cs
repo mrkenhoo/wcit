@@ -1,8 +1,4 @@
-﻿using libwcit.Management.DiskManagement;
-using libwcit.Management.PrivilegesManager;
-using libwcit.Utilities.Deployment;
-using Microsoft.Dism;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -10,6 +6,10 @@ using System.Linq;
 using System.Management;
 using System.Runtime.Versioning;
 using System.Windows.Forms;
+using libwcit.Management.DiskManagement;
+using libwcit.Management.PrivilegesManager;
+using libwcit.Utilities.Deployment;
+using Microsoft.Dism;
 
 namespace wit
 {
