@@ -42,7 +42,8 @@ namespace libwcit.Utilities.Deployment
                 else
                 {
                     Console.Error.WriteLine("Windows seems to be already deployed, not overwriting it.");
-                    return 2;
+                    Worker.ExitCode = 2;
+                    return Worker.ExitCode;
                 }
             }
             catch (Exception)
