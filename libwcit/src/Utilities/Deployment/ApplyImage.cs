@@ -20,17 +20,23 @@ namespace libwcit.Utilities.Deployment
         {
             if (string.IsNullOrEmpty(ImageFile))
             {
-                throw new ArgumentException($"'{nameof(ImageFile)}' cannot be null or empty.", nameof(ImageFile));
+                throw new ArgumentNullException(nameof(ImageFile), $"'{nameof(ImageFile)}' cannot be null or empty.");
             }
 
             if (string.IsNullOrEmpty(DestinationDrive))
             {
-                throw new ArgumentException($"'{nameof(DestinationDrive)}' cannot be null or empty.", nameof(DestinationDrive));
+                throw new ArgumentNullException(nameof(DestinationDrive), $"'{nameof(DestinationDrive)}' cannot be null or empty.");
             }
 
-            if (ImageFile.Length <= 0) throw new InvalidDataException(@$"Invalid {ImageFile}");
+            if (ImageFile.Length <= 0)
+            {
+                throw new InvalidDataException(@$"Invalid {ImageFile}");
+            }
 
-            if (ImageIndex < 0) throw new ArgumentException("No Windows edition was chosen", nameof(ImageIndex));
+            if (ImageIndex < 0)
+            {
+                throw new ArgumentException("No Windows edition was chosen", nameof(ImageIndex));
+            }
 
             try
             {

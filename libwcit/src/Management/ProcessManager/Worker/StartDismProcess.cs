@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.Versioning;
 
@@ -22,7 +23,15 @@ namespace libwcit.Management.ProcessManager
                 ExitCode = process.ExitCode;
                 process.Close();
             }
-            catch (Exception)
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (Win32Exception)
+            {
+                throw;
+            }
+            catch (PlatformNotSupportedException)
             {
                 throw;
             }

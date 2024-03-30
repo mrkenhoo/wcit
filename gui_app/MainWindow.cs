@@ -7,6 +7,7 @@ using System.Management;
 using System.Runtime.Versioning;
 using System.Windows.Forms;
 using libwcit.Management.DiskManagement;
+using libwcit.Management.Installer;
 using libwcit.Management.PrivilegesManager;
 using libwcit.Utilities.Deployment;
 using Microsoft.Dism;
@@ -218,8 +219,7 @@ namespace wit
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
-            SystemDrives.FormatDisk((int)DiskNumber.Value, DestinationDrive.Text, EfiDrive.Text);
-            NewDeploy.ApplyImage(ImageFilePath.Text, DestinationDrive.Text, (int)WindowsEditionIndex.Value);
+            Configuration.InstallWindows((int)DiskNumber.Value, DestinationDrive.Text, EfiDrive.Text, ImageFilePath.Text, (int)WindowsEditionIndex.Value);
         }
 
         private void AboutWindow_Click(object sender, EventArgs e)
