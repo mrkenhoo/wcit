@@ -16,12 +16,20 @@ namespace libwcit.Management.Installer
                 }
                 else if (DiskNumber < 0)
                 {
-
+                    throw new ArgumentOutOfRangeException(nameof(DiskNumber), $"{nameof(DiskNumber)} cannot be null");
                 }
                 ArgumentException.ThrowIfNullOrWhiteSpace(nameof(DestinationDrive));
                 ArgumentException.ThrowIfNullOrWhiteSpace(nameof(EfiDrive));
                 ArgumentException.ThrowIfNullOrWhiteSpace(nameof(ImageFile));
-                ArgumentOutOfRangeException.ThrowIfLessThan(WindowsEdition, 0);
+
+                if (WindowsEdition == null)
+                {
+                    throw new ArgumentNullException(nameof(WindowsEdition), $"{nameof(WindowsEdition)} cannot be null");
+                }
+                else if (WindowsEdition < 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(WindowsEdition), $"{nameof(WindowsEdition)} cannot be null");
+                }
 
                 SystemDrives.FormatDisk((int)DiskNumber, DestinationDrive, EfiDrive);
 
