@@ -119,7 +119,7 @@ namespace wit
             }
 
             DiskList.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            DiskNumber.Maximum = DiskList.Rows.Count;
+            DiskNumber.Maximum = DiskList.Rows.Count -1;
         }
 
         private void GetImageInfo(object sender, EventArgs e)
@@ -165,15 +165,19 @@ namespace wit
             }
 
             DismImageInfoCollection dismImageInfos = DismApi.GetImageInfo(NewDeploy.ImageFile);
+
             ImageFilePath.Text = NewDeploy.ImageFile;
+
+            WindowsEditionIndex.Minimum = 1;
+            WindowsEditionIndex.Maximum = dismImageInfos.Count;
+
+            WindowsEditionIndex.Enabled = true;
 
             ImageList.Columns.Add("ImageIndex", "Index");
             ImageList.Columns.Add("ImageName", "Image name");
 
             foreach (DismImageInfo DismImage in dismImageInfos)
             {
-                WindowsEditionIndex.Minimum = DismImage.ImageIndex - DismImage.ImageIndex;
-                WindowsEditionIndex.Maximum = DismImage.ImageIndex;
                 ImageList.Rows.Add(DismImage.ImageIndex, DismImage.ImageName);
             }
 
