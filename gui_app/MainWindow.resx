@@ -196,7 +196,7 @@
     <value>True</value>
   </data>
   <data name="WindowsEditionIndex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 125</value>
+    <value>107, 126</value>
   </data>
   <data name="WindowsEditionIndex.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 23</value>
@@ -223,7 +223,7 @@
     <value>NoControl</value>
   </data>
   <data name="WindowsEditionIndexLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 122</value>
+    <value>4, 123</value>
   </data>
   <data name="WindowsEditionIndexLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 15</value>
@@ -256,7 +256,7 @@
     <value>NoControl</value>
   </data>
   <data name="ImageFilePath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 91</value>
+    <value>107, 92</value>
   </data>
   <data name="ImageFilePath.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 30</value>
@@ -295,7 +295,7 @@
     <value>4, 61</value>
   </data>
   <data name="DiskNumberLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 29</value>
+    <value>96, 30</value>
   </data>
   <data name="DiskNumberLabel.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -346,7 +346,7 @@
     <value>NoControl</value>
   </data>
   <data name="ImageFileLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 91</value>
+    <value>4, 92</value>
   </data>
   <data name="ImageFileLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 30</value>
@@ -370,10 +370,7 @@
     <value>6</value>
   </data>
   <data name="ChooseISOImage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
-  <data name="ChooseISOImage.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="ChooseISOImage.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -385,7 +382,7 @@
     <value>NoControl</value>
   </data>
   <data name="ChooseISOImage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 94</value>
+    <value>252, 95</value>
   </data>
   <data name="ChooseISOImage.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 24</value>
@@ -492,6 +489,42 @@
   <data name="&gt;&gt;EfiDrive.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="RescanDisks.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="RescanDisks.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="RescanDisks.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>System</value>
+  </data>
+  <data name="RescanDisks.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="RescanDisks.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 64</value>
+  </data>
+  <data name="RescanDisks.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 24</value>
+  </data>
+  <data name="RescanDisks.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="RescanDisks.Text" xml:space="preserve">
+    <value>Rescan devices</value>
+  </data>
+  <data name="&gt;&gt;RescanDisks.Name" xml:space="preserve">
+    <value>RescanDisks</value>
+  </data>
+  <data name="&gt;&gt;RescanDisks.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RescanDisks.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;RescanDisks.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 27</value>
   </data>
@@ -517,7 +550,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="EfiDriveLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="WindowsEditionIndex" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="WindowsEditionIndexLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ImageFilePath" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="DiskNumberLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DiskNumber" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ImageFileLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ChooseISOImage" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="DestinationDriveLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DestinationDrive" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="EfiDrive" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,30,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="EfiDriveLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="WindowsEditionIndex" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="WindowsEditionIndexLabel" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ImageFilePath" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="DiskNumberLabel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DiskNumber" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ImageFileLabel" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ChooseISOImage" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="DestinationDriveLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="DestinationDrive" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="EfiDrive" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="RescanDisks" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,Absolute,30,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="ImageList.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 239</value>
@@ -567,30 +600,6 @@
   <metadata name="MenuBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 22</value>
-  </data>
-  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
-    <value>Exit</value>
-  </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="aboutTheProgramToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
-  </data>
-  <data name="aboutTheProgramToolStripMenuItem.Text" xml:space="preserve">
-    <value>About the program</value>
-  </data>
-  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 20</value>
-  </data>
-  <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
-    <value>About</value>
-  </data>
   <data name="MenuBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -614,6 +623,30 @@
   </data>
   <data name="&gt;&gt;MenuBar.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 22</value>
+  </data>
+  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 20</value>
+  </data>
+  <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="aboutTheProgramToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 22</value>
+  </data>
+  <data name="aboutTheProgramToolStripMenuItem.Text" xml:space="preserve">
+    <value>About the program</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

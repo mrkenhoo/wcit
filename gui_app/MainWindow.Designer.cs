@@ -52,6 +52,7 @@ namespace wit
             exitToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             aboutTheProgramToolStripMenuItem = new ToolStripMenuItem();
+            RescanDisks = new Button();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)WindowsEditionIndex).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DiskNumber).BeginInit();
@@ -81,6 +82,7 @@ namespace wit
             tableLayoutPanel1.Controls.Add(DestinationDriveLabel, 0, 0);
             tableLayoutPanel1.Controls.Add(DestinationDrive, 1, 0);
             tableLayoutPanel1.Controls.Add(EfiDrive, 1, 1);
+            tableLayoutPanel1.Controls.Add(RescanDisks, 2, 2);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // EfiDriveLabel
@@ -211,6 +213,13 @@ namespace wit
             resources.ApplyResources(aboutTheProgramToolStripMenuItem, "aboutTheProgramToolStripMenuItem");
             aboutTheProgramToolStripMenuItem.Click += AboutWindow_Click;
             // 
+            // RescanDisks
+            // 
+            resources.ApplyResources(RescanDisks, "RescanDisks");
+            RescanDisks.Name = "RescanDisks";
+            RescanDisks.UseVisualStyleBackColor = false;
+            RescanDisks.Click += RescanDisks_Click;
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
@@ -258,5 +267,6 @@ namespace wit
         private ToolStripMenuItem aboutTheProgramToolStripMenuItem;
         private ComboBox DestinationDrive;
         private ComboBox EfiDrive;
+        private Button RescanDisks;
     }
 }

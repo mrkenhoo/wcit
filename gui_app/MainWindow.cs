@@ -119,7 +119,7 @@ namespace wit
             }
 
             DiskList.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            DiskNumber.Maximum = DiskList.Rows.Count -1;
+            DiskNumber.Maximum = DiskList.Rows.Count - 1;
         }
 
         private void GetImageInfo(object sender, EventArgs e)
@@ -229,6 +229,13 @@ namespace wit
         private void AboutWindow_Click(object sender, EventArgs e)
         {
             new AboutWindow().ShowDialog(this);
+        }
+
+        private void RescanDisks_Click(object sender, EventArgs e)
+        {
+            DiskList.Columns.Clear();
+            DiskList.Rows.Clear();
+            GetDisksData(sender, e);
         }
     }
 }
