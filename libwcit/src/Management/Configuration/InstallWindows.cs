@@ -1,5 +1,6 @@
 ﻿using System;
 using libwcit.Management.DiskManagement;
+using libwcit.Management.PrivilegesManager;
 using libwcit.Utilities.Deployment;
 
 namespace libwcit.Management.Installer
@@ -8,6 +9,11 @@ namespace libwcit.Management.Installer
     {
         public static void InstallWindows(int DiskNumber, string DestinationDrive, string EfiDrive, string ImageFile, int WindowsEdition)
         {
+            if (!GetPrivileges.IsUserAdmin())
+            {
+                throw new UnauthorizedAccessException("You must have Administrator privileges to make changes to the system.");
+            }
+
             try
             {
                 if (DiskNumber < 0)
