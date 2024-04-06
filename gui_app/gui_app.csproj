@@ -21,7 +21,7 @@
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <DebugType>none</DebugType>
     <IsTrimmable>True</IsTrimmable>
-    <Version>0.0.2.0</Version>
+    <Version>0.0.2.1</Version>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
   </PropertyGroup>
@@ -31,7 +31,7 @@
 	<DebugType>full</DebugType>
 	<VersionSuffix>testing</VersionSuffix>
 	<IsTrimmable>True</IsTrimmable>
-	<Version>0.0.2.0</Version>
+	<Version>0.0.2.1</Version>
 	<VersionSuffix>testing</VersionSuffix>
 	<AssemblyVersion>$(Version)</AssemblyVersion>
 	<FileVersion>$(Version)</FileVersion>
