@@ -1,9 +1,9 @@
-﻿using libwcit.Management.DiskManagement;
-using libwcit.Utilities.Deployment;
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Runtime.Versioning;
+using libwcit.Management.DiskManagement;
+using libwcit.Utilities.Deployment;
 
 namespace libwcit.Management.Installer
 {

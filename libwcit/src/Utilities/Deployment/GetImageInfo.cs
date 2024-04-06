@@ -1,9 +1,9 @@
-﻿using libwcit.Management.ProcessManager;
-using Microsoft.Dism;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Versioning;
+using libwcit.Management.ProcessManager;
+using Microsoft.Dism;
 
 namespace libwcit.Utilities.Deployment
 {

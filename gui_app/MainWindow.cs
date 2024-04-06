@@ -6,7 +6,6 @@ using System.Linq;
 using System.Management;
 using System.Runtime.Versioning;
 using System.Windows.Forms;
-using libwcit.Management.DiskManagement;
 using libwcit.Management.Installer;
 using libwcit.Management.PrivilegesManager;
 using libwcit.Utilities.Deployment;

@@ -1,7 +1,7 @@
-﻿using libwcit.Management.ProcessManager;
-using System;
+﻿using System;
 using System.IO;
 using System.Runtime.Versioning;
+using libwcit.Management.ProcessManager;
 
 namespace libwcit.Utilities.Deployment
 {

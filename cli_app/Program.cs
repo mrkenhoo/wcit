@@ -1,9 +1,9 @@
-﻿using libwcit.Management.EFIManager;
+﻿using System;
+using System.Reflection;
+using libwcit.Management.EFIManager;
 using libwcit.Management.Installer;
 using libwcit.Management.PrivilegesManager;
 using libwcit.Utilities.Deployment;
-using System;
-using System.Reflection;
 
 namespace cli_app
 {

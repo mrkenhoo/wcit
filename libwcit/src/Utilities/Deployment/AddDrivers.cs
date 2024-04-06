@@ -1,6 +1,6 @@
-using libwcit.Management.ProcessManager;
 using System;
 using System.Runtime.Versioning;
+using libwcit.Management.ProcessManager;
 
 namespace libwcit.Utilities.Deployment
 {
