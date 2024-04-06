@@ -17,17 +17,9 @@ namespace libwcit.Utilities.Deployment
         {
             try
             {
-                switch(ImageFile)
-                {
-                    case null:
-                        throw new ArgumentNullException(nameof(ImageFile));
-                }
+                ArgumentException.ThrowIfNullOrWhiteSpace(ImageFile, nameof(ImageFile));
+                ArgumentException.ThrowIfNullOrWhiteSpace(DriversSource, nameof(DriversSource));
 
-                switch(DriversSource)
-                {
-                    case null:
-                        throw new ArgumentNullException(nameof(DriversSource));
-                }
                 Worker.StartDismProcess($"/Image:{ImageFile} /Add-Driver /Drive:{DriversSource} /recurse");
             }
             catch (Exception)

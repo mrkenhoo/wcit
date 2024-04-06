@@ -1,39 +1,42 @@
-﻿using libwcit.Management.DiskManagement;
-using libwcit.Management.ProcessManager;
+﻿using System;
+using libwcit.Management.DiskManagement;
+using libwcit.Management.PrivilegesManager;
 using libwcit.Utilities.Deployment;
-using System;
 
 namespace libwcit.Management.Installer
 {
     public partial class Configuration
     {
-        public static int InstallWindows()
+        public static void InstallWindows(int DiskNumber, string DestinationDrive, string EfiDrive, string ImageFile, int WindowsEdition)
         {
-            if (DiskNumber != -1 && DestinationDrive != null && EfiDrive != null)
+            if (!GetPrivileges.IsUserAdmin())
             {
+                throw new UnauthorizedAccessException("You must have Administrator privileges to make changes to the system.");
+            }
+
+            try
+            {
+                if (DiskNumber < 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(DiskNumber), $"{nameof(DiskNumber)} cannot be set to less than 0.");
+                }
+                else if (WindowsEdition < 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(WindowsEdition), $"{nameof(WindowsEdition)} cannot be null");
+                }
+
                 SystemDrives.FormatDisk(DiskNumber, DestinationDrive, EfiDrive);
-            }
 
-            if (NewDeploy.ImageFile != null && DestinationDrive != null && WindowsEdition >= 0)
-            {
                 Console.WriteLine($"\nImage file: {NewDeploy.ImageFile}");
-                Console.WriteLine($"\n==> Deploying Windows to drive {DestinationDrive} in disk {DiskNumber}, please wait...");
-                NewDeploy.ApplyImage(NewDeploy.ImageFile, DestinationDrive, WindowsEdition);
-            }
+                Console.WriteLine($"==> Deploying Windows to drive {DestinationDrive} in disk {DiskNumber}, please wait...");
+                NewDeploy.ApplyImage(ImageFile, DestinationDrive, WindowsEdition);
 
-            if (DestinationDrive != null && EfiDrive != null)
-            {
                 Console.WriteLine($"\n==> Installing bootloader to drive {EfiDrive} in disk {DiskNumber}");
                 NewDeploy.InstallBootloader(DestinationDrive, EfiDrive, "UEFI");
             }
-
-            if (Worker.ExitCode == 0)
+            catch (Exception)
             {
-                return 0;
-            }
-            else
-            {
-                return 1;
+                throw;
             }
         }
     }

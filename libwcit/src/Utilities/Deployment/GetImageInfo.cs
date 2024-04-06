@@ -44,14 +44,14 @@ namespace libwcit.Utilities.Deployment
                 throw new ArgumentException($"'{nameof(ImageFile)}' cannot be null or whitespace.", nameof(ImageFile));
             }
 
-            List<Tuple<int, string>> ImageList = [];
-
-            DismApi.Initialize(DismLogLevel.LogErrors);
-
-            DismApi.GetImageInfo(ImageFile);
-
             try
             {
+                List<Tuple<int, string>> ImageList = [];
+
+                DismApi.Initialize(DismLogLevel.LogErrors);
+
+                DismApi.GetImageInfo(ImageFile);
+
                 DismImageInfoCollection imageInfos = DismApi.GetImageInfo(GetImageFile(SourceDrive));
 
                 foreach (DismImageInfo imageInfo in imageInfos)

@@ -1,6 +1,7 @@
 ﻿using libwcit.Management.EFIManager;
 using libwcit.Management.Installer;
 using libwcit.Management.PrivilegesManager;
+using libwcit.Utilities.Deployment;
 using System;
 using System.Reflection;
 
@@ -11,7 +12,9 @@ namespace cli_app
         [MTAThread]
         private static int Main(string[] args)
         {
-            Console.Title = $"{Assembly.GetExecutingAssembly().GetName().Name} v{Assembly.GetExecutingAssembly().GetName().Version}";
+            string? ProgramName = Assembly.GetExecutingAssembly().GetName().Name;
+            Version? ProgramVersion = Assembly.GetExecutingAssembly().GetName().Version;
+            Console.Title = $"{ProgramName} v{ProgramVersion}";
 
 #if WINDOWS10_0_22621_0_OR_GREATER && NET8_0_OR_GREATER
             switch (GetPrivileges.IsUserAdmin())
@@ -30,7 +33,8 @@ namespace cli_app
 
                         Configuration.SetupInstaller();
 
-                        Configuration.InstallWindows();
+                        Configuration.InstallWindows(Configuration.DiskNumber,Configuration.DestinationDrive,
+                                                     Configuration.EfiDrive, NewDeploy.ImageFile, Configuration.WindowsEdition);
                     }
                     catch (Exception)
                     {
