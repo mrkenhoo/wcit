@@ -6,10 +6,10 @@ using System.Linq;
 using System.Management;
 using System.Runtime.Versioning;
 using System.Windows.Forms;
-using libwcit.Management.Installer;
-using libwcit.Management.PrivilegesManager;
-using libwcit.Utilities.Deployment;
 using Microsoft.Dism;
+using WindowsInstallerLib.Management.Installer;
+using WindowsInstallerLib.Management.PrivilegesManager;
+using WindowsInstallerLib.Utilities.Deployment;
 
 namespace wit
 {
@@ -156,8 +156,7 @@ namespace wit
                 }
                 else if (!OpenFileDialog.FileName.Contains("install"))
                 {
-                    MessageBox.Show("Invalid image file. It must be 'install.wim' or 'install.esd'.", "Invalid file",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Invalid image file. It must be 'install.wim' or 'install.esd'.","Invalid file", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     throw new InvalidDataException("Invalid image file. It must be 'install.wim' or 'install.esd'.");
                 }

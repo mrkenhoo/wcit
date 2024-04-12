@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
-using libwcit.Management.EFIManager;
-using libwcit.Management.Installer;
-using libwcit.Management.PrivilegesManager;
-using libwcit.Utilities.Deployment;
+using WindowsInstallerLib.Management.EFIManager;
+using WindowsInstallerLib.Management.Installer;
+using WindowsInstallerLib.Management.PrivilegesManager;
+using WindowsInstallerLib.Utilities.Deployment;
 
 namespace cli_app
 {
