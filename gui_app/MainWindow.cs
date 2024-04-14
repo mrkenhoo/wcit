@@ -23,22 +23,24 @@ namespace wit
 
         private void ValidateDiskLetter(object? sender, EventArgs e)
         {
-            if (EfiDrive.Text.Length > 0)
+            switch (EfiDrive.Text.Length > 0)
             {
-                while (DestinationDrive.Text.ToString() == EfiDrive.Text.ToString())
-                {
-                    if (true)
+                case true:
+                    while (DestinationDrive.Text.ToString() == EfiDrive.Text.ToString())
                     {
-                        MessageBox.Show("The OS drive cannot be the same as the bootloader drive.",
-                                        "Duplicate drive letters",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Error);
+                        if (true)
+                        {
+                            MessageBox.Show("The OS drive cannot be the same as the bootloader drive.",
+                                            "Duplicate drive letters",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Error);
 
-                        DestinationDrive.Text = null;
-                        EfiDrive.Text = null;
-                        break;
+                            DestinationDrive.Text = null;
+                            EfiDrive.Text = null;
+                            break;
+                        }
                     }
-                }
+                    break;
             }
         }
 
