@@ -7,6 +7,15 @@ namespace WindowsInstallerLib.Management.Installer
 {
     public partial class Configuration
     {
+        /// <summary>
+        /// Installs Windows onto the specified <paramref name="DestinationDrive"/>.
+        /// </summary>
+        /// <param name="DiskNumber"></param>
+        /// <param name="DestinationDrive"></param>
+        /// <param name="EfiDrive"></param>
+        /// <param name="ImageFile"></param>
+        /// <param name="WindowsEdition"></param>
+        ///
         public static void InstallWindows(int DiskNumber, string DestinationDrive, string EfiDrive, string ImageFile, int WindowsEdition)
         {
             try
