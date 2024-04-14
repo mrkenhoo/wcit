@@ -9,21 +9,15 @@ namespace WindowsInstallerLib.Management.Installer
     {
         public static void InstallWindows(int DiskNumber, string DestinationDrive, string EfiDrive, string ImageFile, int WindowsEdition)
         {
-            if (!GetPrivileges.IsUserAdmin())
-            {
-                throw new UnauthorizedAccessException("You must have Administrator privileges to make changes to the system.");
-            }
-
             try
             {
-                if (DiskNumber < 0)
+                if (!GetPrivileges.IsUserAdmin())
                 {
-                    throw new ArgumentOutOfRangeException(nameof(DiskNumber), $"{nameof(DiskNumber)} cannot be set to less than 0.");
+                    throw new UnauthorizedAccessException("You must have Administrator privileges to make changes to the system.");
                 }
-                else if (WindowsEdition < 0)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(WindowsEdition), $"{nameof(WindowsEdition)} cannot be null");
-                }
+
+                ArgumentOutOfRangeException.ThrowIfLessThan(0, DiskNumber);
+                ArgumentOutOfRangeException.ThrowIfLessThan(0, WindowsEdition);
 
                 SystemDrives.FormatDisk(DiskNumber, DestinationDrive, EfiDrive);
 

@@ -18,25 +18,11 @@ namespace WindowsInstallerLib.Utilities.Deployment
         /// <exception cref="ArgumentException"></exception>
         public static int ApplyImage(string ImageFile, string DestinationDrive, int ImageIndex)
         {
-            if (string.IsNullOrEmpty(ImageFile))
-            {
-                throw new ArgumentNullException(nameof(ImageFile), $"'{nameof(ImageFile)}' cannot be null or empty.");
-            }
+            ArgumentException.ThrowIfNullOrEmpty(ImageFile, nameof(ImageFile));
+            ArgumentException.ThrowIfNullOrWhiteSpace(DestinationDrive, nameof(DestinationDrive));
 
-            if (string.IsNullOrEmpty(DestinationDrive))
-            {
-                throw new ArgumentNullException(nameof(DestinationDrive), $"'{nameof(DestinationDrive)}' cannot be null or empty.");
-            }
-
-            if (ImageFile.Length <= 0)
-            {
-                throw new InvalidDataException(@$"Invalid {ImageFile}");
-            }
-
-            if (ImageIndex < 0)
-            {
-                throw new ArgumentException("No Windows edition was chosen", nameof(ImageIndex));
-            }
+            ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(0, ImageFile.Length, ImageFile);
+            ArgumentOutOfRangeException.ThrowIfLessThan(0, ImageIndex);
 
             try
             {
@@ -48,7 +34,6 @@ namespace WindowsInstallerLib.Utilities.Deployment
                 else
                 {
                     Console.Error.WriteLine("Windows seems to be already deployed, not overwriting it.");
-                    Worker.ExitCode = 2;
                     return Worker.ExitCode;
                 }
             }
