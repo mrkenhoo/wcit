@@ -6,7 +6,7 @@ namespace WindowsInstallerLib.Management.ProcessManager
 {
     static partial class Worker
     {
-        internal static int StartDiskpartProcess(int DiskNumber, string EfiDrive, string DestinationDrive, bool RunAsAdministrator)
+        internal static int StartDiskpartProcess(int DiskNumber, string EfiDrive, string DestinationDrive, bool RunAsAdministrator = false)
         {
             try
             {
