@@ -20,11 +20,6 @@ namespace WindowsInstallerLib.Management.Installer
         {
             try
             {
-                if (!GetPrivileges.IsUserAdmin())
-                {
-                    throw new UnauthorizedAccessException("You must have Administrator privileges to make changes to the system.");
-                }
-
                 ArgumentOutOfRangeException.ThrowIfLessThan(0, DiskNumber);
                 ArgumentOutOfRangeException.ThrowIfLessThan(0, WindowsEdition);
 
