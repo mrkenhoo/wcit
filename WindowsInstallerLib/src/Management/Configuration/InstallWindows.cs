@@ -1,6 +1,5 @@
 ﻿using System;
 using WindowsInstallerLib.Management.DiskManagement;
-using WindowsInstallerLib.Management.PrivilegesManager;
 using WindowsInstallerLib.Utilities.Deployment;
 
 namespace WindowsInstallerLib.Management.Installer
