@@ -7,13 +7,17 @@ namespace WindowsInstallerLib.Management.ProcessManager
     [SupportedOSPlatform("windows")]
     public static partial class Worker
     {
-        public static int StartCmdProcess(string fileName, string args)
+        public static int StartCmdProcess(string fileName, string args, bool RunAsAdministrator)
         {
             try
             {
                 Process process = new();
                 process.StartInfo.FileName = fileName;
                 process.StartInfo.Arguments = args;
+                if (RunAsAdministrator)
+                {
+                    process.StartInfo.Verb = "RunAs";
+                }
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.RedirectStandardOutput = true;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Versioning;
+using WindowsInstallerLib.Management.PrivilegesManager;
 using WindowsInstallerLib.Management.ProcessManager;
 
 namespace WindowsInstallerLib.Utilities.Deployment
@@ -28,8 +29,15 @@ namespace WindowsInstallerLib.Utilities.Deployment
             {
                 if (!Directory.Exists($@"{DestinationDrive}\windows"))
                 {
-                    Worker.StartDismProcess(@$"/apply-image /imagefile:{ImageFile} /applydir:{DestinationDrive}\ /index:{ImageIndex} /verify");
-                    return Worker.ExitCode;
+                    switch (GetPrivileges.IsUserAdmin())
+                    {
+                        case true:
+                            Worker.StartDismProcess(@$"/apply-image /imagefile:{ImageFile} /applydir:{DestinationDrive}\ /index:{ImageIndex} /verify");
+                            return Worker.ExitCode;
+                        case false:
+                            Worker.StartDismProcess(@$"/apply-image /imagefile:{ImageFile} /applydir:{DestinationDrive}\ /index:{ImageIndex} /verify", RunAsAdministrator: true);
+                            return Worker.ExitCode;
+                    }
                 }
                 else
                 {

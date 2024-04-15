@@ -8,13 +8,17 @@ namespace WindowsInstallerLib.Management.ProcessManager
     [SupportedOSPlatform("windows")]
     public static partial class Worker
     {
-        public static int StartDismProcess(string args)
+        public static int StartDismProcess(string args, bool RunAsAdministrator = false)
         {
             try
             {
                 Process process = new();
                 process.StartInfo.FileName = "dism.exe";
                 process.StartInfo.Arguments = args;
+                if (RunAsAdministrator)
+                {
+                    process.StartInfo.Verb = "RunAs";
+                }
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.RedirectStandardOutput = false;
