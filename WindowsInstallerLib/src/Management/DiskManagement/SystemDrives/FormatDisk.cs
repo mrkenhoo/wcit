@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Versioning;
+using WindowsInstallerLib.Management.PrivilegesManager;
 using WindowsInstallerLib.Management.ProcessManager;
 
 namespace WindowsInstallerLib.Management.DiskManagement
@@ -10,9 +11,16 @@ namespace WindowsInstallerLib.Management.DiskManagement
         {
             try
             {
-                Worker.StartDiskpartProcess(DiskNumber, EfiDrive, DestinationDrive);
+                switch (GetPrivileges.IsUserAdmin())
+                {
+                    case true:
+                        Worker.StartDiskpartProcess(DiskNumber, EfiDrive, DestinationDrive);
+                        return Worker.ExitCode;
 
-                return Worker.ExitCode;
+                    case false:
+                        Worker.StartDiskpartProcess(DiskNumber, EfiDrive, DestinationDrive, RunAsAdministrator: true);
+                        return Worker.ExitCode;
+                }
             }
             catch
             {

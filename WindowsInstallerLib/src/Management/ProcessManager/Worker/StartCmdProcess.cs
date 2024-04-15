@@ -7,7 +7,7 @@ namespace WindowsInstallerLib.Management.ProcessManager
     [SupportedOSPlatform("windows")]
     public static partial class Worker
     {
-        public static int StartCmdProcess(string fileName, string args, bool RunAsAdministrator)
+        public static int StartCmdProcess(string fileName, string args, bool RunAsAdministrator = false)
         {
             try
             {
