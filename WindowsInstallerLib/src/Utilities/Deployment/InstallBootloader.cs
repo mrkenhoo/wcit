@@ -48,8 +48,6 @@ namespace WindowsInstallerLib.Utilities.Deployment
                         throw new DirectoryNotFoundException(@$"Could not find the directory {DestinationDrive}\windows");
                     }
                 }
-
-                return Worker.ExitCode;
             }
             catch (Exception)
             {
