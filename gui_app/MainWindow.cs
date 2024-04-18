@@ -6,10 +6,10 @@ using System.Linq;
 using System.Management;
 using System.Runtime.Versioning;
 using System.Windows.Forms;
-using libwcit.Management.Installer;
-using libwcit.Management.PrivilegesManager;
-using libwcit.Utilities.Deployment;
 using Microsoft.Dism;
+using WindowsInstallerLib.Management.Installer;
+using WindowsInstallerLib.Management.PrivilegesManager;
+using WindowsInstallerLib.Utilities.Deployment;
 
 namespace wit
 {
@@ -23,22 +23,24 @@ namespace wit
 
         private void ValidateDiskLetter(object? sender, EventArgs e)
         {
-            if (EfiDrive.Text.Length > 0)
+            switch (EfiDrive.Text.Length > 0)
             {
-                while (DestinationDrive.Text.ToString() == EfiDrive.Text.ToString())
-                {
-                    if (true)
+                case true:
+                    while (DestinationDrive.Text.ToString() == EfiDrive.Text.ToString())
                     {
-                        MessageBox.Show("The OS drive cannot be the same as the bootloader drive.",
-                                        "Duplicate drive letters",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Error);
+                        if (true)
+                        {
+                            MessageBox.Show("The OS drive cannot be the same as the bootloader drive.",
+                                            "Duplicate drive letters",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Error);
 
-                        DestinationDrive.Text = null;
-                        EfiDrive.Text = null;
-                        break;
+                            DestinationDrive.Text = null;
+                            EfiDrive.Text = null;
+                            break;
+                        }
                     }
-                }
+                    break;
             }
         }
 
@@ -99,21 +101,17 @@ namespace wit
 
         private void GetDisksData(object sender, EventArgs e)
         {
-            // Set up DiskList columns
             DiskList.Columns.Add("DiskNumber", "Disk");
             DiskList.Columns.Add("Model", "Model");
             DiskList.Columns.Add("DeviceID", "Device ID");
 
-            // Query disk drive information using WMI
             WqlObjectQuery DeviceTable = new("SELECT * FROM Win32_DiskDrive");
             ManagementObjectSearcher DeviceInfo = new(DeviceTable);
 
             foreach (ManagementObject o in DeviceInfo.Get().Cast<ManagementObject>())
             {
-                // Display information in the DiskList
                 DiskList.Rows.Add(o["Index"], o["Model"], o["DeviceID"]);
 
-                // Sort by DiskNumber ascending
                 DiskList.Sort(DiskList.Columns[0], ListSortDirection.Ascending);
             }
 
@@ -156,8 +154,7 @@ namespace wit
                 }
                 else if (!OpenFileDialog.FileName.Contains("install"))
                 {
-                    MessageBox.Show("Invalid image file. It must be 'install.wim' or 'install.esd'.", "Invalid file",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Invalid image file. It must be 'install.wim' or 'install.esd'.","Invalid file", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     throw new InvalidDataException("Invalid image file. It must be 'install.wim' or 'install.esd'.");
                 }
