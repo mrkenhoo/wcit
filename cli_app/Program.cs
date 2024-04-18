@@ -1,8 +1,9 @@
-﻿using System;
+using libwcit.Management.EFIManager;
+using libwcit.Management.Installer;
+using libwcit.Management.PrivilegesManager;
+using libwcit.Utilities.Deployment;
+using System;
 using System.Reflection;
-using WindowsInstallerLib.Management.EFIManager;
-using WindowsInstallerLib.Management.Installer;
-using WindowsInstallerLib.Utilities.Deployment;
 
 namespace cli_app
 {
@@ -16,25 +17,32 @@ namespace cli_app
             Console.Title = $"{ProgramName} v{ProgramVersion}";
 
 #if WINDOWS10_0_22621_0_OR_GREATER && NET8_0_OR_GREATER
-            try
+            switch (GetPrivileges.IsUserAdmin())
             {
-                if (!GetEFIInfo.IsEFI())
-                {
-                    throw new PlatformNotSupportedException("Your system does not support EFI.");
-                }
+                case true:
+                    try
+                    {
+                        if (!GetEFIInfo.IsEFI())
+                        {
+                            throw new PlatformNotSupportedException("Your system does not support EFI.");
+                        }
 
-                Console.Clear();
+                        Console.Clear();
 
-                Console.WriteLine("Welcome to the Windows CLI Installer Tool!\nCreated by Felipe González Martín");
+                        Console.WriteLine("Welcome to the Windows CLI Installer Tool!\nCreated by Felipe González Martín");
 
-                Configuration.SetupInstaller();
+                        Configuration.SetupInstaller();
 
-                Configuration.InstallWindows(Configuration.DiskNumber, Configuration.DestinationDrive,
-                                             Configuration.EfiDrive, NewDeploy.ImageFile, Configuration.WindowsEdition);
-            }
-            catch (Exception)
-            {
-                throw;
+                        Configuration.InstallWindows(Configuration.DiskNumber,Configuration.DestinationDrive,
+                                                     Configuration.EfiDrive, NewDeploy.ImageFile, Configuration.WindowsEdition);
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                    break;
+                case false:
+                    throw new UnauthorizedAccessException("This program needs administrator privileges to work.");
             }
 
             return 0;

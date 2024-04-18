@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.Versioning;
+using libwcit.Management.ProcessManager;
 
 namespace WindowsInstallerLib.Management.ProcessManager
 {
@@ -24,7 +26,7 @@ namespace WindowsInstallerLib.Management.ProcessManager
 
                 Console.WriteLine($"Selecting disk {DiskNumber}...");
                 process.StandardInput.WriteLine($"select disk {DiskNumber}");
-
+                
                 Console.WriteLine($"Wiping disk {DiskNumber}...");
                 process.StandardInput.WriteLine("clean");
 
@@ -55,10 +57,10 @@ namespace WindowsInstallerLib.Management.ProcessManager
                 process.StandardInput.WriteLine("exit");
 
                 process.WaitForExit();
-                ExitCode = process.ExitCode;
+                Worker.ExitCode = process.ExitCode;
                 process.Close();
 
-                switch (ExitCode)
+                switch (Worker.ExitCode)
                 {
                     case 0:
                         Console.WriteLine($"\nDisk {DiskNumber} has been formatted successfully.");
