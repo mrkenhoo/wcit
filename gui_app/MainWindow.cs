@@ -101,21 +101,17 @@ namespace wit
 
         private void GetDisksData(object sender, EventArgs e)
         {
-            // Set up DiskList columns
             DiskList.Columns.Add("DiskNumber", "Disk");
             DiskList.Columns.Add("Model", "Model");
             DiskList.Columns.Add("DeviceID", "Device ID");
 
-            // Query disk drive information using WMI
             WqlObjectQuery DeviceTable = new("SELECT * FROM Win32_DiskDrive");
             ManagementObjectSearcher DeviceInfo = new(DeviceTable);
 
             foreach (ManagementObject o in DeviceInfo.Get().Cast<ManagementObject>())
             {
-                // Display information in the DiskList
                 DiskList.Rows.Add(o["Index"], o["Model"], o["DeviceID"]);
 
-                // Sort by DiskNumber ascending
                 DiskList.Sort(DiskList.Columns[0], ListSortDirection.Ascending);
             }
 
