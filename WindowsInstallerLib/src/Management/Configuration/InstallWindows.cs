@@ -1,29 +1,26 @@
 ﻿using System;
-using libwcit.Management.DiskManagement;
-using libwcit.Management.PrivilegesManager;
-using libwcit.Utilities.Deployment;
+using WindowsInstallerLib.Management.DiskManagement;
+using WindowsInstallerLib.Utilities.Deployment;
 
-namespace libwcit.Management.Installer
+namespace WindowsInstallerLib.Management.Installer
 {
     public partial class Configuration
     {
+        /// <summary>
+        /// Installs Windows onto the specified <paramref name="DestinationDrive"/>.
+        /// </summary>
+        /// <param name="DiskNumber"></param>
+        /// <param name="DestinationDrive"></param>
+        /// <param name="EfiDrive"></param>
+        /// <param name="ImageFile"></param>
+        /// <param name="WindowsEdition"></param>
+        ///
         public static void InstallWindows(int DiskNumber, string DestinationDrive, string EfiDrive, string ImageFile, int WindowsEdition)
         {
-            if (!GetPrivileges.IsUserAdmin())
-            {
-                throw new UnauthorizedAccessException("You must have Administrator privileges to make changes to the system.");
-            }
-
             try
             {
-                if (DiskNumber < 0)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(DiskNumber), $"{nameof(DiskNumber)} cannot be set to less than 0.");
-                }
-                else if (WindowsEdition < 0)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(WindowsEdition), $"{nameof(WindowsEdition)} cannot be null");
-                }
+                ArgumentOutOfRangeException.ThrowIfLessThan(0, DiskNumber);
+                ArgumentOutOfRangeException.ThrowIfLessThan(0, WindowsEdition);
 
                 SystemDrives.FormatDisk(DiskNumber, DestinationDrive, EfiDrive);
 

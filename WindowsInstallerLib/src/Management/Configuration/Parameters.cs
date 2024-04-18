@@ -1,6 +1,6 @@
 using System.Runtime.Versioning;
 
-namespace libwcit.Management.Installer
+namespace WindowsInstallerLib.Management.Installer
 {
     [SupportedOSPlatform("windows")]
     public partial class Configuration

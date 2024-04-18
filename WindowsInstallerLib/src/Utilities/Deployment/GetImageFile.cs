@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace libwcit.Utilities.Deployment
+namespace WindowsInstallerLib.Utilities.Deployment
 {
     public partial class NewDeploy
     {

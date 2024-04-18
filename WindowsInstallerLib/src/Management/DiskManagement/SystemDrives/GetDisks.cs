@@ -3,7 +3,7 @@ using System.Linq;
 using System.Management;
 using System.Runtime.Versioning;
 
-namespace libwcit.Management.DiskManagement
+namespace WindowsInstallerLib.Management.DiskManagement
 {
     [SupportedOSPlatform("windows")]
     public partial class SystemDrives
