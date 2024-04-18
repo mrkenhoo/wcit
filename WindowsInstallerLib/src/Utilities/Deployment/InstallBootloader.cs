@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Versioning;
-using libwcit.Management.ProcessManager;
+using WindowsInstallerLib.Management.PrivilegesManager;
+using WindowsInstallerLib.Management.ProcessManager;
 
-namespace libwcit.Utilities.Deployment
+namespace WindowsInstallerLib.Utilities.Deployment
 {
     [SupportedOSPlatform("windows")]
     public partial class NewDeploy
@@ -16,7 +17,7 @@ namespace libwcit.Utilities.Deployment
         /// <param name="EfiDrive"></param>
         /// <param name="FirmwareType"></param>
         /// <exception cref="ArgumentException"/>
-        public static int InstallBootloader(string DestinationDrive, string EfiDrive, string FirmwareType)
+        public static int InstallBootloader(string DestinationDrive, string EfiDrive, string FirmwareType, bool RunAsAdministrator = false)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(DestinationDrive, nameof(DestinationDrive));
             ArgumentException.ThrowIfNullOrWhiteSpace(EfiDrive, nameof(EfiDrive));
@@ -32,15 +33,21 @@ namespace libwcit.Utilities.Deployment
                 {
                     if (Directory.Exists(@$"{DestinationDrive}\windows"))
                     {
-                        Worker.StartCmdProcess("bcdboot", @$"{DestinationDrive}\windows /s {EfiDrive} /f {FirmwareType}");
+                        switch (GetPrivileges.IsUserAdmin())
+                        {
+                            case true:
+                                Worker.StartCmdProcess("bcdboot", @$"{DestinationDrive}\windows /s {EfiDrive} /f {FirmwareType}");
+                                return Worker.ExitCode;
+                            case false:
+                                Worker.StartCmdProcess("bcdboot", @$"{DestinationDrive}\windows /s {EfiDrive} /f {FirmwareType}", RunAsAdministrator = true);
+                                return Worker.ExitCode;
+                        }
                     }
                     else
                     {
                         throw new DirectoryNotFoundException(@$"Could not find the directory {DestinationDrive}\windows");
                     }
                 }
-
-                return Worker.ExitCode;
             }
             catch (Exception)
             {

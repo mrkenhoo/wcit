@@ -2,10 +2,10 @@
 using System.Globalization;
 using System.IO;
 using System.Runtime.Versioning;
-using libwcit.Management.DiskManagement;
-using libwcit.Utilities.Deployment;
+using WindowsInstallerLib.Management.DiskManagement;
+using WindowsInstallerLib.Utilities.Deployment;
 
-namespace libwcit.Management.Installer
+namespace WindowsInstallerLib.Management.Installer
 {
     [SupportedOSPlatform("windows")]
     public partial class Configuration

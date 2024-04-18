@@ -1,20 +1,21 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.Versioning;
-using libwcit.Management.ProcessManager;
 
-namespace libwcit.Management.DiskManagement
+namespace WindowsInstallerLib.Management.ProcessManager
 {
-    [SupportedOSPlatform("windows")]
-    public partial class SystemDrives
+    static partial class Worker
     {
-        public static int FormatDisk(int DiskNumber, string DestinationDrive, string EfiDrive)
+        internal static int StartDiskpartProcess(int DiskNumber, string EfiDrive, string DestinationDrive, bool RunAsAdministrator = false)
         {
             try
             {
-                using Process process = new();
+                Process process = new();
                 process.StartInfo.FileName = "diskpart.exe";
+                if (RunAsAdministrator)
+                {
+                    process.StartInfo.Verb = "RunAs";
+                }
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardInput = true;
                 process.StartInfo.RedirectStandardOutput = true;
@@ -23,7 +24,7 @@ namespace libwcit.Management.DiskManagement
 
                 Console.WriteLine($"Selecting disk {DiskNumber}...");
                 process.StandardInput.WriteLine($"select disk {DiskNumber}");
-                
+
                 Console.WriteLine($"Wiping disk {DiskNumber}...");
                 process.StandardInput.WriteLine("clean");
 
@@ -54,10 +55,10 @@ namespace libwcit.Management.DiskManagement
                 process.StandardInput.WriteLine("exit");
 
                 process.WaitForExit();
-                Worker.ExitCode = process.ExitCode;
+                ExitCode = process.ExitCode;
                 process.Close();
 
-                switch (Worker.ExitCode)
+                switch (ExitCode)
                 {
                     case 0:
                         Console.WriteLine($"\nDisk {DiskNumber} has been formatted successfully.");
@@ -66,8 +67,6 @@ namespace libwcit.Management.DiskManagement
                         Console.Error.WriteLine($"\nFailed to format the disk {DiskNumber}.");
                         break;
                 }
-
-                return Worker.ExitCode;
             }
             catch (ObjectDisposedException)
             {
@@ -85,6 +84,8 @@ namespace libwcit.Management.DiskManagement
             {
                 throw;
             }
+
+            return ExitCode;
         }
     }
 }

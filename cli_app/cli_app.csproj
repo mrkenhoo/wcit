@@ -24,7 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\libwcit\libwcit.csproj" />
+    <ProjectReference Include="..\WindowsInstallerLib\WindowsInstallerLib.csproj" />
   </ItemGroup>
 
 </Project>

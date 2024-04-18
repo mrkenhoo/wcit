@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
-namespace libwcit.Management.EFIManager
+namespace WindowsInstallerLib.Management.EFIManager
 {
     [SupportedOSPlatform("windows")]
     public static partial class GetEFIInfo
