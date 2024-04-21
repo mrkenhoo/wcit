@@ -1,4 +1,6 @@
-﻿using System.Runtime.Versioning;
+﻿using System;
+using System.Runtime.Serialization;
+using System.Runtime.Versioning;
 using System.Security.Principal;
 
 namespace WindowsInstallerLib.Management.PrivilegesManager
@@ -18,7 +20,7 @@ namespace WindowsInstallerLib.Management.PrivilegesManager
                 bool CurrentUserIsAdministrator = CurrentUser.IsInRole(WindowsBuiltInRole.Administrator);
                 return CurrentUserIsAdministrator;
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 throw;
             }

@@ -19,16 +19,16 @@ namespace WindowsInstallerLib.Utilities.Deployment
         {
             try
             {
-                if (ImageFile != null)
+                if (NewDeploy.ImageFile != null)
                 {
                     switch (GetPrivileges.IsUserAdmin())
                     {
                         case true:
-                            Worker.StartCmdProcess("dism.exe", @$"/get-imageinfo /imagefile:{ImageFile}");
+                            Worker.StartCmdProcess("dism.exe", @$"/get-imageinfo /imagefile:{NewDeploy.ImageFile}");
                             return Worker.ExitCode;
 
                         case false:
-                            Worker.StartCmdProcess("dism.exe", @$"/get-imageinfo /imagefile:{ImageFile}", RunAsAdministrator: true);
+                            Worker.StartCmdProcess("dism.exe", @$"/get-imageinfo /imagefile:{NewDeploy.ImageFile}", RunAsAdministrator: true);
                             return Worker.ExitCode;
                     }
                 }

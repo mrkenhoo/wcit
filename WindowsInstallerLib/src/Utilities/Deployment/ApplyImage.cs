@@ -22,8 +22,8 @@ namespace WindowsInstallerLib.Utilities.Deployment
             ArgumentException.ThrowIfNullOrEmpty(ImageFile, nameof(ImageFile));
             ArgumentException.ThrowIfNullOrWhiteSpace(DestinationDrive, nameof(DestinationDrive));
 
-            ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(0, ImageFile.Length, ImageFile);
-            ArgumentOutOfRangeException.ThrowIfLessThan(0, ImageIndex);
+            ArgumentOutOfRangeException.ThrowIfEqual(0, ImageFile.Length);
+            ArgumentOutOfRangeException.ThrowIfEqual(0, ImageIndex);
 
             try
             {
@@ -32,7 +32,7 @@ namespace WindowsInstallerLib.Utilities.Deployment
                     switch (GetPrivileges.IsUserAdmin())
                     {
                         case true:
-                            Worker.StartDismProcess(@$"/apply-image /imagefile:{ImageFile} /applydir:{DestinationDrive}\ /index:{ImageIndex} /verify");
+                            Worker.StartDismProcess(@$"/apply-image /imagefile:{ImageFile} /applydir:{DestinationDrive} /index:{ImageIndex} /verify");
                             return Worker.ExitCode;
                         case false:
                             Worker.StartDismProcess(@$"/apply-image /imagefile:{ImageFile} /applydir:{DestinationDrive}\ /index:{ImageIndex} /verify", RunAsAdministrator: true);
@@ -42,7 +42,7 @@ namespace WindowsInstallerLib.Utilities.Deployment
                 else
                 {
                     Console.Error.WriteLine("Windows seems to be already deployed, not overwriting it.");
-                    return Worker.ExitCode;
+                    return 1;
                 }
             }
             catch (Exception)

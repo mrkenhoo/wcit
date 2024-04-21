@@ -27,7 +27,7 @@ namespace WindowsInstallerLib.Utilities.Deployment
             }
             else
             {
-                throw new FileNotFoundException(@$"Could not find an image file.");
+                throw new FileNotFoundException(@$"Could not find a valid image file at {SourceDrive}.");
             }
         }
     }

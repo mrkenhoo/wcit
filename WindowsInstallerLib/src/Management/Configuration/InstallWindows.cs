@@ -19,9 +19,6 @@ namespace WindowsInstallerLib.Management.Installer
         {
             try
             {
-                ArgumentOutOfRangeException.ThrowIfLessThan(0, DiskNumber);
-                ArgumentOutOfRangeException.ThrowIfLessThan(0, WindowsEdition);
-
                 SystemDrives.FormatDisk(DiskNumber, DestinationDrive, EfiDrive);
 
                 Console.WriteLine($"\nImage file: {NewDeploy.ImageFile}");

@@ -16,9 +16,13 @@ namespace WindowsInstallerLib.Management.ProcessManager
                 process.StartInfo.Arguments = args;
                 if (RunAsAdministrator)
                 {
-                    process.StartInfo.Verb = "RunAs";
+                    process.StartInfo.Verb = "runas";
+                    process.StartInfo.UseShellExecute = true;
                 }
-                process.StartInfo.UseShellExecute = false;
+                else
+                {
+                    process.StartInfo.UseShellExecute = false;
+                }
                 process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.Start();
@@ -30,10 +34,19 @@ namespace WindowsInstallerLib.Management.ProcessManager
 
                 process.Close();
             }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (NotSupportedException)
+            {
+                throw;
+            }
             catch (Exception)
             {
                 throw;
             }
+
 
             return ExitCode;
         }

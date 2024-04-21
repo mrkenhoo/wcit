@@ -94,19 +94,11 @@ namespace WindowsInstallerLib.Management.Installer
                 {
                    throw new ArgumentException($"Invalid source drive {SourceDrive}, it must end with a colon. For example: 'H:'.");
                 }
-
-                NewDeploy.ImageFile = NewDeploy.GetImageFile(SourceDrive);
-                NewDeploy.GetImageInfo(NewDeploy.ImageFile);
-            }
-            else
-            {
-                NewDeploy.ImageFile = NewDeploy.GetImageFile(SourceDrive);
-                NewDeploy.GetImageInfo(SourceDrive);
             }
 
             if (WindowsEdition !>= 0)
             {
-                NewDeploy.GetImageInfo(NewDeploy.ImageFile);
+                NewDeploy.GetImageInfo(NewDeploy.GetImageFile(SourceDrive));
 
                 Console.Write("==> Type the index number of the Windows edition you wish to install (e.g. 1): ");
                 string? SelectedIndex = Console.ReadLine();
@@ -121,7 +113,7 @@ namespace WindowsInstallerLib.Management.Installer
                 }
             }
 
-            if (!InstallExtraDrivers)
+            if (InstallExtraDrivers)
             {
                 Console.Write("==> Do you want to add any extra drivers to Windows before using it?: ");
                 string? UserWantsDrivers = Console.ReadLine();

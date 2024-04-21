@@ -31,7 +31,7 @@ namespace WindowsInstallerLib.Utilities.Deployment
                 }
                 else
                 {
-                    if (Directory.Exists(@$"{DestinationDrive}\windows"))
+                    if (Directory.Exists(@$"{DestinationDrive}windows"))
                     {
                         switch (GetPrivileges.IsUserAdmin())
                         {
@@ -45,7 +45,7 @@ namespace WindowsInstallerLib.Utilities.Deployment
                     }
                     else
                     {
-                        throw new DirectoryNotFoundException(@$"Could not find the directory {DestinationDrive}\windows");
+                        throw new DirectoryNotFoundException(@$"Could not find the directory {DestinationDrive}windows");
                     }
                 }
             }

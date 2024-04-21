@@ -18,7 +18,17 @@ namespace wit
     {
         public MainWindow()
         {
-            InitializeComponent();
+            switch (GetPrivileges.IsUserAdmin())
+            {
+                case true:
+                    InitializeComponent();
+                    break;
+                case false:
+                    MessageBox.Show(text: "You must have administrator privileges to run this program.",
+                        "Insufficient privileges", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    throw new UnauthorizedAccessException("You must have Administrator privileges to run this program." +
+                        $" IsUserAdmin() returned {GetPrivileges.IsUserAdmin()}.");
+            }
         }
 
         private void ValidateDiskLetter(object? sender, EventArgs e)
@@ -121,64 +131,66 @@ namespace wit
 
         private void GetImageInfo(object sender, EventArgs e)
         {
-            if (!GetPrivileges.IsUserAdmin())
-            {
-                throw new UnauthorizedAccessException("Insufficient privileges to start DISM API.");
-            }
-            else
+            try
             {
                 DismApi.Initialize(DismLogLevel.LogErrorsWarningsInfo);
-            }
 
-            if (NewDeploy.ImageFile == null)
-            {
-                OpenFileDialog OpenFileDialog = new()
+                if (ImageFilePath.Text == "No image file is selected.")
                 {
-                    Filter = "ESD file (*.esd)|*.esd|WIM file (*.wim)|*.wim",
-                    CheckFileExists = true,
-                    CheckPathExists = true,
-                    AddExtension = true,
-                };
+                    OpenFileDialog OpenFileDialog = new()
+                    {
+                        Filter = "ESD file (*.esd)|*.esd|WIM file (*.wim)|*.wim",
+                        CheckFileExists = true,
+                        CheckPathExists = true,
+                        AddExtension = true,
+                    };
 
-                OpenFileDialog.ShowDialog();
+                    OpenFileDialog.ShowDialog();
 
-                NewDeploy.ImageFile = OpenFileDialog.FileName;
+                    ImageFilePath.Text = "No image file is selected";
 
-                if (string.IsNullOrWhiteSpace(OpenFileDialog.FileName))
-                {
-                    MessageBox.Show("No image file was selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (string.IsNullOrWhiteSpace(OpenFileDialog.FileName))
+                    {
+                        MessageBox.Show("No image file was selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    NewDeploy.ImageFile = null;
+                        ImageFilePath.Text = null;
 
-                    return;
+                        return;
+                    }
+                    else if (!OpenFileDialog.FileName.Contains("install"))
+                    {
+                        MessageBox.Show("Invalid image file. It must be 'install.wim' or 'install.esd'.", "Invalid file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        throw new InvalidDataException("Invalid image file. It must be 'install.wim' or 'install.esd'.");
+                    }
+
+                    ImageFilePath.Text = OpenFileDialog.FileName;
                 }
-                else if (!OpenFileDialog.FileName.Contains("install"))
-                {
-                    MessageBox.Show("Invalid image file. It must be 'install.wim' or 'install.esd'.","Invalid file", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    throw new InvalidDataException("Invalid image file. It must be 'install.wim' or 'install.esd'.");
+                DismImageInfoCollection dismImageInfos = DismApi.GetImageInfo(ImageFilePath.Text);
+
+                WindowsEditionIndex.Minimum = 1;
+                WindowsEditionIndex.Maximum = dismImageInfos.Count;
+
+                WindowsEditionIndex.Enabled = true;
+
+                ImageList.Columns.Add("ImageIndex", "Index");
+                ImageList.Columns.Add("ImageName", "Image name");
+
+                foreach (DismImageInfo DismImage in dismImageInfos)
+                {
+                    ImageList.Rows.Add(DismImage.ImageIndex, DismImage.ImageName);
                 }
             }
-
-            DismImageInfoCollection dismImageInfos = DismApi.GetImageInfo(NewDeploy.ImageFile);
-
-            ImageFilePath.Text = NewDeploy.ImageFile;
-
-            WindowsEditionIndex.Minimum = 1;
-            WindowsEditionIndex.Maximum = dismImageInfos.Count;
-
-            WindowsEditionIndex.Enabled = true;
-
-            ImageList.Columns.Add("ImageIndex", "Index");
-            ImageList.Columns.Add("ImageName", "Image name");
-
-            foreach (DismImageInfo DismImage in dismImageInfos)
+            catch (Exception)
             {
-                ImageList.Rows.Add(DismImage.ImageIndex, DismImage.ImageName);
+                throw;
             }
-
-            DismApi.CleanupMountpoints();
-            DismApi.Shutdown();
+            finally
+            {
+                DismApi.CleanupMountpoints();
+                DismApi.Shutdown();
+            }
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -219,6 +231,11 @@ namespace wit
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
+            if (DestinationDrive.Text.Length < 1)
+                throw new InvalidDataException(nameof(DestinationDrive));
+            else if (EfiDrive.Text.Length < 1)
+                throw new InvalidDataException(nameof(DestinationDrive));
+                
             Configuration.InstallWindows((int)DiskNumber.Value, DestinationDrive.Text, EfiDrive.Text, ImageFilePath.Text, (int)WindowsEditionIndex.Value);
         }
 
