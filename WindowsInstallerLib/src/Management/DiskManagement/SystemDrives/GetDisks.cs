@@ -6,7 +6,7 @@ using System.Runtime.Versioning;
 namespace WindowsInstallerLib.Management.DiskManagement
 {
     [SupportedOSPlatform("windows")]
-    public partial class SystemDrives
+    public partial class Disks
     {
         /// <summary>
         /// Retrieves all disks available in the system and prints it out.

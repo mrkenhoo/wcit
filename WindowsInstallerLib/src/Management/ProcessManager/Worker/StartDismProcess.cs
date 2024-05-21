@@ -10,22 +10,25 @@ namespace WindowsInstallerLib.Management.ProcessManager
     {
         public static int StartDismProcess(string args, bool RunAsAdministrator = false)
         {
+            Process process = new();
+
             try
             {
-                Process process = new();
                 process.StartInfo.FileName = "dism.exe";
                 process.StartInfo.Arguments = args;
                 if (RunAsAdministrator)
                 {
                     process.StartInfo.Verb = "RunAs";
+                    process.StartInfo.UseShellExecute = true;
                 }
-                process.StartInfo.UseShellExecute = false;
+                else
+                {
+                    process.StartInfo.UseShellExecute = false;
+                }
                 process.StartInfo.RedirectStandardError = true;
-                process.StartInfo.RedirectStandardOutput = false;
+                process.StartInfo.RedirectStandardOutput = true;
                 process.Start();
                 process.WaitForExit();
-                ExitCode = process.ExitCode;
-                process.Close();
             }
             catch (InvalidOperationException)
             {
@@ -38,6 +41,11 @@ namespace WindowsInstallerLib.Management.ProcessManager
             catch (PlatformNotSupportedException)
             {
                 throw;
+            }
+            finally
+            {
+                ExitCode = process.ExitCode;
+                process.Close();
             }
 
             return ExitCode;

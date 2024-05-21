@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Versioning;
+using WindowsInstallerLib.Management.Installer;
 using WindowsInstallerLib.Management.PrivilegesManager;
 using WindowsInstallerLib.Management.ProcessManager;
 
@@ -17,12 +18,12 @@ namespace WindowsInstallerLib.Utilities.Deployment
         /// <param name="DestinationDrive"></param>
         /// <param name="Index"></param>
         /// <exception cref="ArgumentException"></exception>
-        public static int ApplyImage(string ImageFile, string DestinationDrive, int ImageIndex)
+        public static int ApplyImage(string ImageFilePath, string DestinationDrive, int ImageIndex)
         {
-            ArgumentException.ThrowIfNullOrEmpty(ImageFile, nameof(ImageFile));
+            ArgumentException.ThrowIfNullOrEmpty(ImageFilePath, nameof(ImageFilePath));
             ArgumentException.ThrowIfNullOrWhiteSpace(DestinationDrive, nameof(DestinationDrive));
 
-            ArgumentOutOfRangeException.ThrowIfEqual(0, ImageFile.Length);
+            ArgumentOutOfRangeException.ThrowIfEqual(0, ImageFilePath.Length);
             ArgumentOutOfRangeException.ThrowIfEqual(0, ImageIndex);
 
             try
@@ -32,10 +33,10 @@ namespace WindowsInstallerLib.Utilities.Deployment
                     switch (GetPrivileges.IsUserAdmin())
                     {
                         case true:
-                            Worker.StartDismProcess(@$"/apply-image /imagefile:{ImageFile} /applydir:{DestinationDrive} /index:{ImageIndex} /verify");
+                            Worker.StartDismProcess(@$"/apply-image /imagefile:{ImageFilePath} /applydir:{DestinationDrive} /index:{ImageIndex} /verify");
                             return Worker.ExitCode;
                         case false:
-                            Worker.StartDismProcess(@$"/apply-image /imagefile:{ImageFile} /applydir:{DestinationDrive}\ /index:{ImageIndex} /verify", RunAsAdministrator: true);
+                            Worker.StartDismProcess(@$"/apply-image /imagefile:{ImageFilePath} /applydir:{DestinationDrive} /index:{ImageIndex} /verify", true);
                             return Worker.ExitCode;
                     }
                 }

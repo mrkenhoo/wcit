@@ -9,8 +9,7 @@ namespace WindowsInstallerLib.Utilities.Deployment
     public partial class NewDeploy
     {
         /// <summary>
-        /// Installs drivers to an offline Windows image at
-        /// <paramref name="DestinationDrive"/> from <paramref name="DestinationDrive"/>.
+        /// Installs drivers to an offline Windows image.
         /// </summary>
         /// <param name="DestinationDrive"></param>
         /// <param name="DriversSource"></param>
@@ -25,11 +24,13 @@ namespace WindowsInstallerLib.Utilities.Deployment
                 {
                     case true:
                         Worker.StartDismProcess($"/Image:{ImageFile} /Add-Driver /Drive:{DriversSource} /recurse");
-                        return Worker.ExitCode;
+                        break;
                     case false:
-                        Worker.StartDismProcess($"/Image:{ImageFile} /Add-Driver /Drive:{DriversSource} /recurse", RunAsAdministrator: true);
-                        return Worker.ExitCode;
+                        Worker.StartDismProcess($"/Image:{ImageFile} /Add-Driver /Drive:{DriversSource} /recurse", true);
+                        break;
                 }
+
+                return Worker.ExitCode;
             }
             catch (Exception)
             {

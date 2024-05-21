@@ -1,16 +1,20 @@
-﻿using System.Runtime.Versioning;
+﻿using System;
+using System.Runtime.Versioning;
 using WindowsInstallerLib.Management.PrivilegesManager;
 using WindowsInstallerLib.Management.ProcessManager;
 
 namespace WindowsInstallerLib.Management.DiskManagement
 {
     [SupportedOSPlatform("windows")]
-    public partial class SystemDrives
+    public partial class Disks
     {
-        public static int FormatDisk(int DiskNumber, string DestinationDrive, string EfiDrive)
+        public static int FormatDisk(int DiskNumber, string EfiDrive, string DestinationDrive)
         {
             try
             {
+                ArgumentException.ThrowIfNullOrEmpty(EfiDrive);
+                ArgumentException.ThrowIfNullOrEmpty(DestinationDrive);
+
                 switch (GetPrivileges.IsUserAdmin())
                 {
                     case true:

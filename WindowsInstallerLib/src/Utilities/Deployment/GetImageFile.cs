@@ -1,33 +1,40 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using WindowsInstallerLib.Management.Installer;
 
 namespace WindowsInstallerLib.Utilities.Deployment
 {
     public partial class NewDeploy
     {
         /// <summary>
-        /// Looks for the image file (install.esd or install.wim) at <paramref name="SourceDrive"/>.
+        /// Searches for a valid image file and return it's full path.
         /// </summary>
-        /// <param name="SourceDrive"></param>
-        /// <returns>
-        /// The path of the image file:
-        /// <paramref name="SourceDrive"/>\sources\install.esd or <paramref name="SourceDrive"/>\sources\install.wim
-        /// </returns>
-        /// <exception cref="FileNotFoundException"></exception>
+        /// <param name="InstallationSettings"></param>
+        /// <returns></returns>
         public static string GetImageFile(string SourceDrive)
         {
-            if (File.Exists(@$"{SourceDrive}\sources\install.esd"))
+            try
             {
-                ImageFile = @$"{SourceDrive}\sources\install.esd";
-                return ImageFile;
+                ArgumentNullException.ThrowIfNull(nameof(SourceDrive));
+
+                if (File.Exists(@$"{SourceDrive}\sources\install.esd"))
+                {
+                    NewInstallation.ImageFilePath = @$"{SourceDrive}\sources\install.esd";
+                }
+                else if (File.Exists(@$"{SourceDrive}\sources\install.wim"))
+                {
+                    NewInstallation.ImageFilePath = @$"{SourceDrive}\sources\install.wim";
+                }
+                else
+                {
+                    throw new FileNotFoundException(@$"Could not find a valid image file at {SourceDrive}.");
+                }
+
+                return NewInstallation.ImageFilePath;
             }
-            else if (File.Exists(@$"{SourceDrive}\sources\install.wim"))
+            catch (Exception)
             {
-                ImageFile = @$"{SourceDrive}\sources\install.wim";
-                return ImageFile;
-            }
-            else
-            {
-                throw new FileNotFoundException(@$"Could not find a valid image file at {SourceDrive}.");
+                throw;
             }
         }
     }

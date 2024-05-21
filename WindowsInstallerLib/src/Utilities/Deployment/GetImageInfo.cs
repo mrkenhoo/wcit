@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Dism;
+using System;
 using System.IO;
 using System.Runtime.Versioning;
-using WindowsInstallerLib.Management.ProcessManager;
-using Microsoft.Dism;
 using WindowsInstallerLib.Management.PrivilegesManager;
 
 namespace WindowsInstallerLib.Utilities.Deployment
@@ -12,73 +10,48 @@ namespace WindowsInstallerLib.Utilities.Deployment
     public partial class NewDeploy
     {
         /// <summary>
-        /// Gets all Windows editions available from the <paramref name="ImageFile"/> using DISM, if any.
+        /// Gets all Windows editions available using DISM, if any.
         /// </summary>
-        /// <param name="ImageFile"></param>
-        public static int GetImageInfo(string ImageFile)
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public static void GetImageInfo(string ImageFilePath)
         {
             try
             {
-                if (NewDeploy.ImageFile != null)
+                if (string.IsNullOrEmpty(ImageFilePath))
                 {
-                    switch (GetPrivileges.IsUserAdmin())
-                    {
-                        case true:
-                            Worker.StartCmdProcess("dism.exe", @$"/get-imageinfo /imagefile:{NewDeploy.ImageFile}");
-                            return Worker.ExitCode;
-
-                        case false:
-                            Worker.StartCmdProcess("dism.exe", @$"/get-imageinfo /imagefile:{NewDeploy.ImageFile}", RunAsAdministrator: true);
-                            return Worker.ExitCode;
-                    }
+                    throw new FileNotFoundException("No image file was specified.", ImageFilePath);
                 }
-                else
+
+                switch (GetPrivileges.IsUserAdmin())
                 {
-                    throw new FileNotFoundException("No image file was specified");
+                    case true:
+                        DismApi.Initialize(DismLogLevel.LogErrorsWarnings);
+                        break;
+                    case false:
+                        throw new UnauthorizedAccessException("Cannot initialize the DISM API without Administrator privileges.");
+                }
+
+                DismImageInfoCollection images = DismApi.GetImageInfo(ImageFilePath);
+
+                Console.WriteLine($"\nFound {images.Count} image(s) in {ImageFilePath}", ConsoleColor.Yellow);
+
+                foreach (DismImageInfo image in images)
+                {
+                    Console.WriteLine($"Image index: {image.ImageIndex}\nImage name: {image.ImageName}");
                 }
             }
-            catch (Exception)
+            catch(DismException)
             {
                 throw;
             }
-        }
-
-        public static List<Tuple<int, string>> GetImageInfoT(string SourceDrive, string ImageFile)
-        {
-            if (string.IsNullOrWhiteSpace(SourceDrive))
+            catch(Exception)
             {
-                throw new ArgumentException($"'{nameof(SourceDrive)}' cannot be null or whitespace.", nameof(SourceDrive));
+                throw;
             }
-            if (string.IsNullOrWhiteSpace(ImageFile))
+            finally
             {
-                throw new ArgumentException($"'{nameof(ImageFile)}' cannot be null or whitespace.", nameof(ImageFile));
-            }
-
-            try
-            {
-                List<Tuple<int, string>> ImageList = [];
-
-                DismApi.Initialize(DismLogLevel.LogErrors);
-
-                DismApi.GetImageInfo(ImageFile);
-
-                DismImageInfoCollection imageInfos = DismApi.GetImageInfo(GetImageFile(SourceDrive));
-
-                foreach (DismImageInfo imageInfo in imageInfos)
-                {
-                    ImageList.ForEach(imageInfos =>
-                    {
-                        ImageList.Add(Tuple.Create(imageInfo.ImageIndex, imageInfo.ImageName));
-                    });
-                }
-
                 DismApi.Shutdown();
-
-                return ImageList;
-            }
-            catch (Exception)
-            {
-                throw;
             }
         }
     }
