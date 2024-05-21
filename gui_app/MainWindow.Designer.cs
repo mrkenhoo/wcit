@@ -45,6 +45,7 @@ namespace wit
             DestinationDriveLabel = new Label();
             DestinationDrive = new ComboBox();
             EfiDrive = new ComboBox();
+            RescanDisks = new Button();
             ImageList = new DataGridView();
             DiskList = new DataGridView();
             MenuBar = new MenuStrip();
@@ -52,7 +53,6 @@ namespace wit
             exitToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             aboutTheProgramToolStripMenuItem = new ToolStripMenuItem();
-            RescanDisks = new Button();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)WindowsEditionIndex).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DiskNumber).BeginInit();
@@ -155,6 +155,13 @@ namespace wit
             EfiDrive.FormattingEnabled = true;
             EfiDrive.Name = "EfiDrive";
             // 
+            // RescanDisks
+            // 
+            resources.ApplyResources(RescanDisks, "RescanDisks");
+            RescanDisks.Name = "RescanDisks";
+            RescanDisks.UseVisualStyleBackColor = false;
+            RescanDisks.Click += RescanDisks_Click;
+            // 
             // ImageList
             // 
             ImageList.AllowUserToAddRows = false;
@@ -184,6 +191,7 @@ namespace wit
             // 
             // MenuBar
             // 
+            MenuBar.BackColor = System.Drawing.Color.Transparent;
             MenuBar.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, aboutToolStripMenuItem });
             resources.ApplyResources(MenuBar, "MenuBar");
             MenuBar.Name = "MenuBar";
@@ -212,13 +220,6 @@ namespace wit
             aboutTheProgramToolStripMenuItem.Name = "aboutTheProgramToolStripMenuItem";
             resources.ApplyResources(aboutTheProgramToolStripMenuItem, "aboutTheProgramToolStripMenuItem");
             aboutTheProgramToolStripMenuItem.Click += AboutWindow_Click;
-            // 
-            // RescanDisks
-            // 
-            resources.ApplyResources(RescanDisks, "RescanDisks");
-            RescanDisks.Name = "RescanDisks";
-            RescanDisks.UseVisualStyleBackColor = false;
-            RescanDisks.Click += RescanDisks_Click;
             // 
             // MainWindow
             // 

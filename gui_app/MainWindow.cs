@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Dism;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Management;
 using System.Runtime.Versioning;
 using System.Windows.Forms;
-using Microsoft.Dism;
+using WindowsInstallerLib.Management.DiskManagement;
 using WindowsInstallerLib.Management.Installer;
 using WindowsInstallerLib.Management.PrivilegesManager;
 using WindowsInstallerLib.Utilities.Deployment;
@@ -24,10 +25,9 @@ namespace wit
                     InitializeComponent();
                     break;
                 case false:
-                    MessageBox.Show(text: "You must have administrator privileges to run this program.",
-                        "Insufficient privileges", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    throw new UnauthorizedAccessException("You must have Administrator privileges to run this program." +
-                        $" IsUserAdmin() returned {GetPrivileges.IsUserAdmin()}.");
+                    MessageBox.Show("You must have administrator privileges to run this program.",
+                                    "Insufficient privileges", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    throw new UnauthorizedAccessException("You must have administrator privileges to run this program.");
             }
         }
 
@@ -36,12 +36,12 @@ namespace wit
             switch (EfiDrive.Text.Length > 0)
             {
                 case true:
-                    while (DestinationDrive.Text.ToString() == EfiDrive.Text.ToString())
+                    while (DestinationDrive.Text == EfiDrive.Text)
                     {
                         if (true)
                         {
-                            MessageBox.Show("The OS drive cannot be the same as the bootloader drive.",
-                                            "Duplicate drive letters",
+                            MessageBox.Show("The OS drive letter cannot be the same as the bootloader drive.",
+                                            "Duplicate letters",
                                             MessageBoxButtons.OK,
                                             MessageBoxIcon.Error);
 
@@ -87,9 +87,7 @@ namespace wit
 
             try
             {
-                DriveInfo[] drives = DriveInfo.GetDrives();
-
-                foreach (DriveInfo drive in drives)
+                foreach (DriveInfo drive in Disks.GetDisksT())
                 {
                     foreach (string letter in DiskLetters.ToList())
                     {
@@ -133,8 +131,6 @@ namespace wit
         {
             try
             {
-                DismApi.Initialize(DismLogLevel.LogErrorsWarningsInfo);
-
                 if (ImageFilePath.Text == "No image file is selected.")
                 {
                     OpenFileDialog OpenFileDialog = new()
@@ -153,7 +149,7 @@ namespace wit
                     {
                         MessageBox.Show("No image file was selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                        ImageFilePath.Text = null;
+                        ImageFilePath.Text = "No image file is selected";
 
                         return;
                     }
@@ -167,28 +163,31 @@ namespace wit
                     ImageFilePath.Text = OpenFileDialog.FileName;
                 }
 
-                DismImageInfoCollection dismImageInfos = DismApi.GetImageInfo(ImageFilePath.Text);
+                DismImageInfoCollection imageInfoCollection = NewDeploy.GetImageInfoT(NewInstallation.ImageFilePath);
 
                 WindowsEditionIndex.Minimum = 1;
-                WindowsEditionIndex.Maximum = dismImageInfos.Count;
+                WindowsEditionIndex.Maximum = imageInfoCollection.Count;
 
                 WindowsEditionIndex.Enabled = true;
 
                 ImageList.Columns.Add("ImageIndex", "Index");
                 ImageList.Columns.Add("ImageName", "Image name");
 
-                foreach (DismImageInfo DismImage in dismImageInfos)
+                foreach (DismImageInfo DismImage in imageInfoCollection)
                 {
                     ImageList.Rows.Add(DismImage.ImageIndex, DismImage.ImageName);
                 }
             }
-            catch (Exception)
+            catch(DismException)
+            {
+                throw;
+            }
+            catch(Exception)
             {
                 throw;
             }
             finally
             {
-                DismApi.CleanupMountpoints();
                 DismApi.Shutdown();
             }
         }
@@ -207,7 +206,6 @@ namespace wit
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -231,12 +229,15 @@ namespace wit
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
-            if (DestinationDrive.Text.Length < 1)
-                throw new InvalidDataException(nameof(DestinationDrive));
-            else if (EfiDrive.Text.Length < 1)
-                throw new InvalidDataException(nameof(DestinationDrive));
-                
-            Configuration.InstallWindows((int)DiskNumber.Value, DestinationDrive.Text, EfiDrive.Text, ImageFilePath.Text, (int)WindowsEditionIndex.Value);
+            NewInstallation.DestinationDrive = DestinationDrive.Text;
+            NewInstallation.EfiDrive = EfiDrive.Text;
+            NewInstallation.DiskNumber = (int)DiskNumber.Value;
+            NewInstallation.ImageFilePath = ImageFilePath.Text;
+            NewInstallation.ImageIndex = (int)WindowsEditionIndex.Value;
+
+            Disks.FormatDisk(NewInstallation.DiskNumber, NewInstallation.EfiDrive, NewInstallation.DestinationDrive);
+            NewDeploy.ApplyImage(NewInstallation.ImageFilePath, NewInstallation.DestinationDrive, NewInstallation.ImageIndex);
+            NewDeploy.InstallBootloader(NewInstallation.DestinationDrive, NewInstallation.EfiDrive, NewInstallation.FirmwareType);
         }
 
         private void AboutWindow_Click(object sender, EventArgs e)
