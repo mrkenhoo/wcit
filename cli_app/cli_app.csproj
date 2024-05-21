@@ -20,9 +20,9 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <AssemblyVersion>0.0.2.1</AssemblyVersion>
-    <FileVersion>0.0.2.1</FileVersion>
-    <Version>0.0.2.1</Version>
+    <AssemblyVersion>0.0.3.0</AssemblyVersion>
+    <FileVersion>0.0.3.0</FileVersion>
+    <Version>0.0.3.0</Version>
     <DebugType>none</DebugType>
     <WarningLevel>0</WarningLevel>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
