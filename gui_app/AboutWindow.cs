@@ -35,7 +35,7 @@ namespace wit
             }
         }
 
-        public static string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        public static string? AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version?.ToString();
 
         public static string AssemblyDescription
         {

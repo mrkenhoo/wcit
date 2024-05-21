@@ -14,7 +14,7 @@ namespace WindowsInstallerLib.Utilities.Deployment
         /// </summary>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public static void GetImageInfo(string ImageFilePath)
+        public static DismImageInfoCollection GetImageInfoT(string ImageFilePath)
         {
             try
             {
@@ -34,12 +34,7 @@ namespace WindowsInstallerLib.Utilities.Deployment
 
                 DismImageInfoCollection images = DismApi.GetImageInfo(ImageFilePath);
 
-                Console.WriteLine($"\nFound {images.Count} image(s) in {ImageFilePath}", ConsoleColor.Yellow);
-
-                foreach (DismImageInfo image in images)
-                {
-                    Console.WriteLine($"Image index: {image.ImageIndex}\nImage name: {image.ImageName}");
-                }
+                return images;
             }
             catch(DismException)
             {

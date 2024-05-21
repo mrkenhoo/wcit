@@ -1,36 +1,43 @@
 ﻿using System;
 using System.Reflection;
+using System.Runtime.Versioning;
 using WindowsInstallerLib.Management.EFIManager;
 using WindowsInstallerLib.Management.Installer;
-using WindowsInstallerLib.Utilities.Deployment;
 
 namespace cli_app
 {
+    [SupportedOSPlatform("windows")]
     internal class Program
     {
         [MTAThread]
-        private static int Main(string[] args)
+        static int Main(string[] args)
         {
-            string? ProgramName = Assembly.GetExecutingAssembly().GetName().Name;
-            Version? ProgramVersion = Assembly.GetExecutingAssembly().GetName().Version;
-            Console.Title = $"{ProgramName} v{ProgramVersion}";
-
-#if WINDOWS10_0_22621_0_OR_GREATER && NET8_0_OR_GREATER
             try
             {
-                if (!GetEFIInfo.IsEFI())
-                {
-                    throw new PlatformNotSupportedException("Your system does not support EFI.");
-                }
+                string ProgramAuthor = "Ken Hoo";
+                string ProgramName = Assembly.GetExecutingAssembly().GetName().Name ?? "Windows CLI Installer";
 
-                Console.Clear();
+                Version? ProgramVersion = Assembly.GetExecutingAssembly().GetName().Version;
+#if DEBUG
+                AssemblyConfigurationAttribute? ConfigurationAttribute = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>();
 
-                Console.WriteLine("Welcome to the Windows CLI Installer Tool!\nCreated by Felipe González Martín");
+                string? ConfigurationMode = ConfigurationAttribute?.Configuration;
 
-                Configuration.SetupInstaller();
+                Console.Title = $"[{ConfigurationMode?.ToString()}] {ProgramName}";
+#else
+                Console.Title = $"{ProgramFullName}";
+#endif
 
-                Configuration.InstallWindows(Configuration.DiskNumber, Configuration.DestinationDrive,
-                                             Configuration.EfiDrive, NewDeploy.ImageFile, Configuration.WindowsEdition);
+                Console.WriteLine($"Welcome to the {ProgramName} tool!\nCurrent version: {ProgramVersion}\nCreated by {ProgramAuthor}");
+
+                NewInstallation.ConfigureInstaller();
+
+                NewInstallation.InstallWindows(NewInstallation.DiskNumber,
+                                               NewInstallation.EfiDrive,
+                                               NewInstallation.DestinationDrive,
+                                               NewInstallation.ImageFilePath,
+                                               NewInstallation.ImageIndex,
+                                               NewInstallation.FirmwareType);
             }
             catch (Exception)
             {
@@ -38,9 +45,6 @@ namespace cli_app
             }
 
             return 0;
-#else
-            throw new NotSupportedException("This system is not compatible with this program.");
-#endif
         }
     }
 }

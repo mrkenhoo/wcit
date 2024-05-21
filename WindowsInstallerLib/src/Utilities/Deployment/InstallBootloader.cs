@@ -10,14 +10,11 @@ namespace WindowsInstallerLib.Utilities.Deployment
     public partial class NewDeploy
     {
         /// <summary>
-        /// Installs the bootloader into the <paramref name="EfiDrive"/> where the newly deployed Windows installation is found.
-        /// The <paramref name="FirmwareType"/> needs to be set to BIOS or UEFI.
+        /// Installs the bootloader to the EFI drive of a new Windows installation.
         /// </summary>
-        /// <param name="DestinationDrive"></param>
-        /// <param name="EfiDrive"></param>
-        /// <param name="FirmwareType"></param>
-        /// <exception cref="ArgumentException"/>
-        public static int InstallBootloader(string DestinationDrive, string EfiDrive, string FirmwareType, bool RunAsAdministrator = false)
+        /// <param name="InstallationSettings"/>
+        /// <returns></returns>
+        public static int InstallBootloader(string DestinationDrive, string EfiDrive, string FirmwareType)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(DestinationDrive, nameof(DestinationDrive));
             ArgumentException.ThrowIfNullOrWhiteSpace(EfiDrive, nameof(EfiDrive));
@@ -31,21 +28,19 @@ namespace WindowsInstallerLib.Utilities.Deployment
                 }
                 else
                 {
-                    if (Directory.Exists(@$"{DestinationDrive}windows"))
+                    if (!Directory.Exists(@$"{DestinationDrive}windows"))
                     {
-                        switch (GetPrivileges.IsUserAdmin())
-                        {
-                            case true:
-                                Worker.StartCmdProcess("bcdboot", @$"{DestinationDrive}\windows /s {EfiDrive} /f {FirmwareType}");
-                                return Worker.ExitCode;
-                            case false:
-                                Worker.StartCmdProcess("bcdboot", @$"{DestinationDrive}\windows /s {EfiDrive} /f {FirmwareType}", RunAsAdministrator = true);
-                                return Worker.ExitCode;
-                        }
+                        throw new DirectoryNotFoundException(@$"The directory {DestinationDrive}windows does not exist!");
                     }
-                    else
+
+                    switch (GetPrivileges.IsUserAdmin())
                     {
-                        throw new DirectoryNotFoundException(@$"Could not find the directory {DestinationDrive}windows");
+                        case true:
+                            Worker.StartCmdProcess("bcdboot", @$"{DestinationDrive}\windows /s {EfiDrive} /f {FirmwareType}");
+                            return Worker.ExitCode;
+                        case false:
+                            Worker.StartCmdProcess("bcdboot", @$"{DestinationDrive}\windows /s {EfiDrive} /f {FirmwareType}", true);
+                            return Worker.ExitCode;
                     }
                 }
             }

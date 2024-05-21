@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 
 namespace WindowsInstallerLib.Management.ProcessManager
 {
@@ -8,9 +9,10 @@ namespace WindowsInstallerLib.Management.ProcessManager
     {
         internal static int StartDiskPartProcess(int DiskNumber, string EfiDrive, string DestinationDrive, bool RunAsAdministrator = false)
         {
+            Process process = new();
+
             try
             {
-                Process process = new();
                 process.StartInfo.FileName = "diskpart.exe";
                 if (RunAsAdministrator && Environment.OSVersion.Version.Major >= 6)
                 {
@@ -41,18 +43,6 @@ namespace WindowsInstallerLib.Management.ProcessManager
                 process.StandardInput.WriteLine("exit");
 
                 process.WaitForExit();
-                ExitCode = process.ExitCode;
-                process.Close();
-
-                switch (ExitCode)
-                {
-                    case 0:
-                        Console.WriteLine($"\nDisk {DiskNumber} has been formatted successfully.");
-                        break;
-                    case 1:
-                        Console.Error.WriteLine($"\nFailed to format the disk {DiskNumber}.");
-                        break;
-                }
             }
             catch (ObjectDisposedException)
             {
@@ -69,6 +59,27 @@ namespace WindowsInstallerLib.Management.ProcessManager
             catch (SystemException)
             {
                 throw;
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+
+            finally
+            {
+                ExitCode = process.ExitCode;
+
+                switch (ExitCode)
+                {
+                    case 0:
+                        Console.WriteLine($"\nDisk {DiskNumber} has been formatted successfully.");
+                        break;
+                    case 1:
+                        Console.Error.WriteLine($"\nFailed to format the disk {DiskNumber}.");
+                        break;
+                }
+                process.Close();
+
             }
 
             return ExitCode;

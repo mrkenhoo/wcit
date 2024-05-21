@@ -5,22 +5,27 @@
     <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
     <Nullable>enable</Nullable>
     <Platforms>x64</Platforms>
-    <SupportedOSPlatformVersion>10.0.22621.0</SupportedOSPlatformVersion>
     <StartupObject>cli_app.Program</StartupObject>
 	<EnableWindowsTargeting>true</EnableWindowsTargeting>
 	<LangVersion>latest</LangVersion>
 	<NeutralLanguage>en-US</NeutralLanguage>
-	<AssemblyName>wcit</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <VersionSuffix>testing</VersionSuffix>
+    <DebugType>embedded</DebugType>
+    <WarningLevel>9999</WarningLevel>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <AssemblyVersion>0.0.2.1</AssemblyVersion>
     <FileVersion>0.0.2.1</FileVersion>
     <Version>0.0.2.1</Version>
+    <DebugType>none</DebugType>
+    <WarningLevel>0</WarningLevel>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
   </PropertyGroup>
 
   <ItemGroup>
