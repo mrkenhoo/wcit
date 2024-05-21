@@ -25,6 +25,8 @@ namespace cli_app
 
                 Console.Title = $"[{ConfigurationMode?.ToString()}] {ProgramName}";
 #else
+                string ProgramFullName = "Windows CLI Installer";
+
                 Console.Title = $"{ProgramFullName}";
 #endif
 
