@@ -11,6 +11,7 @@
 	<LangVersion>latest</LangVersion>
 	<Version>1.0.0.0</Version>
 	<Platforms>x64</Platforms>
+	<EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
