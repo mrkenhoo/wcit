@@ -12,13 +12,13 @@
 	<EnableWindowsTargeting>true</EnableWindowsTargeting>
 	<NeutralLanguage>en-US</NeutralLanguage>
 	<AnalysisLevel>latest-recommended</AnalysisLevel>
-	<WarningLevel>9999</WarningLevel>
 	<AssemblyName>wit</AssemblyName>
 	<RootNamespace>wit</RootNamespace>
 	<Platforms>x64</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+	<WarningLevel>0</WarningLevel>
 	<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
 	<DebugType>none</DebugType>
 	<IsTrimmable>True</IsTrimmable>
@@ -28,6 +28,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+	<WarningLevel>9999</WarningLevel>
 	<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
 	<DebugType>full</DebugType>
 	<VersionSuffix>testing</VersionSuffix>
