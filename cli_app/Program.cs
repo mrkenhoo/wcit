@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using System.Runtime.Versioning;
-using WindowsInstallerLib.Management.EFIManager;
 using WindowsInstallerLib.Management.Installer;
 
 namespace cli_app
