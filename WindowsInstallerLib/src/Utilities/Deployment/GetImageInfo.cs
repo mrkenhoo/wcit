@@ -13,7 +13,6 @@ namespace WindowsInstallerLib.Utilities.Deployment
         /// Gets all Windows editions available using DISM, if any.
         /// </summary>
         /// <param name="parameters"></param>
-        /// <returns></returns>
         public static void GetImageInfo(string ImageFilePath)
         {
             try
@@ -26,7 +25,22 @@ namespace WindowsInstallerLib.Utilities.Deployment
                 switch (GetPrivileges.IsUserAdmin())
                 {
                     case true:
-                        DismApi.Initialize(DismLogLevel.LogErrorsWarnings);
+                        try
+                        {
+                            DismApi.Initialize(DismLogLevel.LogErrorsWarnings);
+                        }
+                        catch (DismException)
+                        {
+                            throw;
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                        finally
+                        {
+                            DismApi.Shutdown();
+                        }
                         break;
                     case false:
                         throw new UnauthorizedAccessException("Cannot initialize the DISM API without Administrator privileges.");
