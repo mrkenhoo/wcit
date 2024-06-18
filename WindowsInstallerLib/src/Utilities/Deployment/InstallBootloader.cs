@@ -36,11 +36,11 @@ namespace WindowsInstallerLib.Utilities.Deployment
                     switch (GetPrivileges.IsUserAdmin())
                     {
                         case true:
-                            Worker.StartCmdProcess("bcdboot", @$"{DestinationDrive}\windows /s {EfiDrive} /f {FirmwareType}");
-                            return Worker.ExitCode;
+                            NewProcess.StartCmdProcess("bcdboot", @$"{DestinationDrive}\windows /s {EfiDrive} /f {FirmwareType}");
+                            return NewProcess.ExitCode;
                         case false:
-                            Worker.StartCmdProcess("bcdboot", @$"{DestinationDrive}\windows /s {EfiDrive} /f {FirmwareType}", true);
-                            return Worker.ExitCode;
+                            NewProcess.StartCmdProcess("bcdboot", @$"{DestinationDrive}\windows /s {EfiDrive} /f {FirmwareType}", true);
+                            return NewProcess.ExitCode;
                     }
                 }
             }

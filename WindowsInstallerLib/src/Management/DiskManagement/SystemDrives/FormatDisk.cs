@@ -18,12 +18,12 @@ namespace WindowsInstallerLib.Management.DiskManagement
                 switch (GetPrivileges.IsUserAdmin())
                 {
                     case true:
-                        Worker.StartDiskPartProcess(DiskNumber, EfiDrive, DestinationDrive);
-                        return Worker.ExitCode;
+                        NewProcess.StartDiskPartProcess(DiskNumber, EfiDrive, DestinationDrive);
+                        return NewProcess.ExitCode;
 
                     case false:
-                        Worker.StartDiskPartProcess(DiskNumber, EfiDrive, DestinationDrive, RunAsAdministrator: true);
-                        return Worker.ExitCode;
+                        NewProcess.StartDiskPartProcess(DiskNumber, EfiDrive, DestinationDrive, RunAsAdministrator: true);
+                        return NewProcess.ExitCode;
                 }
             }
             catch
