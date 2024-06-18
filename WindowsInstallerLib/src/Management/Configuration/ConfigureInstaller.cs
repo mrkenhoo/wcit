@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.Versioning;
 using WindowsInstallerLib.Management.DiskManagement;
@@ -60,7 +59,7 @@ namespace WindowsInstallerLib.Management.Installer
             Disks.GetDisks();
 
             Console.Write("\n==> Please type the disk number to format (e.g. 0): ");
-            int p_DiskNumber = Convert.ToInt32(Console.ReadLine());
+            int p_DiskNumber = Convert.ToInt32(Console.ReadLine(), CultureInfo.CurrentCulture);
 
             DiskNumber = p_DiskNumber;
             #endregion
