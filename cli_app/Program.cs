@@ -6,7 +6,7 @@ using WindowsInstallerLib.Management.Installer;
 namespace cli_app
 {
     [SupportedOSPlatform("windows")]
-    internal class Program
+    internal static class Program
     {
         [MTAThread]
         static int Main(string[] args)
