@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Runtime.Versioning;
 
 namespace WindowsInstallerLib.Management.DiskManagement
@@ -7,13 +8,28 @@ namespace WindowsInstallerLib.Management.DiskManagement
     public partial class Disks
     {
         /// <summary>
-        /// Retrieves all disks available in the system and prints it out.
+        /// Retrieves an array of all disks available in the system.
         /// </summary>
         public static DriveInfo[] GetDisksT()
         {
-            DriveInfo[] drives = DriveInfo.GetDrives();
+            try
+            {
+                DriveInfo[] drives = DriveInfo.GetDrives();
 
-            return drives;
+                return drives;
+            }
+            catch (IOException)
+            {
+                throw;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

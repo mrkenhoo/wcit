@@ -31,14 +31,9 @@ namespace cli_app
 
                 Console.WriteLine($"Welcome to the {ProgramName} tool!\nCurrent version: {ProgramVersion}\nCreated by {ProgramAuthor}");
 
-                NewInstallation.ConfigureInstaller();
+                // NewInstallation.ConfigureInstaller();
 
-                NewInstallation.InstallWindows(NewInstallation.DiskNumber,
-                                               NewInstallation.EfiDrive,
-                                               NewInstallation.DestinationDrive,
-                                               NewInstallation.ImageFilePath,
-                                               NewInstallation.ImageIndex,
-                                               NewInstallation.FirmwareType);
+                NewInstallation.InstallWindows();
             }
             catch (Exception)
             {
