@@ -2,13 +2,13 @@ namespace WindowsInstallerLib.Management.Installer
 {
     public partial class NewInstallation
     {
-        public static string DestinationDrive;
-        public static string EfiDrive;
-        public static int DiskNumber;
-        public static string SourceDrive;
-        public static int ImageIndex;
-        public static string ImageFilePath;
+        public static string? DestinationDrive { get; set; }
+        public static string? EfiDrive { get; set; }
+        public static int DiskNumber = -1;
+        public static string? SourceDrive { get; set; }
+        public static int ImageIndex = -1;
+        public static string? ImageFilePath { get; set; }
         public static bool InstallExtraDrivers;
-        public static string FirmwareType;
+        public static string? FirmwareType { get; set; }
     }
 }
