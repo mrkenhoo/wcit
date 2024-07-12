@@ -47,7 +47,6 @@ namespace WindowsInstallerLib.Management.ProcessManager
                 throw;
             }
 
-
             return ExitCode;
         }
     }
