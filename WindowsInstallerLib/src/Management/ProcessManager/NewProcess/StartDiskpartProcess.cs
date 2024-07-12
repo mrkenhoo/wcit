@@ -5,7 +5,7 @@ using System.IO;
 
 namespace WindowsInstallerLib.Management.ProcessManager
 {
-    static partial class Worker
+    static partial class NewProcess
     {
         internal static int StartDiskPartProcess(int DiskNumber, string EfiDrive, string DestinationDrive, bool RunAsAdministrator = false)
         {
