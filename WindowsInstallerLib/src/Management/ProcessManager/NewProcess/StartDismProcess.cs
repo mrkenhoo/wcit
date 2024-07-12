@@ -6,17 +6,27 @@ using System.Runtime.Versioning;
 namespace WindowsInstallerLib.Management.ProcessManager
 {
     [SupportedOSPlatform("windows")]
-    public static partial class Worker
+    public static partial class NewProcess
     {
-        public static int StartProcess(string filename, string args)
+        public static int StartDismProcess(string args, bool RunAsAdministrator = false)
         {
             Process process = new();
 
             try
             {
-                process.StartInfo.FileName = filename;
+                process.StartInfo.FileName = "dism.exe";
                 process.StartInfo.Arguments = args;
-                process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+                if (RunAsAdministrator)
+                {
+                    process.StartInfo.Verb = "RunAs";
+                    process.StartInfo.UseShellExecute = true;
+                }
+                else
+                {
+                    process.StartInfo.UseShellExecute = false;
+                }
+                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.RedirectStandardOutput = true;
                 process.Start();
                 process.WaitForExit();
             }
@@ -28,11 +38,7 @@ namespace WindowsInstallerLib.Management.ProcessManager
             {
                 throw;
             }
-            catch(PlatformNotSupportedException)
-            {
-                throw;
-            }
-            catch (Exception)
+            catch (PlatformNotSupportedException)
             {
                 throw;
             }

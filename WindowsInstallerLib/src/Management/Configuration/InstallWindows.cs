@@ -1,6 +1,6 @@
 ﻿using System;
+using System.IO;
 using WindowsInstallerLib.Management.DiskManagement;
-using WindowsInstallerLib.Management.EFIManager;
 using WindowsInstallerLib.Utilities.Deployment;
 
 namespace WindowsInstallerLib.Management.Installer
@@ -10,32 +10,33 @@ namespace WindowsInstallerLib.Management.Installer
         /// <summary>
         /// Deploys an image of Windows onto the specified drive.
         /// </summary>
-        /// <param name="DiskNumber"></param>
-        /// <param name="EfiDrive"></param>
-        /// <param name="DestinationDrive"></param>
-        /// <param name="ImageFilePath"></param>
-        /// <param name="ImageIndex"></param>
-        public static void InstallWindows(int DiskNumber, string EfiDrive, string DestinationDrive, string ImageFilePath, int ImageIndex, string? FirmwareType)
+        public static void InstallWindows()
         {
             try
             {
-                ArgumentNullException.ThrowIfNull(nameof(DiskNumber));
-                ArgumentNullException.ThrowIfNull(nameof(EfiDrive));
-                ArgumentNullException.ThrowIfNull(nameof(DestinationDrive));
-                ArgumentNullException.ThrowIfNull(nameof(ImageFilePath));
-                ArgumentNullException.ThrowIfNull(nameof(ImageIndex));
-                
-                if (string.IsNullOrEmpty(FirmwareType))
+                if (DiskNumber.Equals(-1))
                 {
-                    switch (GetEFIInfo.IsEFI())
-                    {
-                        case true:
-                            FirmwareType = "UEFI";
-                            break;
-                        case false:
-                            FirmwareType = "BIOS";
-                            break;
-                    }
+                    throw new InvalidDataException("No disk number was specified, required to know where to install Windows at.");
+                }
+
+                if (string.IsNullOrWhiteSpace(EfiDrive))
+                {
+                    throw new InvalidDataException("No EFI drive was specified, required for the bootloader installation.");
+                }
+
+                ArgumentException.ThrowIfNullOrWhiteSpace(nameof(DestinationDrive));
+                ArgumentException.ThrowIfNullOrWhiteSpace(nameof(ImageFilePath));
+                ArgumentException.ThrowIfNullOrWhiteSpace(nameof(ImageIndex));
+                ArgumentException.ThrowIfNullOrWhiteSpace(nameof(FirmwareType));
+
+                switch (FirmwareType)
+                {
+                    case "UEFI":
+                        break;
+                    case "BIOS":
+                        break;
+                    default:
+                        throw new InvalidDataException($"Invalid firmware type: {FirmwareType}");
                 }
 
                 Disks.FormatDisk(DiskNumber, EfiDrive, DestinationDrive);

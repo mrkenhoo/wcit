@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.Versioning;
 using WindowsInstallerLib.Management.DiskManagement;
@@ -60,7 +59,7 @@ namespace WindowsInstallerLib.Management.Installer
             Disks.GetDisks();
 
             Console.Write("\n==> Please type the disk number to format (e.g. 0): ");
-            int p_DiskNumber = Convert.ToInt32(Console.ReadLine());
+            int p_DiskNumber = Convert.ToInt32(Console.ReadLine(), CultureInfo.CurrentCulture);
 
             DiskNumber = p_DiskNumber;
             #endregion
@@ -97,9 +96,7 @@ namespace WindowsInstallerLib.Management.Installer
             #endregion
 
             #region ImageIndex
-            int p_ImageIndex = -1;
-
-            if (ImageIndex !>= 0)
+            if (ImageIndex == -1)
             {
                 NewDeploy.GetImageInfo(ImageFilePath);
 
@@ -111,10 +108,9 @@ namespace WindowsInstallerLib.Management.Installer
                     throw new ArgumentException("No Windows edition was specified.");
                 }
 
-                p_ImageIndex = Convert.ToInt32(SelectedIndex, CultureInfo.CurrentCulture);
+                ImageIndex = Convert.ToInt32(SelectedIndex, CultureInfo.CurrentCulture);
             }
 
-            ImageIndex = p_ImageIndex;
             #endregion
 
             #region FirmwareType

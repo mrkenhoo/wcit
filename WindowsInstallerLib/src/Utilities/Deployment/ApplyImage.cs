@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Versioning;
-using WindowsInstallerLib.Management.Installer;
 using WindowsInstallerLib.Management.PrivilegesManager;
 using WindowsInstallerLib.Management.ProcessManager;
 
@@ -33,11 +32,11 @@ namespace WindowsInstallerLib.Utilities.Deployment
                     switch (GetPrivileges.IsUserAdmin())
                     {
                         case true:
-                            Worker.StartDismProcess(@$"/apply-image /imagefile:{ImageFilePath} /applydir:{DestinationDrive} /index:{ImageIndex} /verify");
-                            return Worker.ExitCode;
+                            NewProcess.StartDismProcess(@$"/apply-image /imagefile:{ImageFilePath} /applydir:{DestinationDrive} /index:{ImageIndex} /verify");
+                            return NewProcess.ExitCode;
                         case false:
-                            Worker.StartDismProcess(@$"/apply-image /imagefile:{ImageFilePath} /applydir:{DestinationDrive} /index:{ImageIndex} /verify", true);
-                            return Worker.ExitCode;
+                            NewProcess.StartDismProcess(@$"/apply-image /imagefile:{ImageFilePath} /applydir:{DestinationDrive} /index:{ImageIndex} /verify", true);
+                            return NewProcess.ExitCode;
                     }
                 }
                 else

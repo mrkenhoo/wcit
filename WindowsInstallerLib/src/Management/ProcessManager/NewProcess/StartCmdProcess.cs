@@ -1,24 +1,22 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.Versioning;
 
 namespace WindowsInstallerLib.Management.ProcessManager
 {
     [SupportedOSPlatform("windows")]
-    public static partial class Worker
+    public static partial class NewProcess
     {
-        public static int StartDismProcess(string args, bool RunAsAdministrator = false)
+        public static int StartCmdProcess(string fileName, string args, bool RunAsAdministrator = false)
         {
-            Process process = new();
-
             try
             {
-                process.StartInfo.FileName = "dism.exe";
+                Process process = new();
+                process.StartInfo.FileName = fileName;
                 process.StartInfo.Arguments = args;
                 if (RunAsAdministrator)
                 {
-                    process.StartInfo.Verb = "RunAs";
+                    process.StartInfo.Verb = "runas";
                     process.StartInfo.UseShellExecute = true;
                 }
                 else
@@ -29,23 +27,24 @@ namespace WindowsInstallerLib.Management.ProcessManager
                 process.StartInfo.RedirectStandardOutput = true;
                 process.Start();
                 process.WaitForExit();
+                ExitCode = process.ExitCode;
+
+                string output = process.StandardOutput.ReadToEnd();
+                Console.WriteLine(output);
+
+                process.Close();
             }
             catch (InvalidOperationException)
             {
                 throw;
             }
-            catch (Win32Exception)
+            catch (NotSupportedException)
             {
                 throw;
             }
-            catch (PlatformNotSupportedException)
+            catch (Exception)
             {
                 throw;
-            }
-            finally
-            {
-                ExitCode = process.ExitCode;
-                process.Close();
             }
 
             return ExitCode;
