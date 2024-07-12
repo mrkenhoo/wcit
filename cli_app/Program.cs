@@ -33,12 +33,7 @@ namespace cli_app
 
                 NewInstallation.ConfigureInstaller();
 
-                NewInstallation.InstallWindows(NewInstallation.DiskNumber,
-                                               NewInstallation.EfiDrive,
-                                               NewInstallation.DestinationDrive,
-                                               NewInstallation.ImageFilePath,
-                                               NewInstallation.ImageIndex,
-                                               NewInstallation.FirmwareType);
+                NewInstallation.InstallWindows();
             }
             catch (Exception)
             {
