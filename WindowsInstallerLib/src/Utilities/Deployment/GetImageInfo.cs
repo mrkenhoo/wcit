@@ -13,45 +13,44 @@ namespace WindowsInstallerLib.Utilities.Deployment
         /// Gets all Windows editions available using DISM, if any.
         /// </summary>
         /// <param name="parameters"></param>
-        /// <returns></returns>
         public static void GetImageInfo(string ImageFilePath)
         {
-            try
+            if (string.IsNullOrEmpty(ImageFilePath))
             {
-                if (string.IsNullOrEmpty(ImageFilePath))
-                {
-                    throw new FileNotFoundException("No image file was specified.", ImageFilePath);
-                }
+                throw new FileNotFoundException("No image file was specified.", ImageFilePath);
+            }
 
-                switch (GetPrivileges.IsUserAdmin())
-                {
-                    case true:
+            switch (GetPrivileges.IsUserAdmin())
+            {
+                case true:
+                    try
+                    {
                         DismApi.Initialize(DismLogLevel.LogErrorsWarnings);
-                        break;
-                    case false:
-                        throw new UnauthorizedAccessException("Cannot initialize the DISM API without Administrator privileges.");
-                }
 
-                DismImageInfoCollection images = DismApi.GetImageInfo(ImageFilePath);
+                        DismImageInfoCollection images = DismApi.GetImageInfo(ImageFilePath);
 
-                Console.WriteLine($"\nFound {images.Count} image(s) in {ImageFilePath}", ConsoleColor.Yellow);
+                        Console.WriteLine($"\nFound {images.Count} image(s) in {ImageFilePath}", ConsoleColor.Yellow);
 
-                foreach (DismImageInfo image in images)
-                {
-                    Console.WriteLine($"Image index: {image.ImageIndex}\nImage name: {image.ImageName}");
-                }
-            }
-            catch(DismException)
-            {
-                throw;
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                DismApi.Shutdown();
+                        foreach (DismImageInfo image in images)
+                        {
+                            Console.WriteLine($"Image index: {image.ImageIndex}\nImage name: {image.ImageName}");
+                        }
+                    }
+                    catch (DismException)
+                    {
+                        throw;
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        DismApi.Shutdown();
+                    }
+                    break;
+                case false:
+                    throw new UnauthorizedAccessException("Cannot initialize the DISM API without Administrator privileges.");
             }
         }
     }
