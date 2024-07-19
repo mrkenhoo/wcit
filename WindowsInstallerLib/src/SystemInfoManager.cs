@@ -2,10 +2,10 @@
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
-namespace WindowsInstallerLib.Management.EFIManager
+namespace WindowsInstallerLib.Management
 {
     [SupportedOSPlatform("windows")]
-    public static partial class GetEFIInfo
+    static partial class GetSystemInfo
     {
         [LibraryImport("kernel32.dll", EntryPoint = "GetFirmwareEnvironmentVariableA", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvStdcall) })]
@@ -15,7 +15,7 @@ namespace WindowsInstallerLib.Management.EFIManager
         /// Checks if the system supports EFI.
         /// </summary>
         /// <returns>true or false</returns>
-        public static bool IsEFI()
+        internal static bool IsEFI()
         {
             // Call the function with a dummy variable name and a dummy variable namespace (function will fail because these don't exist.)
             GetFirmwareType("", "{00000000-0000-0000-0000-000000000000}", IntPtr.Zero, 0);
