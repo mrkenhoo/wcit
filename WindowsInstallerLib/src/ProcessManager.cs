@@ -18,16 +18,10 @@ namespace WindowsInstallerLib.Management
                 process.StartInfo.FileName = fileName;
                 process.StartInfo.Arguments = args;
                 process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardError = true;
-                process.StartInfo.RedirectStandardOutput = true;
                 process.Start();
                 process.WaitForExit();
                 ExitCode = process.ExitCode;
 
-                string output = process.StandardOutput.ReadToEnd();
-                Console.WriteLine(output);
-
-                process.Close();
             }
             catch (InvalidOperationException)
             {
@@ -55,7 +49,6 @@ namespace WindowsInstallerLib.Management
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardInput = true;
                 process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardError = true;
                 process.Start();
 
                 Console.WriteLine($"Formatting disk {DiskNumber}, please wait...");
@@ -73,6 +66,7 @@ namespace WindowsInstallerLib.Management
                 process.StandardInput.WriteLine("exit");
 
                 process.WaitForExit();
+                ExitCode = process.ExitCode;
             }
             catch (ObjectDisposedException)
             {
@@ -97,8 +91,6 @@ namespace WindowsInstallerLib.Management
 
             finally
             {
-                ExitCode = process.ExitCode;
-
                 switch (ExitCode)
                 {
                     case 0:
@@ -124,10 +116,9 @@ namespace WindowsInstallerLib.Management
                 process.StartInfo.FileName = "dism.exe";
                 process.StartInfo.Arguments = args;
                 process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardError = true;
-                process.StartInfo.RedirectStandardOutput = true;
                 process.Start();
                 process.WaitForExit();
+                ExitCode = process.ExitCode;
             }
             catch (InvalidOperationException)
             {
@@ -143,7 +134,6 @@ namespace WindowsInstallerLib.Management
             }
             finally
             {
-                ExitCode = process.ExitCode;
                 process.Close();
             }
 
@@ -158,9 +148,10 @@ namespace WindowsInstallerLib.Management
             {
                 process.StartInfo.FileName = filename;
                 process.StartInfo.Arguments = args;
-                process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+                process.StartInfo.UseShellExecute = false;
                 process.Start();
                 process.WaitForExit();
+                ExitCode = process.ExitCode;
             }
             catch (InvalidOperationException)
             {
@@ -180,7 +171,6 @@ namespace WindowsInstallerLib.Management
             }
             finally
             {
-                ExitCode = process.ExitCode;
                 process.Close();
             }
 
