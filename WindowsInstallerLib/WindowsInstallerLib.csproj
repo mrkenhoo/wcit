@@ -9,7 +9,7 @@
         <ErrorReport>none</ErrorReport>
         <Title>$(AssemblyName)</Title>
         <LangVersion>latest</LangVersion>
-        <Version>1.0.0.0</Version>
+        <Version>1.1.0.0</Version>
         <Platforms>x64</Platforms>
         <EnableWindowsTargeting>true</EnableWindowsTargeting>
     </PropertyGroup>

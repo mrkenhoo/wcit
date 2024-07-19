@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cli_app", "cli_app\cli_app.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsInstallerLib", "WindowsInstallerLib\WindowsInstallerLib.csproj", "{0621F1C4-7D92-4863-8BF3-39E2D8D0661C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gui_app", "gui_app\gui_app.csproj", "{AD402277-B321-4954-B188-0189CCC0F532}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -23,10 +21,6 @@ Global
 		{0621F1C4-7D92-4863-8BF3-39E2D8D0661C}.Debug|x64.Build.0 = Debug|x64
 		{0621F1C4-7D92-4863-8BF3-39E2D8D0661C}.Release|x64.ActiveCfg = Release|x64
 		{0621F1C4-7D92-4863-8BF3-39E2D8D0661C}.Release|x64.Build.0 = Release|x64
-		{AD402277-B321-4954-B188-0189CCC0F532}.Debug|x64.ActiveCfg = Debug|x64
-		{AD402277-B321-4954-B188-0189CCC0F532}.Debug|x64.Build.0 = Debug|x64
-		{AD402277-B321-4954-B188-0189CCC0F532}.Release|x64.ActiveCfg = Release|x64
-		{AD402277-B321-4954-B188-0189CCC0F532}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

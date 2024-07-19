@@ -3,16 +3,16 @@ using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Principal;
 
-namespace WindowsInstallerLib.Management.PrivilegesManager
+namespace WindowsInstallerLib.Management
 {
     [SupportedOSPlatform("windows")]
-    public class GetPrivileges
+    static class GetPrivileges
     {
         /// <summary>
         /// Checks if the current user has Administrator privileges.
         /// </summary>
         /// <returns>true or false</returns>
-        public static bool IsUserAdmin()
+        internal static bool IsUserAdmin()
         {
             try
             {
