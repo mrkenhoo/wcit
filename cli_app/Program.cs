@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Reflection;
 using System.Runtime.Versioning;
-using WindowsInstallerLib.Management.Installer;
+using WindowsInstallerLib.Management;
 
 namespace cli_app
 {
     [SupportedOSPlatform("windows")]
-    internal class Program
+    class Program
     {
         [MTAThread]
-        static int Main(string[] args)
+        internal static int Main(string[] args)
         {
             try
             {
@@ -23,17 +23,16 @@ namespace cli_app
                 string? ConfigurationMode = ConfigurationAttribute?.Configuration;
 
                 Console.Title = $"[{ConfigurationMode?.ToString()}] {ProgramName}";
+                Console.WriteLine($"Welcome to the {ProgramName} tool!\nCurrent version: {ProgramVersion}-testing\nCreated by {ProgramAuthor}");
 #else
-                string ProgramFullName = "Windows CLI Installer";
-
-                Console.Title = $"{ProgramFullName}";
-#endif
-
+                Console.Title = $"{ProgramName}";
                 Console.WriteLine($"Welcome to the {ProgramName} tool!\nCurrent version: {ProgramVersion}\nCreated by {ProgramAuthor}");
+#endif
+                InstallerParameters parameters = new();
 
-                NewInstallation.ConfigureInstaller();
+                NewInstallation.ConfigureInstaller(ref parameters);
 
-                NewInstallation.InstallWindows();
+                NewInstallation.InstallWindows(ref parameters);
             }
             catch (Exception)
             {
