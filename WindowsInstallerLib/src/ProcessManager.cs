@@ -107,7 +107,7 @@ namespace WindowsInstallerLib.Management
             return ExitCode;
         }
 
-        internal static int StartDismProcess(string args, bool RunAsAdministrator = false)
+        internal static int StartDismProcess(string args)
         {
             Process process = new();
 
