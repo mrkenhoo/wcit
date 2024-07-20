@@ -14,17 +14,17 @@ namespace WindowsInstallerLib.Utilities
         /// </summary>
         /// <param name="DestinationDrive"></param>
         /// <param name="DriversSource"></param>
-        internal static void AddDrivers(string DestinationDrive, string ImageFile, string DriversSource)
+        internal static void AddDrivers(ref InstallerParameters parameters, string DriversSource)
         {
             try
             {
-                ArgumentException.ThrowIfNullOrWhiteSpace(ImageFile, nameof(ImageFile));
+                ArgumentException.ThrowIfNullOrWhiteSpace(parameters.ImageFilePath, nameof(parameters.ImageFilePath));
                 ArgumentException.ThrowIfNullOrWhiteSpace(DriversSource, nameof(DriversSource));
-                ArgumentException.ThrowIfNullOrWhiteSpace(DestinationDrive, nameof(DestinationDrive));
+                ArgumentException.ThrowIfNullOrWhiteSpace(parameters.DestinationDrive, nameof(parameters.DestinationDrive));
 
-                if (!Directory.Exists(DestinationDrive))
+                if (!Directory.Exists(parameters.DestinationDrive))
                 {
-                    throw new DirectoryNotFoundException($"Could not find the directory: {DestinationDrive}");
+                    throw new DirectoryNotFoundException($"Could not find the directory: {parameters.DestinationDrive}");
                 }
 
                 switch (GetPrivileges.IsUserAdmin())
@@ -34,7 +34,7 @@ namespace WindowsInstallerLib.Utilities
                         {
                             DismApi.Initialize(DismLogLevel.LogErrorsWarningsInfo);
 
-                            DismSession session = DismApi.OpenOfflineSession(DestinationDrive);
+                            DismSession session = DismApi.OpenOfflineSession(parameters.DestinationDrive);
 
                             if (DriversSource.GetType().IsArray)
                             {
