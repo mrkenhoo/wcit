@@ -3,10 +3,10 @@ using System.Reflection;
 using System.Runtime.Versioning;
 using WindowsInstallerLib.Management;
 
-namespace cli_app
+namespace ConsoleApp
 {
     [SupportedOSPlatform("windows")]
-    class Program
+    sealed internal class Program
     {
         [MTAThread]
         internal static int Main(string[] args)
