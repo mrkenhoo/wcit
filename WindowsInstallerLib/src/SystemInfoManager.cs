@@ -5,7 +5,7 @@ using System.Runtime.Versioning;
 namespace WindowsInstallerLib.Management
 {
     [SupportedOSPlatform("windows")]
-    static partial class GetSystemInfo
+    static partial class SystemInfoManager
     {
         [LibraryImport("kernel32.dll", EntryPoint = "GetFirmwareEnvironmentVariableA", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvStdcall) })]
