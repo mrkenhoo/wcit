@@ -6,7 +6,7 @@ using System.Security.Principal;
 namespace WindowsInstallerLib.Management
 {
     [SupportedOSPlatform("windows")]
-    static class GetPrivileges
+    static class PrivilegesManager
     {
         /// <summary>
         /// Checks if the current user has Administrator privileges.
