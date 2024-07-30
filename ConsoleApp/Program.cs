@@ -30,9 +30,9 @@ namespace ConsoleApp
 #endif
                 InstallerParameters parameters = new();
 
-                NewInstallation.ConfigureInstaller(ref parameters);
+                InstallerManager.ConfigureInstaller(ref parameters);
 
-                NewInstallation.InstallWindows(ref parameters);
+                InstallerManager.InstallWindows(ref parameters);
             }
             catch (Exception)
             {

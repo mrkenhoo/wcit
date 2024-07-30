@@ -7,7 +7,7 @@ using WindowsInstallerLib.Management;
 namespace WindowsInstallerLib.Utilities
 {
     [SupportedOSPlatform("windows")]
-    partial class NewDeploy
+    partial class DeploymentManager
     {
         /// <summary>
         /// Installs drivers to an offline Windows image.
@@ -27,7 +27,7 @@ namespace WindowsInstallerLib.Utilities
                     throw new DirectoryNotFoundException($"Could not find the directory: {parameters.DestinationDrive}");
                 }
 
-                switch (GetPrivileges.IsUserAdmin())
+                switch (PrivilegesManager.IsUserAdmin())
                 {
                     case true:
                         try
@@ -96,12 +96,12 @@ namespace WindowsInstallerLib.Utilities
             {
                 if (!Directory.Exists($@"{parameters.DestinationDrive}\windows"))
                 {
-                    switch (GetPrivileges.IsUserAdmin())
+                    switch (PrivilegesManager.IsUserAdmin())
                     {
                         case true:
                             Console.WriteLine($"\n==> Deploying Windows to drive {parameters.DestinationDrive} in disk {parameters.DiskNumber}, please wait...");
-                            NewProcess.StartDismProcess(@$"/apply-image /imagefile:{parameters.ImageFilePath} /applydir:{parameters.DestinationDrive} /index:{parameters.ImageIndex} /verify");
-                            return NewProcess.ExitCode;
+                            ProcessManager.StartDismProcess(@$"/apply-image /imagefile:{parameters.ImageFilePath} /applydir:{parameters.DestinationDrive} /index:{parameters.ImageIndex} /verify");
+                            return ProcessManager.ExitCode;
                         case false:
                             throw new UnauthorizedAccessException($"You do not have enough privileges to deploy Windows to {parameters.DestinationDrive}.");
                     }
@@ -159,7 +159,7 @@ namespace WindowsInstallerLib.Utilities
         {
             ArgumentException.ThrowIfNullOrEmpty(parameters.ImageFilePath, nameof(parameters.ImageFilePath));
 
-            switch (GetPrivileges.IsUserAdmin())
+            switch (PrivilegesManager.IsUserAdmin())
             {
                 case true:
                     try
@@ -207,7 +207,7 @@ namespace WindowsInstallerLib.Utilities
                     throw new FileNotFoundException("No image file was specified.", parameters.ImageFilePath);
                 }
 
-                switch (GetPrivileges.IsUserAdmin())
+                switch (PrivilegesManager.IsUserAdmin())
                 {
                     case true:
                         DismApi.Initialize(DismLogLevel.LogErrorsWarnings);
@@ -258,12 +258,12 @@ namespace WindowsInstallerLib.Utilities
                         throw new DirectoryNotFoundException(@$"The directory {parameters.DestinationDrive}windows does not exist!");
                     }
 
-                    switch (GetPrivileges.IsUserAdmin())
+                    switch (PrivilegesManager.IsUserAdmin())
                     {
                         case true:
                             Console.WriteLine($"\n==> Installing bootloader to drive {parameters.EfiDrive} in disk {parameters.DiskNumber}");
-                            NewProcess.StartCmdProcess("bcdboot", @$"{parameters.DestinationDrive}\windows /s {parameters.EfiDrive} /f {parameters.FirmwareType}");
-                            return NewProcess.ExitCode;
+                            ProcessManager.StartCmdProcess("bcdboot", @$"{parameters.DestinationDrive}\windows /s {parameters.EfiDrive} /f {parameters.FirmwareType}");
+                            return ProcessManager.ExitCode;
                         case false:
                             throw new UnauthorizedAccessException($"You do not have enough privileges to install the bootloader to {parameters.EfiDrive}.");
                     }

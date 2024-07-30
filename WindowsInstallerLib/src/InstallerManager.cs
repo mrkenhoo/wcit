@@ -22,7 +22,7 @@ namespace WindowsInstallerLib.Management
     }
 
     [SupportedOSPlatform("windows")]
-    public partial class NewInstallation
+    public partial class InstallerManager
     {
         /// <summary>
         /// Sets up the environment correctly for deploying Windows.
@@ -70,7 +70,7 @@ namespace WindowsInstallerLib.Management
 
             #region DiskNumber
             Console.WriteLine("\n==> These are the disks available on your system:");
-            GetDisks.ListAll();
+            DiskManager.ListAll();
 
             Console.Write("\n==> Please type the disk number to format (e.g. 0): ");
             int p_DiskNumber = Convert.ToInt32(Console.ReadLine(), CultureInfo.CurrentCulture);
@@ -98,7 +98,7 @@ namespace WindowsInstallerLib.Management
             #endregion
 
             #region ImageFilePath
-            string p_ImageFilePath = NewDeploy.GetImageFile(ref parameters);
+            string p_ImageFilePath = DeploymentManager.GetImageFile(ref parameters);
 
             Console.WriteLine($"\nImage file path has been set to {p_ImageFilePath}.");
 
@@ -108,7 +108,7 @@ namespace WindowsInstallerLib.Management
             #region ImageIndex
             if (parameters.ImageIndex == -1)
             {
-                NewDeploy.GetImageInfo(ref parameters);
+                DeploymentManager.GetImageInfo(ref parameters);
 
                 Console.Write("\n==> Type the index number of the Windows edition you wish to install (e.g. 1): ");
                 string? SelectedIndex = Console.ReadLine();
@@ -124,7 +124,7 @@ namespace WindowsInstallerLib.Management
             #endregion
 
             #region FirmwareType
-            switch (GetSystemInfo.IsEFI())
+            switch (SystemInfoManager.IsEFI())
             {
                 case true:
                     parameters.FirmwareType = "UEFI";
@@ -170,9 +170,9 @@ namespace WindowsInstallerLib.Management
                         throw new InvalidDataException($"Invalid firmware type: {parameters.FirmwareType}");
                 }
 
-                GetDisks.FormatDisk(ref parameters);
-                NewDeploy.ApplyImage(ref parameters);
-                NewDeploy.InstallBootloader(ref parameters);
+                DiskManager.FormatDisk(ref parameters);
+                DeploymentManager.ApplyImage(ref parameters);
+                DeploymentManager.InstallBootloader(ref parameters);
             }
             catch (Exception)
             {

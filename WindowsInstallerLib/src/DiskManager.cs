@@ -7,7 +7,7 @@ using System.Runtime.Versioning;
 namespace WindowsInstallerLib.Management
 {
     [SupportedOSPlatform("windows")]
-    partial class GetDisks
+    partial class DiskManager
     {
         internal static int FormatDisk(ref InstallerParameters parameters)
         {
@@ -16,11 +16,11 @@ namespace WindowsInstallerLib.Management
                 ArgumentException.ThrowIfNullOrEmpty(parameters.EfiDrive);
                 ArgumentException.ThrowIfNullOrEmpty(parameters.DestinationDrive);
 
-                switch (GetPrivileges.IsUserAdmin())
+                switch (PrivilegesManager.IsUserAdmin())
                 {
                     case true:
-                        NewProcess.StartDiskPartProcess(parameters.DiskNumber, parameters.EfiDrive, parameters.DestinationDrive);
-                        return NewProcess.ExitCode;
+                        ProcessManager.StartDiskPartProcess(parameters.DiskNumber, parameters.EfiDrive, parameters.DestinationDrive);
+                        return ProcessManager.ExitCode;
 
                     case false:
                         throw new UnauthorizedAccessException($"You do not have enough privileges to format the disk {parameters.DiskNumber}.");
