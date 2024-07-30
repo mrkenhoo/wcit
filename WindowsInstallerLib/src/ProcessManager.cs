@@ -6,7 +6,7 @@ using System.Runtime.Versioning;
 namespace WindowsInstallerLib.Management
 {
     [SupportedOSPlatform("windows")]
-    static partial class NewProcess
+    static partial class ProcessManager
     {
         internal static int ExitCode { get; private set; }
 
