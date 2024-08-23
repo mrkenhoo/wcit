@@ -8,7 +8,6 @@
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <LangVersion>latest</LangVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <PublishAot>True</PublishAot>
     <ErrorReport>none</ErrorReport>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <StartupObject>ConsoleApp.Program</StartupObject>
