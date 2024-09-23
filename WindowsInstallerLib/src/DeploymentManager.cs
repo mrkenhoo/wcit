@@ -168,11 +168,25 @@ namespace WindowsInstallerLib.Utilities
 
                         DismImageInfoCollection images = DismApi.GetImageInfo(parameters.ImageFilePath);
 
-                        Console.WriteLine($"\nFound {images.Count} image(s) in {parameters.ImageFilePath}", ConsoleColor.Yellow);
+                        switch (images.Count)
+                        {
+                            case > 1:
+                                Console.WriteLine($"\nFound {images.Count} images in {parameters.ImageFilePath}, shown below.\n", ConsoleColor.Yellow);
+                                break;
+                            case 1:
+                               Console.WriteLine($"\nFound {images.Count} image in {parameters.ImageFilePath}, shown below.\n", ConsoleColor.Yellow);
+                                break;
+                            case 0:
+                                Console.WriteLine($"\nNo images were found in {parameters.ImageFilePath}\n", ConsoleColor.Red);
+                                throw new InvalidDataException($"images.Count is {images.Count}. This is considered to be invalid, the program cannot continue.");
+                        }
 
                         foreach (DismImageInfo image in images)
                         {
-                            Console.WriteLine($"Image name: {image.ImageName}, image index: {image.ImageIndex}, ");
+                            Console.WriteLine($"Index: {image.ImageIndex}");
+                            Console.WriteLine($"Name: {image.ImageName}");
+                            Console.WriteLine($"Size: {image.ImageSize}");
+                            Console.WriteLine($"Arch: {image.Architecture}\n");
                         }
                     }
                     catch (DismException)
