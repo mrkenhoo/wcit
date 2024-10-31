@@ -16,6 +16,7 @@
     <Version>0.0.4.3</Version>
     <PublishAot>True</PublishAot>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
