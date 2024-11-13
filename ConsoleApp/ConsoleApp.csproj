@@ -13,7 +13,7 @@
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <StartupObject>ConsoleApp.Program</StartupObject>
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
-    <Version>0.0.4.4</Version>
+    <Version>0.0.4.5</Version>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
