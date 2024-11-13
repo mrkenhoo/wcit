@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Runtime.Versioning;
-using WindowsInstallerLib.Management;
+using WindowsInstallerLib;
 
 namespace ConsoleApp
 {
