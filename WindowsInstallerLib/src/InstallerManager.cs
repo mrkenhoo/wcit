@@ -2,9 +2,10 @@
 using System.Globalization;
 using System.IO;
 using System.Runtime.Versioning;
+using WindowsInstallerLib.Management;
 using WindowsInstallerLib.Utilities;
 
-namespace WindowsInstallerLib.Management
+namespace WindowsInstallerLib
 {
     [SupportedOSPlatform("windows")]
     public struct InstallerParameters

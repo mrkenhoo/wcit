@@ -4,73 +4,76 @@ using System.Linq;
 using System.Management;
 using System.Runtime.Versioning;
 
-namespace WindowsInstallerLib.Management
+namespace WindowsInstallerLib
 {
-    [SupportedOSPlatform("windows")]
-    partial class DiskManager
+    namespace Management
     {
-        internal static int FormatDisk(ref InstallerParameters parameters)
+        [SupportedOSPlatform("windows")]
+        partial class DiskManager
         {
-            try
+            internal static int FormatDisk(ref InstallerParameters parameters)
             {
-                ArgumentException.ThrowIfNullOrEmpty(parameters.EfiDrive);
-                ArgumentException.ThrowIfNullOrEmpty(parameters.DestinationDrive);
-
-                switch (PrivilegesManager.IsUserAdmin())
+                try
                 {
-                    case true:
-                        ProcessManager.StartDiskPartProcess(parameters.DiskNumber, parameters.EfiDrive, parameters.DestinationDrive);
-                        return ProcessManager.ExitCode;
+                    ArgumentException.ThrowIfNullOrEmpty(parameters.EfiDrive);
+                    ArgumentException.ThrowIfNullOrEmpty(parameters.DestinationDrive);
 
-                    case false:
-                        throw new UnauthorizedAccessException($"You do not have enough privileges to format the disk {parameters.DiskNumber}.");
+                    switch (PrivilegesManager.IsUserAdmin())
+                    {
+                        case true:
+                            ProcessManager.StartDiskPartProcess(parameters.DiskNumber, parameters.EfiDrive, parameters.DestinationDrive);
+                            return ProcessManager.ExitCode;
+
+                        case false:
+                            throw new UnauthorizedAccessException($"You do not have enough privileges to format the disk {parameters.DiskNumber}.");
+                    }
+                }
+                catch
+                {
+                    throw;
                 }
             }
-            catch
-            {
-                throw;
-            }
-        }
 
-        internal static void ListAll()
-        {
-            try
+            internal static void ListAll()
             {
-                WqlObjectQuery DeviceTable = new("SELECT * FROM Win32_DiskDrive");
-                ManagementObjectSearcher DeviceInfo = new(DeviceTable);
-                foreach (ManagementObject o in DeviceInfo.Get().Cast<ManagementObject>())
+                try
                 {
-                    Console.WriteLine("Disk number = " + o["Index"]);
-                    Console.WriteLine("Model = " + o["Model"]);
-                    Console.WriteLine("DeviceID = " + o["DeviceID"]);
-                    Console.WriteLine("");
+                    WqlObjectQuery DeviceTable = new("SELECT * FROM Win32_DiskDrive");
+                    ManagementObjectSearcher DeviceInfo = new(DeviceTable);
+                    foreach (ManagementObject o in DeviceInfo.Get().Cast<ManagementObject>())
+                    {
+                        Console.WriteLine("Disk number = " + o["Index"]);
+                        Console.WriteLine("Model = " + o["Model"]);
+                        Console.WriteLine("DeviceID = " + o["DeviceID"]);
+                        Console.WriteLine("");
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
-        internal static DriveInfo[] GetDisksT()
-        {
-            try
+            internal static DriveInfo[] GetDisksT()
             {
-                DriveInfo[] drives = DriveInfo.GetDrives();
+                try
+                {
+                    DriveInfo[] drives = DriveInfo.GetDrives();
 
-                return drives;
-            }
-            catch (IOException)
-            {
-                throw;
-            }
-            catch (UnauthorizedAccessException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
+                    return drives;
+                }
+                catch (IOException)
+                {
+                    throw;
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
         }
     }
