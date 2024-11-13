@@ -16,7 +16,6 @@
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
         <IsTrimmable>True</IsTrimmable>
-        <IsAotCompatible>True</IsAotCompatible>
         <WarningLevel>9999</WarningLevel>
         <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
         <VersionSuffix>-testing</VersionSuffix>
@@ -24,7 +23,6 @@
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
         <IsTrimmable>True</IsTrimmable>
-        <IsAotCompatible>True</IsAotCompatible>
         <WarningLevel>9999</WarningLevel>
         <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     </PropertyGroup>
