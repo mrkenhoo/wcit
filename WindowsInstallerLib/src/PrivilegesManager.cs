@@ -3,34 +3,37 @@ using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Principal;
 
-namespace WindowsInstallerLib.Management
+namespace WindowsInstallerLib
 {
-    [SupportedOSPlatform("windows")]
-    static class PrivilegesManager
+    namespace Management
     {
-        /// <summary>
-        /// Checks if the current user has Administrator privileges.
-        /// </summary>
-        /// <returns>true or false</returns>
-        internal static bool IsUserAdmin()
+        [SupportedOSPlatform("windows")]
+        static class PrivilegesManager
         {
-            try
+            /// <summary>
+            /// Checks if the current user has Administrator privileges.
+            /// </summary>
+            /// <returns>true or false</returns>
+            internal static bool IsUserAdmin()
             {
-                WindowsPrincipal CurrentUser = new(WindowsIdentity.GetCurrent());
-                bool CurrentUserIsAdministrator = CurrentUser.IsInRole(WindowsBuiltInRole.Administrator);
-                return CurrentUserIsAdministrator;
-            }
-            catch(SecurityException)
-            {
-                throw;
-            }
-            catch(ArgumentException)
-            {
-                throw;
-            }
-            catch(Exception)
-            {
-                throw;
+                try
+                {
+                    WindowsPrincipal CurrentUser = new(WindowsIdentity.GetCurrent());
+                    bool CurrentUserIsAdministrator = CurrentUser.IsInRole(WindowsBuiltInRole.Administrator);
+                    return CurrentUserIsAdministrator;
+                }
+                catch (SecurityException)
+                {
+                    throw;
+                }
+                catch (ArgumentException)
+                {
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
         }
     }

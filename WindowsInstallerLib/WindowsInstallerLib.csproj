@@ -9,14 +9,13 @@
         <ErrorReport>none</ErrorReport>
         <Title>$(AssemblyName)</Title>
         <LangVersion>latest</LangVersion>
-        <Version>1.1.0.2</Version>
+        <Version>1.1.0.3</Version>
         <Platforms>x64</Platforms>
         <EnableWindowsTargeting>true</EnableWindowsTargeting>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
         <IsTrimmable>True</IsTrimmable>
-        <IsAotCompatible>True</IsAotCompatible>
         <WarningLevel>9999</WarningLevel>
         <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
         <VersionSuffix>-testing</VersionSuffix>
@@ -24,7 +23,6 @@
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
         <IsTrimmable>True</IsTrimmable>
-        <IsAotCompatible>True</IsAotCompatible>
         <WarningLevel>9999</WarningLevel>
         <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     </PropertyGroup>

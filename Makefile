@@ -1,7 +1,8 @@
 SOLUTION_FILE     = "Windows Installer.sln"
 EXTRA_FLAGS       = --nologo
 RUNTIME           = win-x64
-BUILD_FLAGS       = --self-contained --runtime $(RUNTIME)
+BUILD_DIR         = build
+BUILD_FLAGS       = --self-contained --runtime $(RUNTIME) --output $(BUILD_DIR)
 BUILD_EXTRA_FLAGS = --configuration Release
 
 all:
