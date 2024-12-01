@@ -6,7 +6,7 @@ using WindowsInstallerLib;
 namespace ConsoleApp
 {
     [SupportedOSPlatform("windows")]
-    sealed internal class Program
+    internal sealed class Program
     {
         [MTAThread]
         internal static int Main(string[] args)

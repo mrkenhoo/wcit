@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>wcit</AssemblyName>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <Platforms>x64</Platforms>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
@@ -12,8 +12,7 @@
     <ErrorReport>none</ErrorReport>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <StartupObject>ConsoleApp.Program</StartupObject>
-    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
-    <Version>0.0.4.5</Version>
+    <Version>0.0.5.0</Version>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
