@@ -12,6 +12,7 @@
         <Version>1.1.1.0</Version>
         <Platforms>x64</Platforms>
         <EnableWindowsTargeting>true</EnableWindowsTargeting>
+        <TargetFrameworkIdentifier>net9.0</TargetFrameworkIdentifier>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
