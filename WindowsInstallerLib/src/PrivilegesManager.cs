@@ -5,35 +5,35 @@ using System.Security.Principal;
 
 namespace WindowsInstallerLib
 {
-    namespace Management
+    /// <summary>
+    /// Manages the privileges of the current user.
+    /// </summary>
+    internal static class PrivilegesManager
     {
+        /// <summary>
+        /// Checks if the current user is an administrator.
+        /// </summary>
+        /// <returns></returns>
         [SupportedOSPlatform("windows")]
-        static class PrivilegesManager
+        internal static bool IsAdmin()
         {
-            /// <summary>
-            /// Checks if the current user has Administrator privileges.
-            /// </summary>
-            /// <returns>true or false</returns>
-            internal static bool IsUserAdmin()
+            try
             {
-                try
-                {
-                    WindowsPrincipal CurrentUser = new(WindowsIdentity.GetCurrent());
-                    bool CurrentUserIsAdministrator = CurrentUser.IsInRole(WindowsBuiltInRole.Administrator);
-                    return CurrentUserIsAdministrator;
-                }
-                catch (SecurityException)
-                {
-                    throw;
-                }
-                catch (ArgumentException)
-                {
-                    throw;
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+                WindowsPrincipal principal = new(WindowsIdentity.GetCurrent());
+                bool isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
+                return isAdmin;
+            }
+            catch (SecurityException)
+            {
+                throw;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

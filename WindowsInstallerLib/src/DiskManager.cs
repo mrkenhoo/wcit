@@ -6,74 +6,86 @@ using System.Runtime.Versioning;
 
 namespace WindowsInstallerLib
 {
-    namespace Management
+    /// <summary>
+    /// Manages the disks on the system.
+    /// </summary>
+    [SupportedOSPlatform("windows")]
+    internal class DiskManager
     {
-        [SupportedOSPlatform("windows")]
-        partial class DiskManager
+        /// <summary>
+        /// Formats the disk with the specified parameters.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        internal static int FormatDisk(ref Parameters parameters)
         {
-            internal static int FormatDisk(ref InstallerParameters parameters)
+            try
             {
-                try
-                {
-                    ArgumentException.ThrowIfNullOrEmpty(parameters.EfiDrive);
-                    ArgumentException.ThrowIfNullOrEmpty(parameters.DestinationDrive);
+                ArgumentException.ThrowIfNullOrEmpty(parameters.EfiDrive);
+                ArgumentException.ThrowIfNullOrEmpty(parameters.DestinationDrive);
 
-                    switch (PrivilegesManager.IsUserAdmin())
-                    {
-                        case true:
-                            ProcessManager.StartDiskPartProcess(parameters.DiskNumber, parameters.EfiDrive, parameters.DestinationDrive);
-                            return ProcessManager.ExitCode;
-
-                        case false:
-                            throw new UnauthorizedAccessException($"You do not have enough privileges to format the disk {parameters.DiskNumber}.");
-                    }
-                }
-                catch
+                switch (PrivilegesManager.IsAdmin())
                 {
-                    throw;
+                    case true:
+                        ProcessManager.StartDiskPartProcess(parameters.DiskNumber, parameters.EfiDrive, parameters.DestinationDrive);
+                        return ProcessManager.ExitCode;
+
+                    case false:
+                        throw new UnauthorizedAccessException($"You do not have enough privileges to format the disk {parameters.DiskNumber}.");
                 }
             }
-
-            internal static void ListAll()
+            catch
             {
-                try
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Lists all the disks on the system.
+        /// </summary>
+        internal static void ListAll()
+        {
+            try
+            {
+                WqlObjectQuery DeviceTable = new("SELECT * FROM Win32_DiskDrive");
+                ManagementObjectSearcher DeviceInfo = new(DeviceTable);
+                foreach (ManagementObject o in DeviceInfo.Get().Cast<ManagementObject>())
                 {
-                    WqlObjectQuery DeviceTable = new("SELECT * FROM Win32_DiskDrive");
-                    ManagementObjectSearcher DeviceInfo = new(DeviceTable);
-                    foreach (ManagementObject o in DeviceInfo.Get().Cast<ManagementObject>())
-                    {
-                        Console.WriteLine("Disk number = " + o["Index"]);
-                        Console.WriteLine("Model = " + o["Model"]);
-                        Console.WriteLine("DeviceID = " + o["DeviceID"]);
-                        Console.WriteLine("");
-                    }
-                }
-                catch (Exception)
-                {
-                    throw;
+                    Console.WriteLine("Disk number = " + o["Index"]);
+                    Console.WriteLine("Model = " + o["Model"]);
+                    Console.WriteLine("DeviceID = " + o["DeviceID"]);
+                    Console.WriteLine("");
                 }
             }
-
-            internal static DriveInfo[] GetDisksT()
+            catch (Exception)
             {
-                try
-                {
-                    DriveInfo[] drives = DriveInfo.GetDrives();
+                throw;
+            }
+        }
 
-                    return drives;
-                }
-                catch (IOException)
-                {
-                    throw;
-                }
-                catch (UnauthorizedAccessException)
-                {
-                    throw;
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+        /// <summary>
+        /// Lists all disk on the system using DriveInfo.
+        /// </summary>
+        /// <returns></returns>
+        internal static DriveInfo[] GetDisksT()
+        {
+            try
+            {
+                DriveInfo[] drives = DriveInfo.GetDrives();
+
+                return drives;
+            }
+            catch (IOException)
+            {
+                throw;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }
