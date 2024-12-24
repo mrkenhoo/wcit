@@ -8,13 +8,23 @@ namespace ConsoleApp
     internal sealed class Program
     {
         [MTAThread]
-        internal static int Main()
+        internal static int Main(string[] args)
         {
-            InstallerParameters parameters = new();
+            Parameters parameters = new();
 
             try
             {
-                ProgramInfo.GetInformation();
+#if DEBUG
+                Console.Title = $"[{ProgramInfo.GetConfigurationMode()}] {ProgramInfo.GetName()}";
+                Console.WriteLine($"Welcome to the {ProgramInfo.GetName()} tool!");
+                Console.WriteLine($"Current version: {ProgramInfo.GetVersion()}-{ProgramInfo.GetConfigurationMode()}");
+                Console.WriteLine($"Created by {ProgramInfo.GetAuthor()}");
+#else
+                Console.Title = $"{programData.GetName()}";
+                Console.WriteLine($"Welcome to the {programData.GetName()} tool!");
+                Console.WriteLine($"Current version: {programData.GetVersion()}");
+                Console.WriteLine($"Created by {programData.ProgramAuthor}");
+#endif
             }
             catch (Exception)
             {
@@ -23,8 +33,24 @@ namespace ConsoleApp
 
             try
             {
-                InstallerManager.ConfigureInstaller(ref parameters);
+                ArgumentParser.ParseArgs(ref parameters, args);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
+            try
+            {
+                InstallerManager.Configure(ref parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            try
+            {
                 InstallerManager.InstallWindows(ref parameters);
             }
             catch (Exception)
