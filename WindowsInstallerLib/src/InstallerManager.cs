@@ -2,28 +2,45 @@
 using System.Globalization;
 using System.IO;
 using System.Runtime.Versioning;
-using WindowsInstallerLib.Management;
-using WindowsInstallerLib.Utilities;
 
 namespace WindowsInstallerLib
 {
+    /// <summary>
+    /// Contains the parameters required for installing Windows.
+    /// </summary>
+    /// <param name="DestinationDrive"></param>
+    /// <param name="EfiDrive"></param>
+    /// <param name="DiskNumber"></param>
+    /// <param name="SourceDrive"></param>
+    /// <param name="ImageIndex"></param>
+    /// <param name="ImageFilePath"></param>
+    /// <param name="InstallExtraDrivers"></param>
+    /// <param name="FirmwareType"></param>
     [SupportedOSPlatform("windows")]
-    public struct InstallerParameters
+    public struct Parameters(string DestinationDrive,
+                                    string EfiDrive,
+                                    int DiskNumber,
+                                    string SourceDrive,
+                                    int ImageIndex,
+                                    string ImageFilePath,
+                                    bool InstallExtraDrivers,
+                                    string FirmwareType)
     {
-        public string? DestinationDrive;
-        public string? EfiDrive;
-        public int DiskNumber = -1;
-        public string? SourceDrive;
-        public int ImageIndex = -1;
-        public string? ImageFilePath;
-        public bool InstallExtraDrivers;
-        public string? FirmwareType;
-
-        public InstallerParameters() { }
+        public string DestinationDrive { get; set; } = DestinationDrive;
+        public string EfiDrive { get; set; } = EfiDrive;
+        public int DiskNumber { get; set; } = DiskNumber;
+        public string SourceDrive { get; set; } = SourceDrive;
+        public int ImageIndex { get; set; } = ImageIndex;
+        public string ImageFilePath { get; set; } = ImageFilePath;
+        public bool InstallExtraDrivers { get; set; } = InstallExtraDrivers;
+        public string FirmwareType { get; set; } = FirmwareType;
     }
 
+    /// <summary>
+    /// Manages the installation of Windows.
+    /// </summary>
     [SupportedOSPlatform("windows")]
-    public partial class InstallerManager
+    public sealed class InstallerManager
     {
         /// <summary>
         /// Sets up the environment correctly for deploying Windows.
@@ -31,11 +48,32 @@ namespace WindowsInstallerLib
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="Exception"></exception>
-        public static void ConfigureInstaller(ref InstallerParameters parameters)
+        public static void Configure(ref Parameters parameters)
         {
             #region DestinationDrive
+            string p_DestinationDrive;
+
             Console.Write("\n==> Type the mountpoint to use for deploying Windows (e.g. Z:): ");
-            string? p_DestinationDrive = Console.ReadLine();
+            try
+            {
+                p_DestinationDrive = Console.ReadLine() ?? throw new ArgumentNullException(nameof(parameters), "DestinationDrive is null!");
+            }
+            catch (IOException)
+            {
+                throw;
+            }
+            catch (OutOfMemoryException)
+            {
+                throw;
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
             ArgumentException.ThrowIfNullOrWhiteSpace(p_DestinationDrive);
 
@@ -52,8 +90,30 @@ namespace WindowsInstallerLib
             #endregion
 
             #region EfiDrive
+            string p_EfiDrive;
+
             Console.Write("\n==> Type the mountpoint to use for the bootloader (e.g. Y:): ");
-            string? p_EfiDrive = Console.ReadLine();
+
+            try
+            {
+                p_EfiDrive = Console.ReadLine() ?? throw new ArgumentNullException(nameof(parameters), "EfiDrive is null!"); ;
+            }
+            catch (IOException)
+            {
+                throw;
+            }
+            catch (OutOfMemoryException)
+            {
+                throw;
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
             ArgumentException.ThrowIfNullOrWhiteSpace(p_EfiDrive);
 
@@ -70,19 +130,67 @@ namespace WindowsInstallerLib
             #endregion
 
             #region DiskNumber
-            Console.WriteLine("\n==> These are the disks available on your system:");
-            DiskManager.ListAll();
+            int p_DiskNumber;
+
+            try
+            {
+                Console.WriteLine("\n==> These are the disks available on your system:");
+                DiskManager.ListAll();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
             Console.Write("\n==> Please type the disk number to format (e.g. 0): ");
-            int p_DiskNumber = Convert.ToInt32(Console.ReadLine(), CultureInfo.CurrentCulture);
+            try
+            {
+                p_DiskNumber = Convert.ToInt32(Console.ReadLine(), CultureInfo.CurrentCulture);
+            }
+            catch (FormatException)
+            {
+                throw;
+            }
+            catch (OverflowException)
+            {
+                throw;
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
             parameters.DiskNumber = p_DiskNumber;
             #endregion
 
             #region SourceDrive
-            Console.Write("\n==> Specify the mountpount where the source are mounted at (e.g. X:): ");
-            string? p_SourceDrive = Console.ReadLine();
+            string? p_SourceDrive;
 
+            Console.Write("\n==> Specify the mountpount where the source are mounted at (e.g. X:): ");
+            try
+            {
+                p_SourceDrive = Console.ReadLine();
+            }
+            catch (IOException)
+            {
+                throw;
+            }
+            catch (OutOfMemoryException)
+            {
+                throw;
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
             ArgumentException.ThrowIfNullOrWhiteSpace(p_SourceDrive);
 
@@ -99,7 +207,7 @@ namespace WindowsInstallerLib
             #endregion
 
             #region ImageFilePath
-            string p_ImageFilePath = DeploymentManager.GetImageFile(ref parameters);
+            string p_ImageFilePath = DeployManager.GetImageFile(ref parameters);
 
             Console.WriteLine($"\nImage file path has been set to {p_ImageFilePath}.");
 
@@ -109,7 +217,7 @@ namespace WindowsInstallerLib
             #region ImageIndex
             if (parameters.ImageIndex == -1)
             {
-                DeploymentManager.GetImageInfo(ref parameters);
+                DeployManager.GetImageInfo(ref parameters);
 
                 Console.Write("\n==> Type the index number of the Windows edition you wish to install (e.g. 1): ");
                 string? SelectedIndex = Console.ReadLine();
@@ -140,9 +248,11 @@ namespace WindowsInstallerLib
         }
 
         /// <summary>
-        /// Deploys an image of Windows onto the specified drive.
+        /// Installs Windows on the specified disk.
         /// </summary>
-        public static void InstallWindows(ref InstallerParameters parameters)
+        /// <param name="parameters"></param>
+        [SupportedOSPlatform("windows")]
+        public static void InstallWindows(ref Parameters parameters)
         {
             try
             {
@@ -172,8 +282,8 @@ namespace WindowsInstallerLib
                 }
 
                 DiskManager.FormatDisk(ref parameters);
-                DeploymentManager.ApplyImage(ref parameters);
-                DeploymentManager.InstallBootloader(ref parameters);
+                DeployManager.ApplyImage(ref parameters);
+                DeployManager.InstallBootloader(ref parameters);
             }
             catch (Exception)
             {
