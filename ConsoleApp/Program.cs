@@ -20,10 +20,10 @@ namespace ConsoleApp
                 Console.WriteLine($"Current version: {ProgramInfo.GetVersion()}-{ProgramInfo.GetConfigurationMode()}");
                 Console.WriteLine($"Created by {ProgramInfo.GetAuthor()}");
 #else
-                Console.Title = $"{programData.GetName()}";
-                Console.WriteLine($"Welcome to the {programData.GetName()} tool!");
-                Console.WriteLine($"Current version: {programData.GetVersion()}");
-                Console.WriteLine($"Created by {programData.ProgramAuthor}");
+                Console.Title = $"{ProgramInfo.GetName()}";
+                Console.WriteLine($"Welcome to the {ProgramInfo.GetName()} tool!");
+                Console.WriteLine($"Current version: {ProgramInfo.GetVersion()}");
+                Console.WriteLine($"Created by {ProgramInfo.GetAuthor()}");
 #endif
             }
             catch (Exception)
