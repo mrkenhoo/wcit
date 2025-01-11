@@ -51,198 +51,224 @@ namespace WindowsInstallerLib
         public static void Configure(ref Parameters parameters)
         {
             #region DestinationDrive
-            string p_DestinationDrive;
+            if (string.IsNullOrEmpty(parameters.DestinationDrive) ||
+                string.IsNullOrWhiteSpace(parameters.DestinationDrive))
+            {
+                string p_DestinationDrive;
 
-            Console.Write("\n==> Type the mountpoint to use for deploying Windows (e.g. Z:): ");
-            try
-            {
-                p_DestinationDrive = Console.ReadLine() ?? throw new ArgumentNullException(nameof(parameters), "DestinationDrive is null!");
-            }
-            catch (IOException)
-            {
-                throw;
-            }
-            catch (OutOfMemoryException)
-            {
-                throw;
-            }
-            catch (ArgumentNullException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                Console.Write("\n==> Type the mountpoint to use for deploying Windows (e.g. Z:): ");
+                try
+                {
+                    p_DestinationDrive = Console.ReadLine() ?? throw new ArgumentNullException(nameof(parameters), "DestinationDrive is null!");
+                }
+                catch (IOException)
+                {
+                    throw;
+                }
+                catch (OutOfMemoryException)
+                {
+                    throw;
+                }
+                catch (ArgumentNullException)
+                {
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
 
-            ArgumentException.ThrowIfNullOrWhiteSpace(p_DestinationDrive);
+                ArgumentException.ThrowIfNullOrWhiteSpace(p_DestinationDrive);
 
-            if (p_DestinationDrive.StartsWith(':'))
-            {
-                throw new ArgumentException(@$"Invalid source drive {p_DestinationDrive}, it must have a colon at the end not at the beginning. For example: 'Z:'.");
-            }
-            else if (!p_DestinationDrive.EndsWith(':'))
-            {
-                throw new ArgumentException($"Invalid source drive {p_DestinationDrive}, it must have a colon. For example: 'Z:'.");
-            }
+                if (p_DestinationDrive.StartsWith(':'))
+                {
+                    throw new ArgumentException(@$"Invalid source drive {p_DestinationDrive}, it must have a colon at the end not at the beginning. For example: 'Z:'.");
+                }
+                else if (!p_DestinationDrive.EndsWith(':'))
+                {
+                    throw new ArgumentException($"Invalid source drive {p_DestinationDrive}, it must have a colon. For example: 'Z:'.");
+                }
 
-            parameters.DestinationDrive = p_DestinationDrive;
+                parameters.DestinationDrive = p_DestinationDrive;
+            }
             #endregion
 
             #region EfiDrive
-            string p_EfiDrive;
+            if (string.IsNullOrEmpty(parameters.EfiDrive) ||
+                string.IsNullOrWhiteSpace(parameters.EfiDrive))
+            {
+                string p_EfiDrive;
 
-            Console.Write("\n==> Type the mountpoint to use for the bootloader (e.g. Y:): ");
+                Console.Write("\n==> Type the mountpoint to use for the bootloader (e.g. Y:): ");
 
-            try
-            {
-                p_EfiDrive = Console.ReadLine() ?? throw new ArgumentNullException(nameof(parameters), "EfiDrive is null!"); ;
-            }
-            catch (IOException)
-            {
-                throw;
-            }
-            catch (OutOfMemoryException)
-            {
-                throw;
-            }
-            catch (ArgumentNullException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                try
+                {
+                    p_EfiDrive = Console.ReadLine() ?? throw new ArgumentNullException(nameof(parameters), "EfiDrive is null!"); ;
+                }
+                catch (IOException)
+                {
+                    throw;
+                }
+                catch (OutOfMemoryException)
+                {
+                    throw;
+                }
+                catch (ArgumentNullException)
+                {
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
 
-            ArgumentException.ThrowIfNullOrWhiteSpace(p_EfiDrive);
+                ArgumentException.ThrowIfNullOrWhiteSpace(p_EfiDrive);
 
-            if (p_EfiDrive.StartsWith(':'))
-            {
-                throw new ArgumentException(@$"Invalid EFI drive {p_EfiDrive}, it must have a colon at the end not at the beginning. For example: 'Y:'.");
-            }
-            else if (!p_EfiDrive.EndsWith(':'))
-            {
-                throw new ArgumentException($"Invalid EFI drive {p_EfiDrive}, it must have a colon. For example: 'Y:'.");
-            }
+                if (p_EfiDrive.StartsWith(':'))
+                {
+                    throw new ArgumentException(@$"Invalid EFI drive {p_EfiDrive}, it must have a colon at the end not at the beginning. For example: 'Y:'.");
+                }
+                else if (!p_EfiDrive.EndsWith(':'))
+                {
+                    throw new ArgumentException($"Invalid EFI drive {p_EfiDrive}, it must have a colon. For example: 'Y:'.");
+                }
 
-            parameters.EfiDrive = p_EfiDrive;
+                parameters.EfiDrive = p_EfiDrive;
+            }
             #endregion
 
             #region DiskNumber
-            int p_DiskNumber;
+            if (string.IsNullOrEmpty(parameters.DiskNumber.ToString()) ||
+                string.IsNullOrWhiteSpace(parameters.DiskNumber.ToString()))
+            {
+                int p_DiskNumber;
 
-            try
-            {
-                Console.WriteLine("\n==> These are the disks available on your system:");
-                DiskManager.ListAll();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                try
+                {
+                    Console.WriteLine("\n==> These are the disks available on your system:");
+                    DiskManager.ListAll();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
 
-            Console.Write("\n==> Please type the disk number to format (e.g. 0): ");
-            try
-            {
-                p_DiskNumber = Convert.ToInt32(Console.ReadLine(), CultureInfo.CurrentCulture);
-            }
-            catch (FormatException)
-            {
-                throw;
-            }
-            catch (OverflowException)
-            {
-                throw;
-            }
-            catch (ArgumentNullException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                Console.Write("\n==> Please type the disk number to format (e.g. 0): ");
+                try
+                {
+                    p_DiskNumber = Convert.ToInt32(Console.ReadLine(), CultureInfo.CurrentCulture);
+                }
+                catch (FormatException)
+                {
+                    throw;
+                }
+                catch (OverflowException)
+                {
+                    throw;
+                }
+                catch (ArgumentNullException)
+                {
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
 
-            parameters.DiskNumber = p_DiskNumber;
+                parameters.DiskNumber = p_DiskNumber;
+            }
             #endregion
 
             #region SourceDrive
-            string? p_SourceDrive;
+            if (string.IsNullOrEmpty(parameters.SourceDrive) ||
+                string.IsNullOrWhiteSpace(parameters.SourceDrive))
+            {
+                string? p_SourceDrive;
 
-            Console.Write("\n==> Specify the mountpount where the source are mounted at (e.g. X:): ");
-            try
-            {
-                p_SourceDrive = Console.ReadLine();
-            }
-            catch (IOException)
-            {
-                throw;
-            }
-            catch (OutOfMemoryException)
-            {
-                throw;
-            }
-            catch (ArgumentNullException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                Console.Write("\n==> Specify the mountpount where the source are mounted at (e.g. X:): ");
+                try
+                {
+                    p_SourceDrive = Console.ReadLine();
+                }
+                catch (IOException)
+                {
+                    throw;
+                }
+                catch (OutOfMemoryException)
+                {
+                    throw;
+                }
+                catch (ArgumentNullException)
+                {
+                    throw;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
 
-            ArgumentException.ThrowIfNullOrWhiteSpace(p_SourceDrive);
+                ArgumentException.ThrowIfNullOrWhiteSpace(p_SourceDrive);
 
-            if (p_SourceDrive.StartsWith(':'))
-            {
-                throw new ArgumentException(@$"Invalid source drive {p_SourceDrive}, it must have a colon at the end not at the beginning. For example: 'H:'.");
-            }
-            else if (!p_SourceDrive.EndsWith(':'))
-            {
-                throw new ArgumentException($"Invalid source drive {p_SourceDrive}, it must have a colon. For example: 'H:'.");
-            }
+                if (p_SourceDrive.StartsWith(':'))
+                {
+                    throw new ArgumentException(@$"Invalid source drive {p_SourceDrive}, it must have a colon at the end not at the beginning. For example: 'H:'.");
+                }
+                else if (!p_SourceDrive.EndsWith(':'))
+                {
+                    throw new ArgumentException($"Invalid source drive {p_SourceDrive}, it must have a colon. For example: 'H:'.");
+                }
 
-            parameters.SourceDrive = p_SourceDrive;
+                parameters.SourceDrive = p_SourceDrive;
+            }
             #endregion
 
             #region ImageFilePath
-            string p_ImageFilePath = DeployManager.GetImageFile(ref parameters);
+            if (string.IsNullOrEmpty(parameters.ImageFilePath) ||
+                string.IsNullOrWhiteSpace(parameters.ImageFilePath))
+            {
+                string p_ImageFilePath = DeployManager.GetImageFile(ref parameters);
 
-            Console.WriteLine($"\nImage file path has been set to {p_ImageFilePath}.");
+                Console.WriteLine($"\nImage file path has been set to {p_ImageFilePath}.");
 
-            parameters.ImageFilePath = p_ImageFilePath;
+                parameters.ImageFilePath = p_ImageFilePath;
+            }
             #endregion
 
             #region ImageIndex
-            if (parameters.ImageIndex == -1)
+            if (string.IsNullOrEmpty(parameters.ImageIndex.ToString()) ||
+                string.IsNullOrWhiteSpace(parameters.ImageIndex.ToString()))
             {
                 DeployManager.GetImageInfo(ref parameters);
 
                 Console.Write("\n==> Type the index number of the Windows edition you wish to install (e.g. 1): ");
                 string? SelectedIndex = Console.ReadLine();
 
-                if (string.IsNullOrEmpty(SelectedIndex) ||string.IsNullOrWhiteSpace(SelectedIndex))
+                if (string.IsNullOrEmpty(SelectedIndex) || string.IsNullOrWhiteSpace(SelectedIndex))
                 {
                     throw new ArgumentException("No Windows edition was specified.");
                 }
 
                 parameters.ImageIndex = Convert.ToInt32(SelectedIndex, CultureInfo.CurrentCulture);
             }
-
             #endregion
 
             #region FirmwareType
-            switch (SystemInfoManager.IsEFI())
+            if (string.IsNullOrEmpty(parameters.FirmwareType) ||
+                string.IsNullOrWhiteSpace(parameters.FirmwareType))
             {
-                case true:
-                    parameters.FirmwareType = "UEFI";
-                    Console.WriteLine($"\nThe installer has set the firmware type to {parameters.FirmwareType}.", ConsoleColor.Yellow);
-                    break;
-                case false:
-                    parameters.FirmwareType = "BIOS";
-                    Console.WriteLine($"\nThe installer has set the firmware type to {parameters.FirmwareType}.", ConsoleColor.Yellow);
-                    break;
+                switch (SystemInfoManager.IsEFI())
+                {
+                    case true:
+                        parameters.FirmwareType = "UEFI";
+                        Console.WriteLine($"\nThe installer has set the firmware type to {parameters.FirmwareType}.", ConsoleColor.Yellow);
+                        break;
+                    case false:
+                        parameters.FirmwareType = "BIOS";
+                        Console.WriteLine($"\nThe installer has set the firmware type to {parameters.FirmwareType}.", ConsoleColor.Yellow);
+                        break;
+                    default:
+                        throw new InvalidDataException(nameof(parameters.FirmwareType));
+                }
             }
             #endregion
         }

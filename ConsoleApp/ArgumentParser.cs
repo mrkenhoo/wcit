@@ -38,6 +38,7 @@ namespace ConsoleApp
                         Console.WriteLine("  /InstallExtraDrivers       Installs additional drivers during the deployment.");
                         Console.WriteLine("  /FirmwareType <type>       Specifies the firmware type to use for the deployment.");
                         Console.WriteLine("  /?, /h                     Displays this help message.\n");
+                        Environment.Exit(0);
                         return;
                     case "/destinationdrive":
                         parameters.DestinationDrive = args[Array.IndexOf(args, arg) + 1].ToUpperInvariant();
