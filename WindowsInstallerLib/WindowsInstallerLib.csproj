@@ -8,7 +8,7 @@
         <ErrorReport>none</ErrorReport>
         <Title>$(AssemblyName)</Title>
         <LangVersion>latest</LangVersion>
-        <Version>1.1.2.0</Version>
+        <Version>1.1.2.1</Version>
         <Platforms>x64</Platforms>
         <EnableWindowsTargeting>true</EnableWindowsTargeting>
     </PropertyGroup>
